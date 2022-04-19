@@ -1,0 +1,21 @@
+img {
+    width: 25vw;
+}
+
+.img-container {
+    display: inline-block;
+    width: 25vw; /*!! must be same as .main img !!*/
+    position: relative;
+    z-index: 0;
+}
+
+.img-container::before {
+    position: absolute;
+    top: -5%;
+    left: 10%;
+    width: 100%;
+    height: 100%;
+    border: 4px solid red;
+    content: '';
+    z-index: -1;
+}
