@@ -10,7 +10,7 @@ import { AboutComponent } from './components/about/about.component';
 import { EducationExperienceComponent } from './components/education-experience/education-experience.component';
 import { SkillsComponent } from './components/skills/skills.component';
 import { ProjectsComponent } from './components/projects/projects.component';
-import { MainComponent } from './main/main.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 @NgModule({
     declarations: [
@@ -21,12 +21,12 @@ import { MainComponent } from './main/main.component';
         EducationExperienceComponent,
         SkillsComponent,
         ProjectsComponent,
-        MainComponent,
+        LandingPageComponent,
     ],
     imports: [
         BrowserModule,
         RouterModule.forRoot([
-            { path: 'home', component: MainComponent },
+            { path: 'home', component: LandingPageComponent },
             {path:'', redirectTo: '/home', pathMatch: 'full'},
         ])
     ],

@@ -1,10 +1,36 @@
+/* Montserrat font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+body {
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    font-size: 18px;
+    margin: 0;
+}
+
+/*  BG: #f6f6f8
+    darker bg: #cacaca
+    btn: #e3e3e3
+    highlight: #c60021
+*/
+
+
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+}
+
 .separator {
-    width: 10em;
+    width: 4em;
     height: 4px;
-    background-color: red;
+    background-color: #c60021;
+    padding-left: 0.5em;
     margin-bottom: 2em;
 }
 
 .highlight {
-    color: red;
+    color: #c60021;
 }
