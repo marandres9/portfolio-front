@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 // router
 import { RouterModule } from '@angular/router';
+// http modelue
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -11,6 +13,8 @@ import { EducationExperienceComponent } from './components/education-experience/
 import { SkillsComponent } from './components/skills/skills.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { EditButtonComponent } from './components/edit-button/edit-button.component';
 
 @NgModule({
     declarations: [
@@ -22,11 +26,15 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
         SkillsComponent,
         ProjectsComponent,
         LandingPageComponent,
+        LoginPageComponent,
+        EditButtonComponent,
     ],
     imports: [
         BrowserModule,
+        HttpClientModule,
         RouterModule.forRoot([
             { path: 'home', component: LandingPageComponent },
+            { path: 'login', component: LoginPageComponent },
             {path:'', redirectTo: '/home', pathMatch: 'full'},
         ])
     ],

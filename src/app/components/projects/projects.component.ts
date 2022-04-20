@@ -1,15 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/authentication.service';
 
 @Component({
-  selector: 'app-projects',
-  templateUrl: './projects.component.html',
-  styleUrls: ['./projects.component.css']
+    selector: 'app-projects',
+    templateUrl: './projects.component.html',
+    styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
 
-  constructor() { }
+    constructor(private authService: AuthenticationService) { }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
+
+    public isLoggedIn() {
+        return this.authService.isLoggedIn();
+    }
 
 }

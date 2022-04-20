@@ -1,9 +1,7 @@
 <!-- ====== PROYECTS ====== -->
 <div class="container p-4" style="background-color: #f6f6f8;">
     <!-- == EDIT == -->
-    <div class="d-flex justify-content-end mb-3">
-        <a href="" class="btn"><i class="fa-solid fa-square-pen fa-xl"></i></a>
-    </div>
+    <app-edit-button *ngIf="isLoggedIn()"></app-edit-button>
 
         <div class="d-flex flex-column align-items-center">
             <h1 class="">Projects</h1>
