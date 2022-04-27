@@ -18,6 +18,7 @@ import { EditButtonComponent } from './components/edit-button/edit-button.compon
 import { AuthenticationService } from './service/authentication.service';
 import { HttpService } from './service/http.service';
 import { EditingPageComponent } from './editing-page/editing-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -36,6 +37,7 @@ import { EditingPageComponent } from './editing-page/editing-page.component';
     imports: [
         BrowserModule,
         HttpClientModule,
+        ReactiveFormsModule,
         RouterModule.forRoot([
             { path: 'home', component: LandingPageComponent },
             { path: 'login', component: LoginPageComponent },
