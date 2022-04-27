@@ -39,7 +39,8 @@ import { EditingPageComponent } from './editing-page/editing-page.component';
         RouterModule.forRoot([
             { path: 'home', component: LandingPageComponent },
             { path: 'login', component: LoginPageComponent },
-            {path:'', redirectTo: '/home', pathMatch: 'full'},
+            { path: 'edit', component: EditingPageComponent },
+            { path:'', redirectTo: '/home', pathMatch: 'full' }
         ])
     ],
     providers: [
