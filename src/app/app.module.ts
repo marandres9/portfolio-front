@@ -15,6 +15,8 @@ import { ProjectsComponent } from './components/projects/projects.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { EditButtonComponent } from './components/edit-button/edit-button.component';
+import { AuthenticationService } from './service/authentication.service';
+import { HttpService } from './service/http.service';
 
 @NgModule({
     declarations: [
@@ -38,7 +40,10 @@ import { EditButtonComponent } from './components/edit-button/edit-button.compon
             {path:'', redirectTo: '/home', pathMatch: 'full'},
         ])
     ],
-    providers: [],
+    providers: [
+        AuthenticationService,
+        HttpService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
