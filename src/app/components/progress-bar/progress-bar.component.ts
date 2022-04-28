@@ -10,6 +10,7 @@ export class ProgressBarComponent implements OnInit, OnChanges {
     @Input() title: string;
     @Input() value: string;
 
+    progress_container_style = 'height: 0.5em;'
     progress_bar_style: string;
 
     constructor() { }

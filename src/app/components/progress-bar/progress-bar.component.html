@@ -1,6 +1,10 @@
-<div>
-    <h5>{{this.title}}</h5>
-    <div class="progress">
+<div class="my-4">
+    <h5></h5>
+    <div class="d-flex justify-content-between h-auto">
+        <span class="title">{{this.title}}</span>
+        <span>{{this.value}}%</span>
+    </div>
+    <div class="progress" [style]="this.progress_container_style">
         <div
         class="progress-bar"
         role="progressbar"
@@ -9,7 +13,6 @@
         aria-valuemin="0"
         aria-valuemax="100"
         >
-            {{this.value}}%
         </div>
     </div>
 </div>
