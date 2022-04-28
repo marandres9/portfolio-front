@@ -17,6 +17,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { EditButtonComponent } from './components/edit-button/edit-button.component';
 import { AuthenticationService } from './service/authentication.service';
 import { HttpService } from './service/http.service';
+import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 
 @NgModule({
     declarations: [
@@ -30,6 +31,7 @@ import { HttpService } from './service/http.service';
         LandingPageComponent,
         LoginPageComponent,
         EditButtonComponent,
+        ProgressBarComponent,
     ],
     imports: [
         BrowserModule,
