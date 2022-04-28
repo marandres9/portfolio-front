@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Home } from 'src/app/model/Home';
-import { AuthenticationService } from 'src/app/service/authentication.service';
-import { HttpService } from 'src/app/service/http.service';
+import { AuthenticationService } from 'src/app/authentication.service';
 
 @Component({
     selector: 'app-home',
@@ -11,19 +9,9 @@ import { HttpService } from 'src/app/service/http.service';
 export class HomeComponent implements OnInit {
     profilePicPath: string = 'assets/img/profile.jpg'
 
-    home = new Home();
-
-    constructor(private authService: AuthenticationService, private http: HttpService) { }
+    constructor(private authService: AuthenticationService) { }
 
     ngOnInit(): void {
-        this.getHome();
-    }
-
-    public getHome() {
-        this.http.getHome()
-            .subscribe(data => {
-                this.home = data;
-            })
     }
 
     public isLoggedIn() {
