@@ -1,0 +1,12 @@
+.btn {
+    background-color: #e3e3e3;
+}
+
+.card-title {
+    color: #c60021;
+    font-weight: 600;
+}
+
+.card-body {
+    border-left: 2px solid red;
+}

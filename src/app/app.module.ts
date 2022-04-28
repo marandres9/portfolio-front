@@ -20,6 +20,7 @@ import { HttpService } from './service/http.service';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { EducationItemComponent } from './components/education-item/education-item.component';
 import { ExperienceItemComponent } from './components/experience-item/experience-item.component';
+import { ProjectCardComponent } from './components/project-card/project-card.component';
 
 @NgModule({
     declarations: [
@@ -36,6 +37,7 @@ import { ExperienceItemComponent } from './components/experience-item/experience
         ProgressBarComponent,
         EducationItemComponent,
         ExperienceItemComponent,
+        ProjectCardComponent,
     ],
     imports: [
         BrowserModule,
