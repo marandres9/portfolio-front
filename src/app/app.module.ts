@@ -37,8 +37,8 @@ import { HttpService } from './service/http.service';
         RouterModule.forRoot([
             { path: 'home', component: LandingPageComponent },
             { path: 'login', component: LoginPageComponent },
-            { path: '', redirectTo: '/home', pathMatch: 'full' },
-        ]),
+            {path:'', redirectTo: '/home', pathMatch: 'full'},
+        ])
     ],
     providers: [
         AuthenticationService,
