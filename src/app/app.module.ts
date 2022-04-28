@@ -21,6 +21,8 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
 import { EducationItemComponent } from './components/education-item/education-item.component';
 import { ExperienceItemComponent } from './components/experience-item/experience-item.component';
 import { ProjectCardComponent } from './components/project-card/project-card.component';
+import { EditingPageComponent } from './editing-page/editing-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -38,14 +40,17 @@ import { ProjectCardComponent } from './components/project-card/project-card.com
         EducationItemComponent,
         ExperienceItemComponent,
         ProjectCardComponent,
+        EditingPageComponent,
     ],
     imports: [
         BrowserModule,
         HttpClientModule,
+        ReactiveFormsModule,
         RouterModule.forRoot([
             { path: 'home', component: LandingPageComponent },
             { path: 'login', component: LoginPageComponent },
-            {path:'', redirectTo: '/home', pathMatch: 'full'},
+            { path: 'edit', component: EditingPageComponent },
+            { path:'', redirectTo: '/home', pathMatch: 'full' }
         ])
     ],
     providers: [

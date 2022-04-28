@@ -1,0 +1,8 @@
+<form [formGroup]="homeForm">
+    <label for="title">Title: </label> <br>
+    <input type="text" id="title" formControlName="title" value="home.title">
+    <br>
+    <label for="title">Description: </label> <br>
+    <input type="text" id="description" formControlName="description">
+</form>
+{{this.home.title}}
