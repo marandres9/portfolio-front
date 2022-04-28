@@ -18,6 +18,8 @@ import { EditButtonComponent } from './components/edit-button/edit-button.compon
 import { AuthenticationService } from './service/authentication.service';
 import { HttpService } from './service/http.service';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
+import { EducationItemComponent } from './components/education-item/education-item.component';
+import { ExperienceItemComponent } from './components/experience-item/experience-item.component';
 
 @NgModule({
     declarations: [
@@ -32,6 +34,8 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
         LoginPageComponent,
         EditButtonComponent,
         ProgressBarComponent,
+        EducationItemComponent,
+        ExperienceItemComponent,
     ],
     imports: [
         BrowserModule,
