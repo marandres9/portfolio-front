@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 
 @Component({
@@ -7,6 +7,7 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
     styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
+    @Input() description: string;
 
     constructor(private authService: AuthenticationService) { }
 

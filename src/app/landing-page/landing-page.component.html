@@ -1,9 +1,15 @@
+<!-- ====== TEST ====== -->
+<p>{{portfoioDto.home_title}}</p>
+<p>{{portfoioDto.home_description}}</p>
+<p>{{portfoioDto.about_description}}</p>
+<p>borrar</p>
+
 <!-- ====== HOME ====== -->
-<app-home></app-home>
+<app-home [title]="portfoioDto.home_title" [description]="portfoioDto.home_description"></app-home>
 <!-- ====== END HOME ====== -->
 
 <!-- ====== ABOUT ====== -->
-<app-about></app-about>
+<app-about [description]="portfoioDto.about_description"></app-about>
 <!-- ====== END ABOUT ====== -->
 
 <!-- ====== SKILLS ====== -->

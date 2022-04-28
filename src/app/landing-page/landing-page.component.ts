@@ -1,15 +1,27 @@
 import { Component, OnInit } from '@angular/core';
+import { PortfolioDTO } from '../model/PortfolioDTO';
+import { HttpService } from '../service/http.service';
 
 @Component({
-  selector: 'app-landing-page',
-  templateUrl: './landing-page.component.html',
-  styleUrls: ['./landing-page.component.css']
+    selector: 'app-landing-page',
+    templateUrl: './landing-page.component.html',
+    styleUrls: ['./landing-page.component.css']
 })
 export class LandingPageComponent implements OnInit {
 
-  constructor() { }
+    public portfoioDto = new PortfolioDTO();
 
-  ngOnInit(): void {
-  }
+    constructor(private http: HttpService) { }
+
+    ngOnInit(): void {
+        this.getPortfolio();
+    }
+
+    public getPortfolio() {
+        this.http.getPortfolio()
+            .subscribe(portfolioDto => {
+                this.portfoioDto = portfolioDto
+            })
+    }
 
 }
