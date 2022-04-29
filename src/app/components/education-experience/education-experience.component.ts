@@ -12,7 +12,7 @@ export class EducationExperienceComponent implements OnInit {
 
     @Input() educations: Education[]
 
-    constructor(private authService: AuthenticationService, private http: HttpService) { }
+    constructor(private authService: AuthenticationService) { }
 
     ngOnInit(): void {
     }

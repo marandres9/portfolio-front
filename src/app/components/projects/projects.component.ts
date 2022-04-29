@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Project } from 'src/app/model/Project';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 
 @Component({
@@ -7,6 +8,8 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
     styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
+
+    @Input() projects: Project[]
 
     constructor(private authService: AuthenticationService) { }
 
