@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Education } from 'src/app/model/Education';
 
 @Component({
     selector: 'app-education-item',
@@ -7,11 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class EducationItemComponent implements OnInit {
 
-    @Input() title: string = 'Master of Fine Arts & Graphic Design'
-    @Input() period: string = '2015 - 2016'
-    @Input() institution: string = 'Rochester Institute of Technology'
-    @Input() location: string = 'Rochester, NY'
-    @Input() description: string = 'Qui deserunt veniam. Et sed aliquam labore tempore sed quisquam iusto autem sit. Ea vero voluptatu qui ut dignissimos deleniti nerada porti sand markend'
+    @Input() education: Education = new Education(0, '', '', '', '', '')
 
     constructor() { }
 

@@ -10,14 +10,8 @@
         </div>
         <div class="col">
             <!-- EDUCATION COLUMN -->
-            <div class="resume-item">
-                <app-education-item></app-education-item>
-            </div>
-            <div class="resume-item">
-                <app-education-item></app-education-item>
-            </div>
-            <div class="resume-item">
-                <app-education-item></app-education-item>
+            <div class="resume-item" *ngFor="let education of educations">
+                <app-education-item [education]="education"></app-education-item>
             </div>
         </div>
         <div class="col">

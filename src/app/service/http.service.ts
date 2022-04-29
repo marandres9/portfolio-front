@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Home } from 'src/app/model/Home';
+import { Education } from '../model/Education';
 import { PortfolioDTO } from '../model/PortfolioDTO';
 
 @Injectable({
@@ -18,5 +19,9 @@ export class HttpService {
 
     public getPortfolio() {
         return this.http.get<PortfolioDTO>(this.url + '/portfolio/get')
+    }
+
+    public getEducation() {
+        return this.http.get<Education[]>(this.url + '/test/education')
     }
 }

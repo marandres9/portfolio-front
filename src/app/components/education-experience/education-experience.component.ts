@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Education } from 'src/app/model/Education';
 import { AuthenticationService } from 'src/app/service/authentication.service';
+import { HttpService } from 'src/app/service/http.service';
 
 @Component({
     selector: 'app-education-experience',
@@ -8,7 +10,9 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 })
 export class EducationExperienceComponent implements OnInit {
 
-    constructor(private authService: AuthenticationService) { }
+    @Input() educations: Education[]
+
+    constructor(private authService: AuthenticationService, private http: HttpService) { }
 
     ngOnInit(): void {
     }

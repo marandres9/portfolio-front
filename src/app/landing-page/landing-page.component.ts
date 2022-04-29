@@ -21,7 +21,6 @@ export class LandingPageComponent implements OnInit {
         this.http.getPortfolio()
             .subscribe(portfolioDto => {
                 this.portfoioDto = portfolioDto
-                console.log(portfolioDto.skills)
             })
     }
 
