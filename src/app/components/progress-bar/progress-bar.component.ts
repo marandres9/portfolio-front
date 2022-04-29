@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Skill } from 'src/app/model/Skill';
 
 @Component({
     selector: 'app-progress-bar',
@@ -7,8 +8,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 })
 export class ProgressBarComponent implements OnInit, OnChanges {
 
-    @Input() title: string;
-    @Input() value: string;
+    @Input() skill: Skill = new Skill('test1', 50);
 
     progress_container_style = 'height: 0.5em;'
     progress_bar_style: string;
@@ -23,8 +23,8 @@ export class ProgressBarComponent implements OnInit, OnChanges {
         // valor 'value'. Se debe esperar a recibir dicho valor antes de setear
         // el width del componente, sino va a quedar solo con el valor inicializado
         // (ej: 0) y nunca se va a actualizar
-        this.value = changes['value'].currentValue
-        this.progress_bar_style = `background-color: #c60021; width: ${this.value}%`;
+        this.skill = changes['skill'].currentValue
+        this.progress_bar_style = `background-color: #c60021; width: ${this.skill.value}%`;
     }
 
 }

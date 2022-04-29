@@ -10,18 +10,26 @@
         </div>
         <div class="row">
             <div class="col">
-                <app-progress-bar title="test" value="25"></app-progress-bar>
-                <app-progress-bar title="HTML" value="50"></app-progress-bar>
+                <!-- <app-progress-bar title="HTML" value="50"></app-progress-bar>
                 <app-progress-bar title="CSS" value="50"></app-progress-bar>
                 <app-progress-bar title="JavaScript" value="50"></app-progress-bar>
                 <app-progress-bar title="Java" value="50"></app-progress-bar>
-                <app-progress-bar title="C/C++" value="50"></app-progress-bar>
+                <app-progress-bar title="C/C++" value="50"></app-progress-bar> -->
+
+                <app-progress-bar
+                    *ngFor="let skill of skills"
+                    [skill]="skill"
+                >
+                </app-progress-bar>
+
             </div>
             <div class="col">
-                <app-progress-bar title="Team work" value="50"></app-progress-bar>
-                <app-progress-bar title="Communication" value="50"></app-progress-bar>
-                <app-progress-bar title="Problem solving" value="50"></app-progress-bar>
-                <app-progress-bar title="Organization" value="50"></app-progress-bar>
+                <app-progress-bar
+                    *ngFor="let skill of softSkills"
+                    [skill]="skill"
+                >
+                </app-progress-bar>
+
             </div>
         </div>
     </div>
