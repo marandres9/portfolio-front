@@ -15,7 +15,7 @@ export class EditingPageComponent implements OnInit {
     portfolio = new PortfolioDTO();
 
     homeForm = new FormGroup({
-        title: new FormControl(this.portfolio.home_title),
+        title: new FormControl(''),
         description: new FormControl('')
     })
 
@@ -25,6 +25,15 @@ export class EditingPageComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+        this.getIfEmpty()
+    }
+
+    updateForm(): void {
+        this.homeForm.get('title')?.setValue(this.portfolio.home_title)
+        this.homeForm.get('description')?.setValue(this.portfolio.home_description)
+    }
+
+    getIfEmpty(): void {
         if(this.portfolioService.isEmpty()) {
             // make http req
             console.log("portfolio is empty")
@@ -39,10 +48,5 @@ export class EditingPageComponent implements OnInit {
             this.portfolio = this.portfolioService.portfolio
             this.updateForm()
         }
-
-    }
-
-    updateForm(): void {
-        this.homeForm.get('title')?.setValue(this.portfolio.home_title)
     }
 }

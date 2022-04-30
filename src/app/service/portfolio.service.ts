@@ -5,22 +5,31 @@ import { PortfolioDTO } from '../model/PortfolioDTO';
     providedIn: 'root'
 })
 export class PortfolioService {
-    portfolio: PortfolioDTO = new PortfolioDTO()
+    portfolioDto: PortfolioDTO = new PortfolioDTO()
 
     constructor() { }
 
     isEmpty() {
+        // checks if its portfolio has any data
         if(
-            this.portfolio.home_title ||
-            this.portfolio.home_description ||
-            this.portfolio.about_description ||
-            this.portfolio.skills ||
-            this.portfolio.educations ||
-            this.portfolio.projects
+            this.portfolioDto.home_title ||
+            this.portfolioDto.home_description ||
+            this.portfolioDto.about_description ||
+            this.portfolioDto.skills ||
+            this.portfolioDto.educations ||
+            this.portfolioDto.projects
             ) {
                 return false
             } else {
                 return true
         }
+    }
+
+    get portfolio() {
+        return this.portfolioDto
+    }
+
+    set portfolio(portfolio: PortfolioDTO) {
+        this.portfolioDto = portfolio
     }
 }
