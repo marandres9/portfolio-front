@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Skill } from 'src/app/model/Skill';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 
@@ -9,13 +9,9 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 })
 export class SkillsComponent implements OnInit {
 
-    @Input() skills: Skill[]
+    @Input() hardSkills: Skill[] = []
 
-    softSkills: Skill[] = [
-        new Skill('Team work', 10),
-        new Skill('Communication', 20),
-        new Skill('Problem solving', 30),
-        new Skill('Organization', 40)]
+    @Input() softSkills: Skill[] = []
 
     constructor(private authService: AuthenticationService) {
     }

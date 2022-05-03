@@ -15,7 +15,8 @@ export class PortfolioService {
             this.portfolioDto.home_title ||
             this.portfolioDto.home_description ||
             this.portfolioDto.about_description ||
-            this.portfolioDto.skills ||
+            this.portfolioDto.hardSkills ||
+            this.portfolioDto.softSkills ||
             this.portfolioDto.educations ||
             this.portfolioDto.projects
             ) {

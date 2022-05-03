@@ -7,7 +7,8 @@ export class PortfolioDTO {
     private _home_title: string;
     private _home_description: string;
     private _about_description: string;
-    private _skills: Skill[]
+    private _soft_skills: Skill[]
+    private _hard_skills: Skill[]
     private _educations: Education[]
     private _projects: Project[]
 
@@ -23,8 +24,12 @@ export class PortfolioDTO {
         return this._about_description;
     }
 
-    public get skills() {
-        return this._skills
+    public get softSkills() {
+        return this._soft_skills
+    }
+
+    public get hardSkills() {
+        return this._hard_skills
     }
 
     public get educations() {

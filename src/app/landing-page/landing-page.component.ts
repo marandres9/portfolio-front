@@ -26,6 +26,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
         this.http.getPortfolio()
             .subscribe(portfolioDto => {
                 this.portfoioDto = portfolioDto
+                console.log(portfolioDto)
             })
     }
 

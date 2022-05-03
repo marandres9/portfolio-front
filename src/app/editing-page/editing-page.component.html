@@ -1,21 +1,44 @@
-<form [formGroup]="homeForm">
+<form [formGroup]="this.homeForm">
     <label for="title">Title: </label> <br>
-    <input type="text" id="title" formControlName="title" value="home.title">
+    <input type="text" id="title" formControlName="title">
     <br>
-    <label for="title">Description: </label> <br>
+    <label for="description">Description: </label> <br>
     <input type="text" id="description" formControlName="description">
 </form>
-<h3>
-    INCOMPLETE
-</h3>
-<p>
-    the component shouldn't make a http request. It should get everything from
-    the lainding-page component
-</p>
 
 {{this.portfolio.home_title}} <br>
 {{this.portfolio.home_description}} <br>
-{{this.portfolio.about_description}} <br>
-{{this.portfolio.skills}} <br>
+{{this.portfolio.home_description}} <br>
+{{this.portfolio.hardSkills}} <br>
 {{this.portfolio.educations}} <br>
 {{this.portfolio.projects}}
+
+<hr>
+
+<div class="row">
+    <div class="col-6">
+        <div *ngFor="let form of this.hardSkillsForm">
+            <form [formGroup]="form">
+                <label for="title">Title: </label> <br>
+                <input type="text" id="title" formControlName="title">
+                <br>
+                <label for="value">Value: </label> <br>
+                <input type="number" id="value" formControlName="value">
+                <hr>
+            </form>
+        </div>
+    </div>
+    <div class="col">
+
+    </div>
+</div>
+
+
+<!-- <div *ngFor="let skill of this.portfolio.skills">
+    <label for="title">Title: </label> <br>
+    <input type="text" id="title" formControlName="title">
+    <br>
+    <label for="value">Value: </label> <br>
+    <input type="text" id="value" formControlName="value">
+    <hr>
+</div> -->

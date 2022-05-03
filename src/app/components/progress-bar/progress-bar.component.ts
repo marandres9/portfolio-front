@@ -8,7 +8,7 @@ import { Skill } from 'src/app/model/Skill';
 })
 export class ProgressBarComponent implements OnInit, OnChanges {
 
-    @Input() skill: Skill = new Skill('test1', 50);
+    @Input() skill: Skill = new Skill('', 0, false);
 
     progress_container_style = 'height: 0.5em;'
     progress_bar_style: string;
