@@ -17,7 +17,29 @@
 
 <div class="row">
     <div class="col-6">
-        <div *ngFor="let form of this.hardSkillsForm">
+        <div *ngFor="let form of this.hardSkillsForm; let i = index">
+            <form [formGroup]="form">
+                <label for="title">Title: </label> <br>
+                <input type="text" id="title" formControlName="title">
+                <br>
+                <label for="value">Value: </label> <br>
+                <input type="number" id="value" formControlName="value">
+                <br>
+                <button
+                class="btn btn-danger"
+                (click)="onDelete(form, i, false)"
+                >
+                    Delete
+                </button>
+                <button class="btn btn-primary">
+                    Update
+                </button>
+                <hr>
+            </form>
+        </div>
+    </div>
+    <div class="col-6">
+        <div *ngFor="let form of this.softSkillsForm; let i = index">
             <form [formGroup]="form">
                 <label for="title">Title: </label> <br>
                 <input type="text" id="title" formControlName="title">
@@ -25,11 +47,14 @@
                 <label for="value">Value: </label> <br>
                 <input type="number" id="value" formControlName="value">
                 <hr>
+                <button
+                class="btn btn-danger"
+                (click)="onDelete(form, i, true)"
+                >
+                    Delete
+                </button>
             </form>
         </div>
-    </div>
-    <div class="col">
-
     </div>
 </div>
 

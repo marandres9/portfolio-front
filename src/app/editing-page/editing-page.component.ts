@@ -20,6 +20,7 @@ export class EditingPageComponent implements OnInit {
     // try using a functino that returns the controls
 
     hardSkillsForm: FormGroup[] = []
+    softSkillsForm: FormGroup[] = []
 
     constructor(
         private http: HttpService,
@@ -40,13 +41,24 @@ export class EditingPageComponent implements OnInit {
             description: this.portfolio.home_description
         })
 
-        // set skills-form values
+        // set hard-skills-form values
         for(let skill of this.portfolio.hardSkills) {
-            console.log(skill)
             // push skills to form-group-array
             this.hardSkillsForm.push(new FormGroup({
+                id: new FormControl(skill.id),
                 title: new FormControl(skill.title),
                 value: new FormControl(skill.value)
+            }))
+        }
+
+        // set soft-skill-form values
+        for(let skill of this.portfolio.softSkills) {
+            // push skills to form-group-array
+            this.softSkillsForm.push(new FormGroup({
+                id: new FormControl(skill.id),
+                title: new FormControl(skill.title),
+                value: new FormControl(skill.value),
+                softSkill : new FormControl(skill.softSkill)
             }))
         }
     }
@@ -69,6 +81,20 @@ export class EditingPageComponent implements OnInit {
             this.portfolio = this.portfolioService.portfolio
             // updates displayed values
             this.updateForm()
+        }
+    }
+
+    onDelete(form: FormGroup, index: number, is_soft: boolean) {
+        // An HttpClient method does not begin its HTTP request until you call
+        // .subscribe() on the observable returned by that method
+        let skill_id = form.get('id')?.value
+        this.http.deleteSkill(skill_id).subscribe()
+
+        if (is_soft) {
+            // specify to delete only one!!
+            this.softSkillsForm.splice(index, 1)
+        } else {
+            this.hardSkillsForm.splice(index, 1)
         }
     }
 }

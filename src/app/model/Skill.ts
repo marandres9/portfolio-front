@@ -11,6 +11,10 @@ export class Skill {
         this._softSkill = soft;
     }
 
+    public get id() {
+        return this._id;
+    }
+
     public get title() {
         return this._title;
     }

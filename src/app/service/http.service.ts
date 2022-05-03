@@ -24,4 +24,8 @@ export class HttpService {
     public getEducation() {
         return this.http.get<Education[]>(this.url + '/test/education')
     }
+
+    public deleteSkill(id: number) {
+        return this.http.delete(this.url + `/portfolio/skills/delete/${id}`)
+    }
 }
