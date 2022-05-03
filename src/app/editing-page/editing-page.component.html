@@ -1,9 +1,48 @@
-<form [formGroup]="this.homeForm">
-    <label for="title">Title: </label> <br>
-    <input type="text" id="title" formControlName="title">
-    <br>
-    <label for="description">Description: </label> <br>
-    <input type="text" id="description" formControlName="description">
+<form [formGroup]="this.portfolioForm">
+    <!-- == HOME == -->
+    <div formGroupName="home">
+        <label for="title">Title: </label> <br>
+        <input type="text" id="title" formControlName="title">
+        <br>
+        <label for="description">Description: </label> <br>
+        <input type="text" id="description" formControlName="description">
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-6">
+            <!-- == HARD-SKILLS == -->
+            <span formArrayName="hardSkills">
+                <div
+                    *ngFor="let skill of this.hardSkills.controls; let i = index"
+                    [formGroupName]="i"
+                >
+                    <label for="title">Title: </label> <br>
+                    <input type="text" id="title" formControlName="title">
+                    <br>
+                    <label for="value">Value: </label> <br>
+                    <input type="number" id="value" formControlName="value">
+                    <hr>
+                </div>
+            </span>
+        </div>
+        <div class="col-6">
+            <!-- == SOFT-SKILLS == -->
+            <span formArrayName="softSkills">
+                <div
+                    *ngFor="let skill of this.softSkills.controls; let i = index"
+                    [formGroupName]="i"
+                >
+                    <label for="title">Title: </label> <br>
+                    <input type="text" id="title" formControlName="title">
+                    <br>
+                    <label for="value">Value: </label> <br>
+                    <input type="number" id="value" formControlName="value">
+                    <hr>
+                </div>
+            </span>
+        </div>
+    </div>
+
 </form>
 
 {{this.portfolio.home_title}} <br>

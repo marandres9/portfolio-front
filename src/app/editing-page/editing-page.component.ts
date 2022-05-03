@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PortfolioDTO } from '../model/PortfolioDTO';
 import { HttpService } from '../service/http.service';
 import { PortfolioService } from '../service/portfolio.service';
@@ -13,6 +13,15 @@ export class EditingPageComponent implements OnInit {
 
     portfolio = new PortfolioDTO();
 
+    portfolioForm = this.fb.group({
+        home: this.fb.group({
+            title: [''],
+            description: ['']
+        }),
+        hardSkills: this.fb.array([]),
+        softSkills: this.fb.array([])
+    })
+
     homeForm = new FormGroup({
         title: new FormControl(''),
         description: new FormControl('')
@@ -24,6 +33,7 @@ export class EditingPageComponent implements OnInit {
 
     constructor(
         private http: HttpService,
+        private fb: FormBuilder,
         private portfolioService: PortfolioService
     ) { }
 
@@ -36,7 +46,9 @@ export class EditingPageComponent implements OnInit {
         // .setValue() sets all form-controls in the group
 
         // set home-form values
-        this.homeForm.setValue({
+        this.portfolioForm.get
+
+        this.home.setValue({
             title: this.portfolio.home_title,
             description: this.portfolio.home_description
         })
@@ -44,22 +56,28 @@ export class EditingPageComponent implements OnInit {
         // set hard-skills-form values
         for(let skill of this.portfolio.hardSkills) {
             // push skills to form-group-array
-            this.hardSkillsForm.push(new FormGroup({
-                id: new FormControl(skill.id),
-                title: new FormControl(skill.title),
-                value: new FormControl(skill.value)
+            this.hardSkills.push(this.fb.group({
+                id: [skill.id],
+                title: [skill.title],
+                value: [skill.value]
             }))
         }
 
         // set soft-skill-form values
         for(let skill of this.portfolio.softSkills) {
             // push skills to form-group-array
-            this.softSkillsForm.push(new FormGroup({
-                id: new FormControl(skill.id),
-                title: new FormControl(skill.title),
-                value: new FormControl(skill.value),
-                softSkill : new FormControl(skill.softSkill)
-            }))
+            this.softSkills.push(this.fb.group({
+                id: [skill.id],
+                title: [skill.title],
+                value: [skill.value],
+                softSkill: [skill.softSkill]
+            })
+                // new FormGroup({
+                // id: new FormControl(skill.id),
+                // title: new FormControl(skill.title),
+                // value: new FormControl(skill.value),
+                // softSkill : new FormControl(skill.softSkill)
+            )
         }
     }
 
@@ -96,5 +114,15 @@ export class EditingPageComponent implements OnInit {
         } else {
             this.hardSkillsForm.splice(index, 1)
         }
+    }
+
+    get home() {
+        return this.portfolioForm.get('home') as FormGroup
+    }
+    get hardSkills() {
+        return this.portfolioForm.get('hardSkills') as FormArray
+    }
+    get softSkills() {
+        return this.portfolioForm.get('softSkills') as FormArray
     }
 }
