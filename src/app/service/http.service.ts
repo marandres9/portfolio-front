@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Home } from 'src/app/model/Home';
 import { Education } from '../model/Education';
 import { PortfolioDTO } from '../model/PortfolioDTO';
+import { Skill } from '../model/Skill';
 
 @Injectable({
     providedIn: 'root'
@@ -26,6 +27,11 @@ export class HttpService {
     }
 
     public deleteSkill(id: number) {
-        return this.http.delete(this.url + `/portfolio/skills/delete/${id}`)
+        return this.http.delete<Skill>(this.url + `/portfolio/skills/delete/${id}`)
     }
+
+    public updateSkill(id:number, title: string, value: number) {
+        return this.http.put<Skill>(`${this.url}/skills/update/${id}`, {}, {params: {'title': title, 'value': value}})
+    }
+    // !!! HANDLE HTTP ERRORS
 }

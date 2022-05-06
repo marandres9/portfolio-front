@@ -10,11 +10,11 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 export class SkillsComponent implements OnInit {
 
     @Input() hardSkills: Skill[] = []
-
     @Input() softSkills: Skill[] = []
 
-    constructor(private authService: AuthenticationService) {
-    }
+    constructor(
+        private authService: AuthenticationService
+    ) {}
 
     ngOnInit(): void {}
 

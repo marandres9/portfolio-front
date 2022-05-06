@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PortfolioDTO } from '../model/PortfolioDTO';
+import { Skill } from '../model/Skill';
 import { HttpService } from '../service/http.service';
 import { PortfolioService } from '../service/portfolio.service';
 
@@ -22,14 +23,13 @@ export class EditingPageComponent implements OnInit {
         softSkills: this.fb.array([])
     })
 
-    homeForm = new FormGroup({
-        title: new FormControl(''),
-        description: new FormControl('')
+    // addSkillForm: FormGroup = this.fb.group({})
+    showAddSkillForm = false
+    addSkillForm = this.fb.group({
+        title: [''],
+        value: [''],
+        softSkill: ['']
     })
-    // try using a functino that returns the controls
-
-    hardSkillsForm: FormGroup[] = []
-    softSkillsForm: FormGroup[] = []
 
     constructor(
         private http: HttpService,
@@ -46,7 +46,7 @@ export class EditingPageComponent implements OnInit {
         // .setValue() sets all form-controls in the group
 
         // set home-form values
-        this.portfolioForm.get
+        // this.portfolioForm.get
 
         this.home.setValue({
             title: this.portfolio.home_title,
@@ -54,7 +54,7 @@ export class EditingPageComponent implements OnInit {
         })
 
         // set hard-skills-form values
-        for(let skill of this.portfolio.hardSkills) {
+        for (let skill of this.portfolio.hardSkills) {
             // push skills to form-group-array
             this.hardSkills.push(this.fb.group({
                 id: [skill.id],
@@ -64,27 +64,21 @@ export class EditingPageComponent implements OnInit {
         }
 
         // set soft-skill-form values
-        for(let skill of this.portfolio.softSkills) {
+        for (let skill of this.portfolio.softSkills) {
             // push skills to form-group-array
             this.softSkills.push(this.fb.group({
                 id: [skill.id],
                 title: [skill.title],
                 value: [skill.value],
                 softSkill: [skill.softSkill]
-            })
-                // new FormGroup({
-                // id: new FormControl(skill.id),
-                // title: new FormControl(skill.title),
-                // value: new FormControl(skill.value),
-                // softSkill : new FormControl(skill.softSkill)
-            )
+            }))
         }
     }
 
     getIfEmpty(): void {
         // if a portfolioDTO already exists (when loading the home page) the
         // service passes the object to this page, if not, a new GET req is made
-        if(this.portfolioService.isEmpty()) {
+        if (this.portfolioService.isEmpty()) {
             // make http req
             console.log("portfolio is empty")
             this.http.getPortfolio().subscribe(portfolio => {
@@ -102,18 +96,37 @@ export class EditingPageComponent implements OnInit {
         }
     }
 
-    onDelete(form: FormGroup, index: number, is_soft: boolean) {
+    onDelete(id: number, index: number, isSoft: boolean) {
+        if (isSoft) {
+            this.softSkills.removeAt(index)
+        } else {
+            this.hardSkills.removeAt(index)
+        }
         // An HttpClient method does not begin its HTTP request until you call
         // .subscribe() on the observable returned by that method
-        let skill_id = form.get('id')?.value
-        this.http.deleteSkill(skill_id).subscribe()
+        this.http.deleteSkill(id).subscribe()
+    }
 
-        if (is_soft) {
-            // specify to delete only one!!
-            this.softSkillsForm.splice(index, 1)
-        } else {
-            this.hardSkillsForm.splice(index, 1)
-        }
+    onUpdate(index: number, control: AbstractControl) {
+        let id: number = control.get('id')?.value
+        let title: string = control.get('title')?.value
+        let value: number = control.get('value')?.value
+
+        this.http.updateSkill(id, title, value)
+            .subscribe((updatedSkill) => {
+                if (updatedSkill !== null) {
+                    if (updatedSkill.softSkill) {
+                        this.portfolio.softSkills[index].setSkill(updatedSkill.title, updatedSkill.value)
+                    } else {
+                        this.portfolio.hardSkills[index].setSkill(updatedSkill.title, updatedSkill.value)
+                    }
+                }
+            })
+    }
+
+    addSkill() {
+
+        this.addSkillForm.addControl('title', new FormControl())
     }
 
     get home() {

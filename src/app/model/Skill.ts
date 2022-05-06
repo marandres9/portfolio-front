@@ -38,4 +38,9 @@ export class Skill {
     public get softSkill() {
         return this._softSkill
     }
+
+    public setSkill(title: string, value: number) {
+        this.title = title
+        this.value = value
+    }
 }

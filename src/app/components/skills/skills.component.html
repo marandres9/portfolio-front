@@ -10,14 +10,9 @@
         </div>
         <div class="row">
             <div class="col">
-                <!-- <app-progress-bar title="HTML" value="50"></app-progress-bar>
-                <app-progress-bar title="CSS" value="50"></app-progress-bar>
-                <app-progress-bar title="JavaScript" value="50"></app-progress-bar>
-                <app-progress-bar title="Java" value="50"></app-progress-bar>
-                <app-progress-bar title="C/C++" value="50"></app-progress-bar> -->
 
                 <app-progress-bar
-                    *ngFor="let skill of hardSkills"
+                    *ngFor="let skill of this.hardSkills"
                     [skill]="skill"
                 >
                 </app-progress-bar>
@@ -25,7 +20,7 @@
             </div>
             <div class="col">
                 <app-progress-bar
-                    *ngFor="let skill of softSkills"
+                    *ngFor="let skill of this.softSkills"
                     [skill]="skill"
                 >
                 </app-progress-bar>
