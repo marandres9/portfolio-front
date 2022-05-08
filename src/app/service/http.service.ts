@@ -14,16 +14,12 @@ export class HttpService {
 
     constructor(private http: HttpClient) { }
 
-    public getHome() {
-        return this.http.get<Home>(this.url + '/home')
-    }
-
     public getPortfolio() {
         return this.http.get<PortfolioDTO>(this.url + '/portfolio/get')
     }
 
-    public getEducation() {
-        return this.http.get<Education[]>(this.url + '/test/education')
+    public updateHome(title: string, description: string) {
+        return this.http.put<Home>(`${this.url}/home/update/`, {}, {params: {'title': title, 'description': description}})
     }
 
     public deleteSkill(id: number) {

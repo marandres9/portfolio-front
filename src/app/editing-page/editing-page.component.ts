@@ -43,22 +43,12 @@ export class EditingPageComponent implements OnInit {
 
     updateForm(): void {
         // set home-form values
-        this.home.setValue({
-            title: this.portfolio.home_title,
-            description: this.portfolio.home_description
-        })
+        this.setHome()
 
         // set hard-skills-form values
-        for (let skill of this.portfolio.hardSkills) {
-            // push skills to form-group-array
-            this.pushToFormArray(this.hardSkillsForm, skill)
-        }
-
+        this.setHardSkills()
         // set soft-skill-form values
-        for (let skill of this.portfolio.softSkills) {
-            // push skills to form-group-array
-            this.pushToFormArray(this.softSkillsForm, skill)
-        }
+        this.setSoftSkills()
     }
 
     getIfEmpty(): void {
@@ -70,19 +60,35 @@ export class EditingPageComponent implements OnInit {
             this.http.getPortfolio().subscribe(portfolio => {
                 this.portfolio = portfolio
                 console.log(this.portfolio)
-                // updates displayed values
+
                 this.updateForm()
             })
         } else {
             // get from service
             console.log("portfolio not empty")
             this.portfolio = this.portfolioService.portfolio
-            // updates displayed values
+
             this.updateForm()
         }
     }
 
-    onDelete(form: AbstractControl, index: number) {
+    // === HOME ===
+    setHome() {
+        this.homeForm.setValue({
+            title: this.portfolio.home_title,
+            description: this.portfolio.home_description
+        })
+    }
+
+    onHomeUpdate() {
+        let title: string = this.homeForm.get('title')?.value
+        let description: string = this.homeForm.get('description')?.value
+
+        this.http.updateHome(title, description).subscribe()
+    }
+
+    // === SKILLS ===
+    onSkillsDelete(form: AbstractControl, index: number) {
         let id = form.get('id')?.value
         let isSoftSkill = form.get('softSkill')?.value
 
@@ -96,24 +102,15 @@ export class EditingPageComponent implements OnInit {
         this.http.deleteSkill(id).subscribe()
     }
 
-    onUpdate(index: number, control: AbstractControl) {
+    onSkillsUpdate(index: number, control: AbstractControl) {
         let id: number = control.get('id')?.value
         let title: string = control.get('title')?.value
         let value: number = control.get('value')?.value
 
-        this.http.updateSkill(id, title, value)
-            .subscribe((updatedSkill) => {
-                if (updatedSkill !== null) {
-                    if (updatedSkill.softSkill) {
-                        this.portfolio.softSkills[index].setSkill(updatedSkill.title, updatedSkill.value)
-                    } else {
-                        this.portfolio.hardSkills[index].setSkill(updatedSkill.title, updatedSkill.value)
-                    }
-                }
-            })
+        this.http.updateSkill(id, title, value).subscribe()
     }
 
-    addSkill() {
+    onSkillsSave() {
         let form = this.addSkillForm
 
         let title: string = form.get('title')?.value
@@ -133,7 +130,7 @@ export class EditingPageComponent implements OnInit {
         this.showAddSkillForm = !this.showAddSkillForm
     }
 
-    get home() {
+    get homeForm() {
         return this.portfolioForm.get('home') as FormGroup
     }
     get hardSkillsForm() {
@@ -141,6 +138,19 @@ export class EditingPageComponent implements OnInit {
     }
     get softSkillsForm() {
         return this.portfolioForm.get('softSkills') as FormArray
+    }
+
+    setHardSkills() {
+        for (let skill of this.portfolio.hardSkills) {
+            // push skills to form-group-array
+            this.pushToFormArray(this.hardSkillsForm, skill)
+        }
+    }
+    setSoftSkills() {
+        for (let skill of this.portfolio.softSkills) {
+            // push skills to form-group-array
+            this.pushToFormArray(this.softSkillsForm, skill)
+        }
     }
 
     pushToFormArray(array: FormArray, skill: Skill) {

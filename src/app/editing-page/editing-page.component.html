@@ -6,6 +6,13 @@
         <br>
         <label for="description">Description: </label> <br>
         <input type="text" id="description" formControlName="description">
+        <br>
+        <button
+            class="btn btn-primary"
+            (click)="this.onHomeUpdate()"
+        >
+            Update
+        </button>
     </div>
     <hr>
     <div class="row">
@@ -27,13 +34,13 @@
                     <button
                         class="btn btn-danger"
                         type="button"
-                        (click)="this.onDelete(skill, i)"
+                        (click)="this.onSkillsDelete(skill, i)"
                     >
                         Delete
                     </button>
                     <button
                         class="btn btn-primary"
-                        (click)="this.onUpdate(i, skill)"
+                        (click)="this.onSkillsUpdate(i, skill)"
                     >
                         Update
                     </button>
@@ -59,13 +66,13 @@
                     <button
                         class="btn btn-danger"
                         type="button"
-                        (click)="this.onDelete(skill, i)"
+                        (click)="this.onSkillsDelete(skill, i)"
                     >
                         Delete
                     </button>
                     <button
                         class="btn btn-primary"
-                        (click)="this.onUpdate(i, skill)"
+                        (click)="this.onSkillsUpdate(i, skill)"
                     >
                         Update
                     </button>
@@ -102,7 +109,7 @@
                 </button>
                 <button
                     class="btn btn-success"
-                    (click)="addSkill()"
+                    (click)="onSkillsSave()"
                 >
                     Save
                 </button>
