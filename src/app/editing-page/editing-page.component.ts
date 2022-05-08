@@ -42,12 +42,7 @@ export class EditingPageComponent implements OnInit {
     }
 
     updateForm(): void {
-        // this.homeForm.get('title')?.setValue(this.portfolio.home_title)
-        // .setValue() sets all form-controls in the group
-
         // set home-form values
-        // this.portfolioForm.get
-
         this.home.setValue({
             title: this.portfolio.home_title,
             description: this.portfolio.home_description
@@ -59,7 +54,8 @@ export class EditingPageComponent implements OnInit {
             this.hardSkills.push(this.fb.group({
                 id: [skill.id],
                 title: [skill.title],
-                value: [skill.value]
+                value: [skill.value],
+                softSkill: [skill.softSkill]
             }))
         }
 
@@ -125,8 +121,25 @@ export class EditingPageComponent implements OnInit {
     }
 
     addSkill() {
+        let form = this.addSkillForm
 
-        this.addSkillForm.addControl('title', new FormControl())
+        let title: string = form.get('title')?.value
+        let value: number = form.get('value')?.value
+        let softSkill: boolean = form.get('softSkill')?.value
+
+        let skill = new Skill(title, value, softSkill)
+        // console.log(skill)
+        this.http.saveSkill(skill).subscribe((newSkill) => {
+            // if(newSkill.softSkill) {
+            //     this.softSkills.push(form)
+            // } else {
+            //     this.hardSkills.push(form)
+            // }
+            console.log(newSkill)
+            window.location.reload()
+        })
+        this.addSkillForm.reset()
+        this.showAddSkillForm = !this.showAddSkillForm
     }
 
     get home() {

@@ -33,5 +33,9 @@ export class HttpService {
     public updateSkill(id:number, title: string, value: number) {
         return this.http.put<Skill>(`${this.url}/skills/update/${id}`, {}, {params: {'title': title, 'value': value}})
     }
+
+    public saveSkill(skill: Skill) {
+        return this.http.post<Skill>(`${this.url}/skills/save`, skill)
+    }
     // !!! HANDLE HTTP ERRORS
 }

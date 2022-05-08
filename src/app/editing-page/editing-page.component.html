@@ -16,6 +16,8 @@
                     *ngFor="let skill of this.hardSkills.controls; let i = index"
                     [formGroupName]="i"
                 >
+                    ID: <strong>{{skill.get('id')?.value}}</strong>
+                    <br>
                     <label for="title">Title: </label> <br>
                     <input type="text" id="title" formControlName="title">
                     <br>
@@ -60,8 +62,14 @@
                 </div>
                 <ng-template #noshow>
                     <button
-                        class="btn btn-success"
+                        class="btn btn-danger"
                         (click)="showAddSkillForm = !showAddSkillForm"
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        class="btn btn-success"
+                        (click)="addSkill()"
                     >
                         Save
                     </button>
@@ -75,6 +83,8 @@
                     *ngFor="let skill of this.softSkills.controls; let i = index"
                     [formGroupName]="i"
                 >
+                    ID: <strong>{{skill.get('id')?.value}}</strong>
+                    <br>
                     <label for="title">Title: </label> <br>
                     <input type="text" id="title" formControlName="title">
                     <br>
