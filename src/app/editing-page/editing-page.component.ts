@@ -12,11 +12,14 @@ import { PortfolioService } from '../service/portfolio.service';
 })
 export class EditingPageComponent implements OnInit {
 
-    portfolio = new PortfolioDTO();
+    portfolioDto = new PortfolioDTO();
 
     portfolioForm = this.fb.group({
         home: this.fb.group({
             title: [''],
+            description: ['']
+        }),
+        about: this.fb.group({
             description: ['']
         }),
         hardSkills: this.fb.array([]),
@@ -45,6 +48,8 @@ export class EditingPageComponent implements OnInit {
         // set home-form values
         this.setHome()
 
+        this.setAbout()
+
         // set hard-skills-form values
         this.setHardSkills()
         // set soft-skill-form values
@@ -58,15 +63,15 @@ export class EditingPageComponent implements OnInit {
             // make http req
             console.log("portfolio is empty")
             this.http.getPortfolio().subscribe(portfolio => {
-                this.portfolio = portfolio
-                console.log(this.portfolio)
+                this.portfolioDto = portfolio
+                console.log(this.portfolioDto)
 
                 this.updateForm()
             })
         } else {
             // get from service
             console.log("portfolio not empty")
-            this.portfolio = this.portfolioService.portfolio
+            this.portfolioDto = this.portfolioService.portfolio
 
             this.updateForm()
         }
@@ -75,8 +80,8 @@ export class EditingPageComponent implements OnInit {
     // === HOME ===
     setHome() {
         this.homeForm.setValue({
-            title: this.portfolio.home_title,
-            description: this.portfolio.home_description
+            title: this.portfolioDto.home_title,
+            description: this.portfolioDto.home_description
         })
     }
 
@@ -85,6 +90,19 @@ export class EditingPageComponent implements OnInit {
         let description: string = this.homeForm.get('description')?.value
 
         this.http.updateHome(title, description).subscribe()
+    }
+
+    // === ABOUT ===
+    setAbout() {
+        this.aboutForm.setValue({
+            description: this.portfolioDto.about_description
+        })
+    }
+
+    onAboutUpdate() {
+        let description: string = this.aboutForm.get('description')?.value
+
+        this.http.updateAbout(description).subscribe()
     }
 
     // === SKILLS ===
@@ -133,6 +151,9 @@ export class EditingPageComponent implements OnInit {
     get homeForm() {
         return this.portfolioForm.get('home') as FormGroup
     }
+    get aboutForm() {
+        return this.portfolioForm.get('about') as FormGroup
+    }
     get hardSkillsForm() {
         return this.portfolioForm.get('hardSkills') as FormArray
     }
@@ -141,13 +162,13 @@ export class EditingPageComponent implements OnInit {
     }
 
     setHardSkills() {
-        for (let skill of this.portfolio.hardSkills) {
+        for (let skill of this.portfolioDto.hardSkills) {
             // push skills to form-group-array
             this.pushToFormArray(this.hardSkillsForm, skill)
         }
     }
     setSoftSkills() {
-        for (let skill of this.portfolio.softSkills) {
+        for (let skill of this.portfolioDto.softSkills) {
             // push skills to form-group-array
             this.pushToFormArray(this.softSkillsForm, skill)
         }

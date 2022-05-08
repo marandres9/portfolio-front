@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Home } from 'src/app/model/Home';
 import { Education } from '../model/Education';
+import { About } from '../model/About';
 import { PortfolioDTO } from '../model/PortfolioDTO';
 import { Skill } from '../model/Skill';
 
@@ -18,10 +19,17 @@ export class HttpService {
         return this.http.get<PortfolioDTO>(this.url + '/portfolio/get')
     }
 
+    // === HOME ===
     public updateHome(title: string, description: string) {
         return this.http.put<Home>(`${this.url}/home/update/`, {}, {params: {'title': title, 'description': description}})
     }
 
+    // === ABOUT ===
+    public updateAbout(description: string) {
+        return this.http.put<About>(`${this.url}/about/update/`, {}, {params: {'description': description}})
+    }
+
+    // === SKILLS ===
     public deleteSkill(id: number) {
         return this.http.delete<Skill>(this.url + `/portfolio/skills/delete/${id}`)
     }

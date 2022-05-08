@@ -1,5 +1,5 @@
 <form [formGroup]="this.portfolioForm">
-    <!-- == HOME == -->
+    <!-- === HOME === -->
     <div formGroupName="home">
         <label for="title">Title: </label> <br>
         <input type="text" id="title" formControlName="title">
@@ -15,6 +15,20 @@
         </button>
     </div>
     <hr>
+    <!-- === ABOUT === -->
+    <div formGroupName="about">
+        <label for="description">Description: </label> <br>
+        <input type="text" id="description" formControlName="description">
+        <br>
+        <button
+            class="btn btn-primary"
+            (click)="this.onAboutUpdate()"
+        >
+            Update
+        </button>
+    </div>
+    <hr>
+    <!-- === SKILLS ===  -->
     <div class="row">
         <div class="col-6">
             <!-- == HARD-SKILLS == -->
@@ -119,10 +133,10 @@
 
 </form>
 
-{{this.portfolio.home_title}} <br>
-{{this.portfolio.home_description}} <br>
-{{this.portfolio.home_description}} <br>
-{{this.portfolio.hardSkills}} <br>
-<!-- {{this.portfolio.softSkills}} <br> -->
-{{this.portfolio.educations}} <br>
-{{this.portfolio.projects}}
+{{this.portfolioDto.home_title}} <br>
+{{this.portfolioDto.home_description}} <br>
+{{this.portfolioDto.home_description}} <br>
+{{this.portfolioDto.hardSkills}} <br>
+<!-- {{this.portfolioDto.softSkills}} <br> -->
+{{this.portfolioDto.educations}} <br>
+{{this.portfolioDto.projects}}
