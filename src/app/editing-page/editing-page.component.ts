@@ -51,23 +51,13 @@ export class EditingPageComponent implements OnInit {
         // set hard-skills-form values
         for (let skill of this.portfolio.hardSkills) {
             // push skills to form-group-array
-            this.hardSkills.push(this.fb.group({
-                id: [skill.id],
-                title: [skill.title],
-                value: [skill.value],
-                softSkill: [skill.softSkill]
-            }))
+            this.pushToFormArray(this.hardSkillsForm, skill)
         }
 
         // set soft-skill-form values
         for (let skill of this.portfolio.softSkills) {
             // push skills to form-group-array
-            this.softSkills.push(this.fb.group({
-                id: [skill.id],
-                title: [skill.title],
-                value: [skill.value],
-                softSkill: [skill.softSkill]
-            }))
+            this.pushToFormArray(this.softSkillsForm, skill)
         }
     }
 
@@ -92,11 +82,14 @@ export class EditingPageComponent implements OnInit {
         }
     }
 
-    onDelete(id: number, index: number, isSoft: boolean) {
-        if (isSoft) {
-            this.softSkills.removeAt(index)
+    onDelete(form: AbstractControl, index: number) {
+        let id = form.get('id')?.value
+        let isSoftSkill = form.get('softSkill')?.value
+
+        if (isSoftSkill) {
+            this.softSkillsForm.removeAt(index)
         } else {
-            this.hardSkills.removeAt(index)
+            this.hardSkillsForm.removeAt(index)
         }
         // An HttpClient method does not begin its HTTP request until you call
         // .subscribe() on the observable returned by that method
@@ -130,13 +123,11 @@ export class EditingPageComponent implements OnInit {
         let skill = new Skill(title, value, softSkill)
         // console.log(skill)
         this.http.saveSkill(skill).subscribe((newSkill) => {
-            // if(newSkill.softSkill) {
-            //     this.softSkills.push(form)
-            // } else {
-            //     this.hardSkills.push(form)
-            // }
-            console.log(newSkill)
-            window.location.reload()
+            if(newSkill.softSkill) {
+                this.pushToFormArray(this.softSkillsForm, newSkill)
+            } else {
+                this.pushToFormArray(this.hardSkillsForm, newSkill)
+            }
         })
         this.addSkillForm.reset()
         this.showAddSkillForm = !this.showAddSkillForm
@@ -145,10 +136,19 @@ export class EditingPageComponent implements OnInit {
     get home() {
         return this.portfolioForm.get('home') as FormGroup
     }
-    get hardSkills() {
+    get hardSkillsForm() {
         return this.portfolioForm.get('hardSkills') as FormArray
     }
-    get softSkills() {
+    get softSkillsForm() {
         return this.portfolioForm.get('softSkills') as FormArray
+    }
+
+    pushToFormArray(array: FormArray, skill: Skill) {
+        array.push(this.fb.group({
+            id: [skill.id],
+            title: [skill.title],
+            value: [skill.value],
+            softSkill: [skill.softSkill]
+        }))
     }
 }
