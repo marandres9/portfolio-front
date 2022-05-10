@@ -110,7 +110,7 @@
                 <input type="checkbox" id="softSkill" formControlName="softSkill">
                 <br>
             </form>
-            <div *ngIf="!showAddSkillForm; else noshow">
+            <div *ngIf="!showAddSkillForm; else showAddSkill">
                 <button
                     type="button"
                     class="btn btn-success"
@@ -119,7 +119,7 @@
                     Add+
                 </button>
             </div>
-            <ng-template #noshow>
+            <ng-template #showAddSkill>
                 <button
                     type="button"
                     class="btn btn-danger"
@@ -248,7 +248,7 @@
             <input type="checkbox" id="isExperience" formControlName="isExperience">
 
         </div>
-        <div *ngIf="showAddEdExpForm; else noShow">
+        <div *ngIf="showAddEdExpForm; else showAddProj">
             <button
                 type="button"
                 class="btn btn-danger"
@@ -264,7 +264,7 @@
                 Save
             </button>
         </div>
-        <ng-template #noShow>
+        <ng-template #showAddProj>
             <button
                 type="button"
                 class="btn btn-success"
@@ -273,6 +273,85 @@
                 Add+
             </button>
         </ng-template>
+    </form>
+
+    <!-- === EXPERIENCE === -->
+    <div>
+        <span formArrayName="projects" class="d-flex">
+            <div
+                *ngFor="let proj of this.projectsForm.controls; let i = index"
+                [formGroupName]="i"
+                class="px-4"
+            >
+                ID:
+                <strong>{{proj.get('id')?.value}}</strong>
+                <br>
+                <label for="title">Title: </label> <br>
+                <input type="text" id="title" formControlName="title">
+                <br>
+                <label for="description">Description: </label> <br>
+                <input type="text" id="description" formControlName="description">
+                <br>
+                <label for="url">URL: </label> <br>
+                <input type="text" id="url" formControlName="url">
+                <br>
+                <button
+                    type="button"
+                    class="btn btn-danger"
+                    type="button"
+                    (click)="this.onProjectDelete(proj, i)"
+                >
+                    Delete
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="this.onProjectUpdate(proj, i)"
+                >
+                    Update
+                </button>
+                <!-- <hr> -->
+            </div>
+        </span>
+    </div>
+    <form [formGroup]="addProjectForm">
+        <div [hidden]="!showAddProjectForm">
+            <label for="title">Title: </label> <br>
+            <input type="text" id="title" formControlName="title">
+            <br>
+            <label for="description">Description: </label> <br>
+            <input type="text" id="description" formControlName="description">
+            <br>
+            <label for="url">URL: </label> <br>
+            <input type="text" id="url" formControlName="url">
+        </div>
+        <div>
+            <div *ngIf="showAddProjectForm; else showAddBtn">
+                <button
+                    type="button"
+                    class="btn btn-danger"
+                    (click)="toggleAddProjectForm()"
+                >
+                    Cancel
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-success"
+                    (click)="onProjectSave()"
+                >
+                    Save
+                </button>
+            </div>
+            <ng-template #showAddBtn>
+                <button
+                    type="button"
+                    class="btn btn-success"
+                    (click)="showAddProjectForm = !showAddProjectForm"
+                >
+                    Add+
+                </button>
+            </ng-template>
+        </div>
     </form>
 </form>
 

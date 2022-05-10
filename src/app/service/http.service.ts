@@ -6,6 +6,7 @@ import { About } from '../model/About';
 import { PortfolioDTO } from '../model/PortfolioDTO';
 import { Skill } from '../model/Skill';
 import { Experience } from '../model/Experience';
+import { Project } from '../model/Project';
 
 @Injectable({
     providedIn: 'root'
@@ -67,10 +68,6 @@ export class HttpService {
     }
 
     // === EXPERIENCE ===
-    public saveExperience(exp: Experience) {
-        return this.http.post<Experience>(`${this.url}/portfolio/edit/experience/save`, exp)
-    }
-
     public deleteExperience(id: number) {
         return this.http.delete<Experience>(`${this.url}/portfolio/edit/experience/delete/${id}`)
     }
@@ -87,6 +84,31 @@ export class HttpService {
                 'description': description
             }}
         )
+    }
+
+    public saveExperience(exp: Experience) {
+        return this.http.post<Experience>(`${this.url}/portfolio/edit/experience/save`, exp)
+    }
+
+    // === PROJECTS ===
+    public deleteProject(id: Number) {
+        return this.http.delete<Project>(`${this.url}/portfolio/edit/projects/delete/${id}`)
+    }
+
+    public updateProject(id: number, title: string, description: string, url: string) {
+        return this.http.put<Project>(
+            `${this.url}/portfolio/edit/projects/update/${id}`,
+            {},
+            {params: {
+                'title': title,
+                'description': description,
+                'url': url
+            }}
+        )
+    }
+
+    public saveProject(proj: Project) {
+        return this.http.post<Project>(`${this.url}/portfolio/edit/projects/save`, proj)
     }
 
     // !!! HANDLE HTTP ERRORS

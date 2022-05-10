@@ -3,6 +3,7 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from 
 import { Education } from '../model/Education';
 import { Experience } from '../model/Experience';
 import { PortfolioDTO } from '../model/PortfolioDTO';
+import { Project } from '../model/Project';
 import { Skill } from '../model/Skill';
 import { HttpService } from '../service/http.service';
 import { PortfolioService } from '../service/portfolio.service';
@@ -27,7 +28,8 @@ export class EditingPageComponent implements OnInit {
         hardSkills: this.fb.array([]),
         softSkills: this.fb.array([]),
         education: this.fb.array([]),
-        experience: this.fb.array([])
+        experience: this.fb.array([]),
+        projects: this.fb.array([])
     })
 
     // forms to add new skill
@@ -47,6 +49,17 @@ export class EditingPageComponent implements OnInit {
         location: [''],
         description: [''],
         isExperience: ['']
+    })
+    // forms to add new project
+    showAddProjectForm = false
+    toggleAddProjectForm() {
+        this.showAddProjectForm = !this.showAddProjectForm
+    }
+    addProjectForm = this.fb.group({
+        id: [''],
+        title: [''],
+        description: [''],
+        url: ['']
     })
 
     constructor(
@@ -72,6 +85,8 @@ export class EditingPageComponent implements OnInit {
         this.setEducation()
         // set experience-form values
         this.setExperience()
+        // set projects-form values
+        this.setProjects()
     }
 
     getIfEmpty(): void {
@@ -239,8 +254,8 @@ export class EditingPageComponent implements OnInit {
             })
         }
         // reset and hide form
-        // this.addEdExpForm.reset()
-        // this.showAddEdExpForm = !this.showAddEdExpForm
+        this.addEdExpForm.reset()
+        this.showAddEdExpForm = !this.showAddEdExpForm
     }
 
     pushEducationToFomArray(array: FormArray, ed: Education) {
@@ -265,8 +280,6 @@ export class EditingPageComponent implements OnInit {
         let id = form.get('id')?.value
 
         this.experienceForm.removeAt(index)
-        // An HttpClient method does not begin its HTTP request until you call
-        // .subscribe() on the observable returned by that method
         this.http.deleteExperience(id).subscribe()
     }
 
@@ -292,6 +305,55 @@ export class EditingPageComponent implements OnInit {
         }))
     }
 
+    // === PROJECTS ===
+    setProjects() {
+        for(let proj of this.portfolioDto.projects) {
+            this.pushProjectToFomArray(this.projectsForm, proj)
+        }
+    }
+
+    onProjectDelete(form: AbstractControl, index: number) {
+        let id = form.get('id')?.value
+
+        this.projectsForm.removeAt(index)
+        this.http.deleteProject(id).subscribe()
+    }
+
+    onProjectUpdate(control: AbstractControl, index: number) {
+        let id: number = control.get('id')?.value
+        let title: string = control.get('title')?.value
+        let description: string = control.get('description')?.value
+        let url: string = control.get('url')?.value
+
+        this.http.updateProject(id, title, description, url).subscribe()
+    }
+
+    onProjectSave() {
+        let form = this.addProjectForm
+
+        let title: string = form.get('title')?.value
+        let description: string = form.get('description')?.value
+        let url: string = form.get('url')?.value
+
+        let proj = new Project(title, description, url)
+        console.log(proj)
+
+        this.http.saveProject(proj).subscribe((newProj) => {
+            this.pushProjectToFomArray(this.projectsForm, newProj)
+        })
+        this.addProjectForm.reset()
+        this.toggleAddProjectForm()
+    }
+
+    pushProjectToFomArray(array: FormArray, proj: Project) {
+        array.push(this.fb.group({
+            id: [proj.id],
+            title: [proj.title],
+            description: [proj.description],
+            url: [proj.url]
+        }))
+    }
+
     get homeForm() {
         return this.portfolioForm.get('home') as FormGroup
     }
@@ -310,5 +372,7 @@ export class EditingPageComponent implements OnInit {
     get experienceForm() {
         return this.portfolioForm.get('experience') as FormArray
     }
-
+    get projectsForm() {
+        return this.portfolioForm.get('projects') as FormArray
+    }
 }
