@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Education } from 'src/app/model/Education';
+import { Experience } from 'src/app/model/Experience';
 import { AuthenticationService } from 'src/app/service/authentication.service';
-import { HttpService } from 'src/app/service/http.service';
 
 @Component({
     selector: 'app-education-experience',
@@ -10,9 +10,12 @@ import { HttpService } from 'src/app/service/http.service';
 })
 export class EducationExperienceComponent implements OnInit {
 
-    @Input() educations: Education[]
+    @Input() educations: Education[] = []
+    @Input() experiences: Experience[] = []
 
-    constructor(private authService: AuthenticationService) { }
+    constructor(private authService: AuthenticationService) {
+        // console.log(this.experiences)
+    }
 
     ngOnInit(): void {
     }
@@ -20,5 +23,4 @@ export class EducationExperienceComponent implements OnInit {
     public isLoggedIn() {
         return this.authService.isLoggedIn();
     }
-
 }

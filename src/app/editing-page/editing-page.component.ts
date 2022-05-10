@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Education } from '../model/Education';
+import { Experience } from '../model/Experience';
 import { PortfolioDTO } from '../model/PortfolioDTO';
 import { Skill } from '../model/Skill';
 import { HttpService } from '../service/http.service';
@@ -25,7 +26,8 @@ export class EditingPageComponent implements OnInit {
         }),
         hardSkills: this.fb.array([]),
         softSkills: this.fb.array([]),
-        education: this.fb.array([])
+        education: this.fb.array([]),
+        experience: this.fb.array([])
     })
 
     // forms to add new skill
@@ -36,14 +38,15 @@ export class EditingPageComponent implements OnInit {
         softSkill: ['']
     })
     // forms to add new education/experience
-    showAddEducationForm = false
-    addEducationForm = this.fb.group({
+    showAddEdExpForm = false
+    addEdExpForm = this.fb.group({
         id: [''],
         title: [''],
         period: [''],
         institution: [''],
         location: [''],
-        description: ['']
+        description: [''],
+        isExperience: ['']
     })
 
     constructor(
@@ -67,6 +70,8 @@ export class EditingPageComponent implements OnInit {
         this.setSoftSkills()
         // set education-form values
         this.setEducation()
+        // set experience-form values
+        this.setExperience()
     }
 
     getIfEmpty(): void {
@@ -209,8 +214,8 @@ export class EditingPageComponent implements OnInit {
         this.http.updateEducation(id, title, period, institution, location, description).subscribe()
     }
 
-    onEducationSave() {
-        let form = this.addEducationForm
+    onEducationExperienceSave() {
+        let form = this.addEdExpForm
 
         let title: string = form.get('title')?.value
         let period: string = form.get('period')?.value
@@ -218,14 +223,24 @@ export class EditingPageComponent implements OnInit {
         let location: string = form.get('location')?.value
         let description: string = form.get('description')?.value
 
-        let ed = new Education(title, period, institution, location, description)
-        console.log(ed)
-        this.http.saveEducation(ed).subscribe((newEducation) => {
-            this.pushEducationToFomArray(this.educationForm, newEducation)
-        })
+        let isExperience: boolean = form.get('isExperience')?.value
+
+        if(isExperience) {
+            let exp = new Experience(title, period, institution, location, description)
+            console.log(exp)
+            this.http.saveExperience(exp).subscribe((newExp) => {
+                this.pushExperienceToFomArray(this.experienceForm, newExp)
+            })
+        } else {
+            let ed = new Education(title, period, institution, location, description)
+            console.log(ed)
+            this.http.saveEducation(ed).subscribe((newEd) => {
+                this.pushEducationToFomArray(this.educationForm, newEd)
+            })
+        }
         // reset and hide form
-        this.addEducationForm.reset()
-        this.showAddEducationForm = !this.showAddEducationForm
+        // this.addEdExpForm.reset()
+        // this.showAddEdExpForm = !this.showAddEdExpForm
     }
 
     pushEducationToFomArray(array: FormArray, ed: Education) {
@@ -236,6 +251,44 @@ export class EditingPageComponent implements OnInit {
             institution: [ed.institution],
             location: [ed.location],
             description: [ed.description]
+        }))
+    }
+
+    // === EXPERIENCE ===
+    setExperience() {
+        for(let exp of this.portfolioDto.experiences) {
+            this.pushExperienceToFomArray(this.experienceForm, exp)
+        }
+    }
+
+    onExperienceDelete(form: AbstractControl, index: number) {
+        let id = form.get('id')?.value
+
+        this.experienceForm.removeAt(index)
+        // An HttpClient method does not begin its HTTP request until you call
+        // .subscribe() on the observable returned by that method
+        this.http.deleteExperience(id).subscribe()
+    }
+
+    onExperienceUpdate(control: AbstractControl, index: number) {
+        let id: number = control.get('id')?.value
+        let title: string = control.get('title')?.value
+        let period: string = control.get('period')?.value
+        let institution: string = control.get('institution')?.value
+        let location: string = control.get('location')?.value
+        let description: string = control.get('description')?.value
+
+        this.http.updateExperience(id, title, period, institution, location, description).subscribe()
+    }
+
+    pushExperienceToFomArray(array: FormArray, exp: Experience) {
+        array.push(this.fb.group({
+            id: [exp.id],
+            title: [exp.title],
+            period: [exp.period],
+            institution: [exp.institution],
+            location: [exp.location],
+            description: [exp.description]
         }))
     }
 
@@ -253,6 +306,9 @@ export class EditingPageComponent implements OnInit {
     }
     get educationForm() {
         return this.portfolioForm.get('education') as FormArray
+    }
+    get experienceForm() {
+        return this.portfolioForm.get('experience') as FormArray
     }
 
 }

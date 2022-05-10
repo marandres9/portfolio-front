@@ -5,6 +5,7 @@ import { Education } from '../model/Education';
 import { About } from '../model/About';
 import { PortfolioDTO } from '../model/PortfolioDTO';
 import { Skill } from '../model/Skill';
+import { Experience } from '../model/Experience';
 
 @Injectable({
     providedIn: 'root'
@@ -63,6 +64,29 @@ export class HttpService {
 
     public saveEducation(ed: Education) {
         return this.http.post<Education>(`${this.url}/portfolio/edit/education/save`, ed)
+    }
+
+    // === EXPERIENCE ===
+    public saveExperience(exp: Experience) {
+        return this.http.post<Experience>(`${this.url}/portfolio/edit/experience/save`, exp)
+    }
+
+    public deleteExperience(id: number) {
+        return this.http.delete<Experience>(`${this.url}/portfolio/edit/experience/delete/${id}`)
+    }
+
+    public updateExperience(id: number, title: string, period: string, institution: string, location: string, description: string) {
+        return this.http.put<Experience>(
+            `${this.url}/portfolio/edit/experience/update/${id}`,
+            {},
+            {params: {
+                'title': title,
+                'period': period,
+                'institution': institution,
+                'location': location,
+                'description': description
+            }}
+        )
     }
 
     // !!! HANDLE HTTP ERRORS

@@ -1,4 +1,5 @@
 import { Education } from "./Education";
+import { Experience } from "./Experience";
 import { Project } from "./Project";
 import { Skill } from "./Skill";
 
@@ -10,6 +11,7 @@ export class PortfolioDTO {
     softSkills: Skill[]
     hardSkills: Skill[]
     educations: Education[]
+    experiences: Experience[]
     projects: Project[]
 
     // public get home_title() {

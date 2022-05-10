@@ -23,7 +23,7 @@ export class ProgressBarComponent implements OnInit, OnChanges {
         // valor 'value'. Se debe esperar a recibir dicho valor antes de setear
         // el width del componente, sino va a quedar solo con el valor inicializado
         // (ej: 0) y nunca se va a actualizar
-        this.skill = changes['skill'].currentValue
+        // this.skill = changes['skill'].currentValue
         this.progress_bar_style = `background-color: #c60021; width: ${this.skill.value}%`;
     }
 
