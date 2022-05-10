@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Education } from '../model/Education';
 import { PortfolioDTO } from '../model/PortfolioDTO';
 import { Skill } from '../model/Skill';
 import { HttpService } from '../service/http.service';
@@ -23,15 +24,26 @@ export class EditingPageComponent implements OnInit {
             description: ['']
         }),
         hardSkills: this.fb.array([]),
-        softSkills: this.fb.array([])
+        softSkills: this.fb.array([]),
+        education: this.fb.array([])
     })
 
-    // addSkillForm: FormGroup = this.fb.group({})
+    // forms to add new skill
     showAddSkillForm = false
     addSkillForm = this.fb.group({
         title: [''],
         value: [''],
         softSkill: ['']
+    })
+    // forms to add new education/experience
+    showAddEducationForm = false
+    addEducationForm = this.fb.group({
+        id: [''],
+        title: [''],
+        period: [''],
+        institution: [''],
+        location: [''],
+        description: ['']
     })
 
     constructor(
@@ -47,13 +59,14 @@ export class EditingPageComponent implements OnInit {
     updateForm(): void {
         // set home-form values
         this.setHome()
-
+        // set about-form values
         this.setAbout()
-
         // set hard-skills-form values
         this.setHardSkills()
         // set soft-skill-form values
         this.setSoftSkills()
+        // set education-form values
+        this.setEducation()
     }
 
     getIfEmpty(): void {
@@ -120,7 +133,7 @@ export class EditingPageComponent implements OnInit {
         this.http.deleteSkill(id).subscribe()
     }
 
-    onSkillsUpdate(index: number, control: AbstractControl) {
+    onSkillsUpdate(control: AbstractControl, index: number) {
         let id: number = control.get('id')?.value
         let title: string = control.get('title')?.value
         let value: number = control.get('value')?.value
@@ -139,13 +152,91 @@ export class EditingPageComponent implements OnInit {
         // console.log(skill)
         this.http.saveSkill(skill).subscribe((newSkill) => {
             if(newSkill.softSkill) {
-                this.pushToFormArray(this.softSkillsForm, newSkill)
+                this.pushSkillToFormArray(this.softSkillsForm, newSkill)
             } else {
-                this.pushToFormArray(this.hardSkillsForm, newSkill)
+                this.pushSkillToFormArray(this.hardSkillsForm, newSkill)
             }
         })
         this.addSkillForm.reset()
         this.showAddSkillForm = !this.showAddSkillForm
+    }
+
+    setHardSkills() {
+        for (let skill of this.portfolioDto.hardSkills) {
+            // push skills to form-group-array
+            this.pushSkillToFormArray(this.hardSkillsForm, skill)
+        }
+    }
+    setSoftSkills() {
+        for (let skill of this.portfolioDto.softSkills) {
+            // push skills to form-group-array
+            this.pushSkillToFormArray(this.softSkillsForm, skill)
+        }
+    }
+
+    pushSkillToFormArray(array: FormArray, skill: Skill) {
+        array.push(this.fb.group({
+            id: [skill.id],
+            title: [skill.title],
+            value: [skill.value],
+            softSkill: [skill.softSkill]
+        }))
+    }
+
+    // === EDUCATION ===
+    setEducation() {
+        for(let ed of this.portfolioDto.educations) {
+            this.pushEducationToFomArray(this.educationForm, ed)
+        }
+    }
+    onEducationDelete(form: AbstractControl, index: number) {
+        let id = form.get('id')?.value
+
+        this.educationForm.removeAt(index)
+        // An HttpClient method does not begin its HTTP request until you call
+        // .subscribe() on the observable returned by that method
+        this.http.deleteEducation(id).subscribe()
+    }
+
+    onEducationUpdate(control: AbstractControl, index: number) {
+        let id: number = control.get('id')?.value
+        let title: string = control.get('title')?.value
+        let period: string = control.get('period')?.value
+        let institution: string = control.get('institution')?.value
+        let location: string = control.get('location')?.value
+        let description: string = control.get('description')?.value
+
+        this.http.updateEducation(id, title, period, institution, location, description).subscribe()
+    }
+
+    onEducationSave() {
+        let form = this.addEducationForm
+
+        let title: string = form.get('title')?.value
+        let period: string = form.get('period')?.value
+        let institution: string = form.get('institution')?.value
+        let location: string = form.get('location')?.value
+        let description: string = form.get('description')?.value
+
+        let ed = new Education(title, period, institution, location, description)
+        console.log(ed)
+        this.http.saveEducation(ed).subscribe((newEducation) => {
+            this.pushEducationToFomArray(this.educationForm, newEducation)
+        })
+        // reset and hide form
+        this.addEducationForm.reset()
+        this.showAddEducationForm = !this.showAddEducationForm
+    }
+
+    pushEducationToFomArray(array: FormArray, ed: Education) {
+        array.push(this.fb.group({
+            id: [ed.id],
+            title: [ed.title],
+            period: [ed.period],
+            institution: [ed.institution],
+            location: [ed.location],
+            description: [ed.description]
+        }))
     }
 
     get homeForm() {
@@ -160,26 +251,8 @@ export class EditingPageComponent implements OnInit {
     get softSkillsForm() {
         return this.portfolioForm.get('softSkills') as FormArray
     }
-
-    setHardSkills() {
-        for (let skill of this.portfolioDto.hardSkills) {
-            // push skills to form-group-array
-            this.pushToFormArray(this.hardSkillsForm, skill)
-        }
-    }
-    setSoftSkills() {
-        for (let skill of this.portfolioDto.softSkills) {
-            // push skills to form-group-array
-            this.pushToFormArray(this.softSkillsForm, skill)
-        }
+    get educationForm() {
+        return this.portfolioForm.get('education') as FormArray
     }
 
-    pushToFormArray(array: FormArray, skill: Skill) {
-        array.push(this.fb.group({
-            id: [skill.id],
-            title: [skill.title],
-            value: [skill.value],
-            softSkill: [skill.softSkill]
-        }))
-    }
 }

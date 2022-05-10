@@ -21,25 +21,49 @@ export class HttpService {
 
     // === HOME ===
     public updateHome(title: string, description: string) {
-        return this.http.put<Home>(`${this.url}/home/update/`, {}, {params: {'title': title, 'description': description}})
+        return this.http.put<Home>(`${this.url}/portfolio/edit/home/update/`, {}, {params: {'title': title, 'description': description}})
     }
 
     // === ABOUT ===
     public updateAbout(description: string) {
-        return this.http.put<About>(`${this.url}/about/update/`, {}, {params: {'description': description}})
+        return this.http.put<About>(`${this.url}/portfolio/edit/about/update/`, {}, {params: {'description': description}})
     }
 
     // === SKILLS ===
     public deleteSkill(id: number) {
-        return this.http.delete<Skill>(this.url + `/portfolio/skills/delete/${id}`)
+        return this.http.delete<Skill>(this.url + `/portfolio/edit/skills/delete/${id}`)
     }
 
     public updateSkill(id:number, title: string, value: number) {
-        return this.http.put<Skill>(`${this.url}/skills/update/${id}`, {}, {params: {'title': title, 'value': value}})
+        return this.http.put<Skill>(`${this.url}/portfolio/edit/skills/update/${id}`, {}, {params: {'title': title, 'value': value}})
     }
 
     public saveSkill(skill: Skill) {
-        return this.http.post<Skill>(`${this.url}/skills/save`, skill)
+        return this.http.post<Skill>(`${this.url}/portfolio/edit/skills/save`, skill)
     }
+
+    // === EDUCATION ===
+    public deleteEducation(id: number) {
+        return this.http.delete(`${this.url}/portfolio/edit/education/delete/${id}`)
+    }
+
+    public updateEducation(id: number, title: string, period: string, institution: string, location: string, description: string) {
+        return this.http.put<Education>(
+            `${this.url}/portfolio/edit/education/update/${id}`,
+            {},
+            {params: {
+                'title': title,
+                'period': period,
+                'institution': institution,
+                'location': location,
+                'description': description
+            }}
+        )
+    }
+
+    public saveEducation(ed: Education) {
+        return this.http.post<Education>(`${this.url}/portfolio/edit/education/save`, ed)
+    }
+
     // !!! HANDLE HTTP ERRORS
 }
