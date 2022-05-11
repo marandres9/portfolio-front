@@ -11,7 +11,7 @@ import { HttpService } from 'src/app/service/http.service';
 export class HomeComponent implements OnInit {
     profilePicPath: string = 'assets/img/profile.jpg'
 
-    home = new Home();
+    home = new Home('', '');
 
     @Input() title: string;
     @Input() description: string;

@@ -23,6 +23,8 @@ import { ExperienceItemComponent } from './components/experience-item/experience
 import { ProjectCardComponent } from './components/project-card/project-card.component';
 import { EditingPageComponent } from './editing-page/editing-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HomeFormComponent } from './editing-page/home-form/home-form.component';
+import { AboutFormComponent } from './editing-page/about-form/about-form.component';
 
 @NgModule({
     declarations: [
@@ -41,6 +43,8 @@ import { ReactiveFormsModule } from '@angular/forms';
         ExperienceItemComponent,
         ProjectCardComponent,
         EditingPageComponent,
+        HomeFormComponent,
+        AboutFormComponent,
     ],
     imports: [
         BrowserModule,

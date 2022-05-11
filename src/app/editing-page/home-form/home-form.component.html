@@ -1,0 +1,28 @@
+<form [formGroup]="homeForm">
+    <div class="mb-3">
+        <label class="form-label" for="title">Title</label>
+        <input
+            class="form-control"
+            type="text"
+            id="title"
+            formControlName="title"
+            #homeTitle
+        />
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="description">Description</label>
+        <textarea
+            class="form-control"
+            id="description"
+            formControlName="description"
+            #homeDescription
+        ></textarea>
+    </div>
+    <button
+        class="btn btn-primary"
+        type="button"
+        (click)="onHomeUpdate(homeTitle.value, homeDescription.value)"
+    >
+        Update
+    </button>
+</form>

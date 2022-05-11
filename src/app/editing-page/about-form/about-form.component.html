@@ -1,0 +1,18 @@
+<form [formGroup]="aboutForm">
+    <div class="mb-3">
+        <label class="form-label" for="description">Description</label>
+        <textarea
+            class="form-control"
+            id="description"
+            formControlName="description"
+            #aboutDescription
+        ></textarea>
+    </div>
+    <button
+        class="btn btn-primary"
+        type="button"
+        (click)="onAboutUpdate(aboutDescription.value)"
+    >
+        Update
+    </button>
+</form>

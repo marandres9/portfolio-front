@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { About } from '../model/About';
 import { Education } from '../model/Education';
 import { Experience } from '../model/Experience';
+import { Home } from '../model/Home';
 import { PortfolioDTO } from '../model/PortfolioDTO';
 import { Project } from '../model/Project';
 import { Skill } from '../model/Skill';
@@ -118,11 +120,8 @@ export class EditingPageComponent implements OnInit {
         })
     }
 
-    onHomeUpdate() {
-        let title: string = this.homeForm.get('title')?.value
-        let description: string = this.homeForm.get('description')?.value
-
-        this.http.updateHome(title, description).subscribe()
+    updateHome(home: Home) {
+        this.http.updateHome(home.title, home.description).subscribe()
     }
 
     // === ABOUT ===
@@ -132,10 +131,8 @@ export class EditingPageComponent implements OnInit {
         })
     }
 
-    onAboutUpdate() {
-        let description: string = this.aboutForm.get('description')?.value
-
-        this.http.updateAbout(description).subscribe()
+    updateAbout(about: About) {
+        this.http.updateAbout(about.description).subscribe()
     }
 
     // === SKILLS ===
