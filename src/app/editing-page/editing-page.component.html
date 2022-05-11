@@ -6,138 +6,27 @@
         (updateEvent)="updateHome($event)"
     ></app-home-form>
 </div>
-<hr>
+<hr />
 <div>
     <!-- === ABOUT === -->
-    <app-about-form [description]="this.portfolioDto.about_description" (updateEvent)="updateAbout($event)"></app-about-form>
+    <app-about-form
+        [description]="this.portfolioDto.about_description"
+        (updateEvent)="updateAbout($event)"
+    ></app-about-form>
+</div>
+<hr />
+<div>
+    <!-- === SKILLS ===  -->
+    <app-skills-form
+        [hardSkills]="this.portfolioDto.hardSkills"
+        [softSkills]="this.portfolioDto.softSkills"
+        (deleteEvent)="this.deleteSkill($event)"
+        (updateEvent)="this.updateSkill($event)"
+        (saveEvent)="this.saveSkill($event)"
+    ></app-skills-form>
 </div>
 
 <form [formGroup]="this.portfolioForm">
-    <!-- === ABOUT === -->
-    <div formGroupName="about">
-        <label for="description">Description: </label> <br />
-        <input type="text" id="description" formControlName="description" />
-        <br />
-        <button type="button" class="btn btn-primary">Update</button>
-    </div>
-    <hr />
-    <!-- === SKILLS ===  -->
-    <div class="row">
-        <div class="col-6">
-            <!-- == HARD-SKILLS == -->
-            <span formArrayName="hardSkills">
-                <div
-                    *ngFor="
-                        let skill of this.hardSkillsForm.controls;
-                        let i = index
-                    "
-                    [formGroupName]="i"
-                >
-                    ID: <strong>{{ skill.get("id")?.value }}</strong>
-                    <br />
-                    <label for="title">Title: </label> <br />
-                    <input type="text" id="title" formControlName="title" />
-                    <br />
-                    <label for="value">Value: </label> <br />
-                    <input type="number" id="value" formControlName="value" />
-                    <br />
-                    <button
-                        type="button"
-                        class="btn btn-danger"
-                        (click)="this.onSkillsDelete(skill, i)"
-                    >
-                        Delete
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-primary"
-                        (click)="this.onSkillsUpdate(skill, i)"
-                    >
-                        Update
-                    </button>
-                    <hr />
-                </div>
-            </span>
-        </div>
-        <div class="col-6">
-            <!-- == SOFT-SKILLS == -->
-            <span formArrayName="softSkills">
-                <div
-                    *ngFor="
-                        let skill of this.softSkillsForm.controls;
-                        let i = index
-                    "
-                    [formGroupName]="i"
-                >
-                    ID: <strong>{{ skill.get("id")?.value }}</strong>
-                    <br />
-                    <label for="title">Title: </label> <br />
-                    <input type="text" id="title" formControlName="title" />
-                    <br />
-                    <label for="value">Value: </label> <br />
-                    <input type="number" id="value" formControlName="value" />
-                    <br />
-                    <button
-                        type="button"
-                        class="btn btn-danger"
-                        (click)="this.onSkillsDelete(skill, i)"
-                    >
-                        Delete
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-primary"
-                        (click)="this.onSkillsUpdate(skill, i)"
-                    >
-                        Update
-                    </button>
-                    <hr />
-                </div>
-            </span>
-        </div>
-        <div>
-            <form [formGroup]="addSkillForm" [hidden]="!showAddSkillForm">
-                <label for="title">Title: </label> <br />
-                <input type="text" id="title" formControlName="title" />
-                <br />
-                <label for="value">Value: </label> <br />
-                <input type="number" id="value" formControlName="value" />
-                <br />
-                <label for="softSkill">Soft Skill?: </label>
-                <input
-                    type="checkbox"
-                    id="softSkill"
-                    formControlName="softSkill"
-                />
-                <br />
-            </form>
-            <div *ngIf="!showAddSkillForm; else showAddSkill">
-                <button
-                    type="button"
-                    class="btn btn-success"
-                    (click)="showAddSkillForm = !showAddSkillForm"
-                >
-                    Add+
-                </button>
-            </div>
-            <ng-template #showAddSkill>
-                <button
-                    type="button"
-                    class="btn btn-danger"
-                    (click)="showAddSkillForm = !showAddSkillForm"
-                >
-                    Cancel
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-success"
-                    (click)="onSkillsSave()"
-                >
-                    Save
-                </button>
-            </ng-template>
-        </div>
-    </div>
     <div class="row">
         <div class="col">
             <h3>education</h3>
@@ -258,7 +147,7 @@
             </span>
         </div>
     </div>
-    <form [formGroup]="addEdExpForm">
+    <!-- <form [formGroup]="addEdExpForm">
         <div [hidden]="!showAddEdExpForm">
             <label for="title">Title: </label> <br />
             <input type="text" id="title" formControlName="title" />
@@ -307,7 +196,7 @@
                 Add+
             </button>
         </ng-template>
-    </form>
+    </form> -->
 
     <!-- === EXPERIENCE === -->
     <div>

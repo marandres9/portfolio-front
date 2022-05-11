@@ -136,46 +136,22 @@ export class EditingPageComponent implements OnInit {
     }
 
     // === SKILLS ===
-    onSkillsDelete(form: AbstractControl, index: number) {
-        let id = form.get('id')?.value
-        let isSoftSkill = form.get('softSkill')?.value
-
-        if (isSoftSkill) {
-            this.softSkillsForm.removeAt(index)
-        } else {
-            this.hardSkillsForm.removeAt(index)
-        }
+    deleteSkill(id: number) {
         // An HttpClient method does not begin its HTTP request until you call
         // .subscribe() on the observable returned by that method
         this.http.deleteSkill(id).subscribe()
     }
 
-    onSkillsUpdate(control: AbstractControl, index: number) {
-        let id: number = control.get('id')?.value
-        let title: string = control.get('title')?.value
-        let value: number = control.get('value')?.value
-
-        this.http.updateSkill(id, title, value).subscribe()
+    updateSkill(skill: Skill) {
+        this.http.updateSkill(skill.id, skill.title, skill.value).subscribe()
     }
 
-    onSkillsSave() {
-        let form = this.addSkillForm
-
-        let title: string = form.get('title')?.value
-        let value: number = form.get('value')?.value
-        let softSkill: boolean = form.get('softSkill')?.value
-
-        let skill = new Skill(title, value, softSkill)
+    saveSkill(skill: Skill) {
         // console.log(skill)
-        this.http.saveSkill(skill).subscribe((newSkill) => {
-            if(newSkill.softSkill) {
-                this.pushSkillToFormArray(this.softSkillsForm, newSkill)
-            } else {
-                this.pushSkillToFormArray(this.hardSkillsForm, newSkill)
-            }
-        })
+        this.http.saveSkill(skill).subscribe()
         this.addSkillForm.reset()
         this.showAddSkillForm = !this.showAddSkillForm
+        window.location.reload()
     }
 
     setHardSkills() {
