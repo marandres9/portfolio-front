@@ -224,6 +224,7 @@ export class EditingPageComponent implements OnInit {
 
         if (isExperience) {
             let exp = new Experience(
+                0,
                 title,
                 period,
                 institution,
@@ -273,31 +274,25 @@ export class EditingPageComponent implements OnInit {
         }
     }
 
-    onExperienceDelete(form: AbstractControl, index: number) {
-        let id = form.get('id')?.value;
-
-        this.experienceForm.removeAt(index);
+    deleteExperience(id: number) {
         this.http.deleteExperience(id).subscribe();
     }
 
-    onExperienceUpdate(control: AbstractControl, index: number) {
-        let id: number = control.get('id')?.value;
-        let title: string = control.get('title')?.value;
-        let period: string = control.get('period')?.value;
-        let institution: string = control.get('institution')?.value;
-        let location: string = control.get('location')?.value;
-        let description: string = control.get('description')?.value;
-
+    updateExperience(exp: Experience) {
         this.http
             .updateExperience(
-                id,
-                title,
-                period,
-                institution,
-                location,
-                description
+                exp.id,
+                exp.title,
+                exp.period,
+                exp.institution,
+                exp.location,
+                exp.description
             )
             .subscribe();
+    }
+
+    saveExperience(exp: Experience) {
+        this.http.saveExperience(exp).subscribe(() => window.location.reload())
     }
 
     pushExperienceToFomArray(array: FormArray, exp: Experience) {

@@ -27,7 +27,7 @@
 </div>
 
 <div class="row">
-    <div class="col-6">
+    <div class="col">
         <app-education-form
             [educations]="this.portfolioDto.educations"
             (deleteEvent)="this.deleteEducation($event)"
@@ -35,6 +35,15 @@
             (saveEvent)="this.saveEducation($event)"
         >
         </app-education-form>
+    </div>
+    <div class="col">
+        <app-experience-form
+            [experiences]="this.portfolioDto.experiences"
+            (deleteEvent)="this.deleteExperience($event)"
+            (updateEvent)="this.updateExperience($event)"
+            (saveEvent)="this.saveExperience($event)"
+        >
+        </app-experience-form>
     </div>
 </div>
 
@@ -102,7 +111,7 @@
         <div class="col">
             <h3>EXPERIENCE</h3>
             <!-- === EXPERIENCE === -->
-            <span formArrayName="experience">
+            <!-- <span formArrayName="experience">
                 <div
                     *ngFor="
                         let exp of this.experienceForm.controls;
@@ -156,7 +165,7 @@
                     </button>
                     <hr />
                 </div>
-            </span>
+            </span> -->
         </div>
     </div>
     <!-- <form [formGroup]="addEdExpForm">

@@ -1,0 +1,191 @@
+<div class="mb-3">
+    <form [formGroup]="experienceForm">
+        <span formArrayName="experience">
+            <div
+                *ngFor="let exp of experienceFormArray.controls; let i = index"
+                [formGroupName]="i"
+            >
+                <div class="mb-2">
+                    <label class="form-label" for="id"
+                        ><strong>ID</strong></label
+                    >
+                    <input
+                        class="form-control"
+                        type="text"
+                        id="id"
+                        formControlName="id"
+                        #id
+                    />
+                </div>
+                <div class="mb-2">
+                    <label class="form-label" for="title">Title</label>
+                    <input
+                        class="form-control"
+                        type="text"
+                        id="title"
+                        formControlName="title"
+                        #title
+                    />
+                </div>
+                <div class="mb-2">
+                    <label class="form-label" for="period">Period</label>
+                    <input
+                        class="form-control"
+                        type="text"
+                        id="period"
+                        formControlName="period"
+                        #period
+                    />
+                </div>
+                <div class="mb-2">
+                    <label class="form-label" for="institution"
+                        >Institution</label
+                    >
+                    <input
+                        class="form-control"
+                        type="text"
+                        id="institution"
+                        formControlName="institution"
+                        #institution
+                    />
+                </div>
+                <div class="mb-2">
+                    <label class="form-label" for="location">Location</label>
+                    <input
+                        class="form-control"
+                        type="text"
+                        id="location"
+                        formControlName="location"
+                        #location
+                    />
+                </div>
+                <div class="mb-2">
+                    <label class="form-label" for="description"
+                        >Description</label
+                    >
+                    <input
+                        class="form-control"
+                        type="text"
+                        id="description"
+                        formControlName="description"
+                        #description
+                    />
+                </div>
+                <button
+                    class="btn btn-danger"
+                    type="button"
+                    (click)="onExperienceDelete(+id.value, i)"
+                >
+                    Delete
+                </button>
+                <button
+                    class="btn btn-primary"
+                    type="button"
+                    (click)="
+                        onExperienceUpdate(
+                            +id.value,
+                            title.value,
+                            period.value,
+                            institution.value,
+                            location.value,
+                            description.value
+                        )
+                    "
+                >
+                    Update
+                </button>
+            </div>
+        </span>
+    </form>
+</div>
+
+<div class="mb-3">
+    <form [formGroup]="newExperienceForm">
+        <div [hidden]="!this.showNewForm">
+            <div class="mb-2">
+                <label class="form-label" for="title">Title</label>
+                <input
+                    class="form-control"
+                    type="text"
+                    id="title"
+                    formControlName="title"
+                    #title
+                />
+            </div>
+            <div class="mb-2">
+                <label class="form-label" for="period">Period</label>
+                <input
+                    class="form-control"
+                    type="text"
+                    id="period"
+                    formControlName="period"
+                    #period
+                />
+            </div>
+            <div class="mb-2">
+                <label class="form-label" for="institution">Institution</label>
+                <input
+                    class="form-control"
+                    type="text"
+                    id="institution"
+                    formControlName="institution"
+                    #institution
+                />
+            </div>
+            <div class="mb-2">
+                <label class="form-label" for="location">Location</label>
+                <input
+                    class="form-control"
+                    type="text"
+                    id="location"
+                    formControlName="location"
+                    #location
+                />
+            </div>
+            <div class="mb-2">
+                <label class="form-label" for="description">Description</label>
+                <input
+                    class="form-control"
+                    type="text"
+                    id="description"
+                    formControlName="description"
+                    #description
+                />
+            </div>
+        </div>
+        <!-- BUTTONS -->
+        <div [hidden]="this.showNewForm">
+            <button
+                type="button"
+                class="btn btn-success"
+                (click)="toggleNewForm()"
+            >
+                Add+
+            </button>
+        </div>
+        <div [hidden]="!this.showNewForm">
+            <button
+                type="button"
+                class="btn btn-danger"
+                (click)="toggleNewForm()"
+            >
+                Cancel
+            </button>
+            <button
+                type="button"
+                class="btn btn-success"
+                (click)="
+                    onExperienceSave(
+                        title.value,
+                        period.value,
+                        institution.value,
+                        location.value,
+                        description.value
+                    )
+                "
+            >
+                Save
+            </button>
+        </div>
+    </form>
+</div>

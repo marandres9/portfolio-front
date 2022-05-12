@@ -27,6 +27,7 @@ import { HomeFormComponent } from './editing-page/home-form/home-form.component'
 import { AboutFormComponent } from './editing-page/about-form/about-form.component';
 import { SkillsFormComponent } from './editing-page/skills-form/skills-form.component';
 import { EducationFormComponent } from './editing-page/education-form/education-form.component';
+import { ExperienceFormComponent } from './editing-page/experience-form/experience-form.component';
 
 @NgModule({
     declarations: [
@@ -49,6 +50,7 @@ import { EducationFormComponent } from './editing-page/education-form/education-
         AboutFormComponent,
         SkillsFormComponent,
         EducationFormComponent,
+        ExperienceFormComponent,
     ],
     imports: [
         BrowserModule,

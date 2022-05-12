@@ -14,7 +14,7 @@ export class ExperienceItemComponent implements OnInit, OnChanges {
     // @Input() location: string = 'Experion, New York, NY '
     // @Input() description: string
 
-    @Input() experience: Experience = new Experience('', '', '', '', '')
+    @Input() experience: Experience = new Experience(0, '', '', '', '', '')
 
     items: string[]
 
