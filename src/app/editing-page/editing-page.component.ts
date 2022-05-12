@@ -147,11 +147,12 @@ export class EditingPageComponent implements OnInit {
     }
 
     saveSkill(skill: Skill) {
-        // console.log(skill)
-        this.http.saveSkill(skill).subscribe()
-        this.addSkillForm.reset()
-        this.showAddSkillForm = !this.showAddSkillForm
-        window.location.reload()
+        console.log(skill)
+        this.http.saveSkill(skill).subscribe(() => {
+            this.addSkillForm.reset()
+            this.showAddSkillForm = !this.showAddSkillForm
+            window.location.reload()
+        })
     }
 
     setHardSkills() {
