@@ -2,6 +2,7 @@
     <form [formGroup]="educationForm">
         <span formArrayName="education">
             <div
+                class="mb-4"
                 *ngFor="let ed of educationFormArray.controls; let i = index"
                 [formGroupName]="i"
             >
