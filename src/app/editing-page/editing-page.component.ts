@@ -24,20 +24,20 @@ import { PortfolioService } from '../service/portfolio.service';
 export class EditingPageComponent implements OnInit {
     portfolioDto = new PortfolioDTO();
 
-    portfolioForm = this.fb.group({
-        home: this.fb.group({
-            title: [''],
-            description: [''],
-        }),
-        about: this.fb.group({
-            description: [''],
-        }),
-        hardSkills: this.fb.array([]),
-        softSkills: this.fb.array([]),
-        education: this.fb.array([]),
-        experience: this.fb.array([]),
-        projects: this.fb.array([]),
-    });
+    // portfolioForm = this.fb.group({
+    //     home: this.fb.group({
+    //         title: [''],
+    //         description: [''],
+    //     }),
+    //     about: this.fb.group({
+    //         description: [''],
+    //     }),
+    //     hardSkills: this.fb.array([]),
+    //     softSkills: this.fb.array([]),
+    //     education: this.fb.array([]),
+    //     experience: this.fb.array([]),
+    //     projects: this.fb.array([]),
+    // });
 
     // forms to add new skill
     showAddSkillForm = false;
@@ -104,25 +104,24 @@ export class EditingPageComponent implements OnInit {
             console.log('portfolio is empty');
             this.http.getPortfolio().subscribe((portfolio) => {
                 this.portfolioDto = portfolio;
-                console.log(this.portfolioDto);
 
-                this.updateForm();
+                // this.updateForm();
             });
         } else {
             // get from service
             console.log('portfolio not empty');
             this.portfolioDto = this.portfolioService.portfolio;
 
-            this.updateForm();
+            // this.updateForm();
         }
     }
 
     // === HOME ===
     setHome() {
-        this.homeForm.setValue({
-            title: this.portfolioDto.home_title,
-            description: this.portfolioDto.home_description,
-        });
+        // this.homeForm.setValue({
+        //     title: this.portfolioDto.home_title,
+        //     description: this.portfolioDto.home_description,
+        // });
     }
 
     updateHome(home: Home) {
@@ -131,9 +130,9 @@ export class EditingPageComponent implements OnInit {
 
     // === ABOUT ===
     setAbout() {
-        this.aboutForm.setValue({
-            description: this.portfolioDto.about_description,
-        });
+        // this.aboutForm.setValue({
+        //     description: this.portfolioDto.about_description,
+        // });
     }
 
     updateAbout(about: About) {
@@ -160,13 +159,13 @@ export class EditingPageComponent implements OnInit {
     setHardSkills() {
         for (let skill of this.portfolioDto.hardSkills) {
             // push skills to form-group-array
-            this.pushSkillToFormArray(this.hardSkillsForm, skill);
+            // this.pushSkillToFormArray(this.hardSkillsForm, skill);
         }
     }
     setSoftSkills() {
         for (let skill of this.portfolioDto.softSkills) {
             // push skills to form-group-array
-            this.pushSkillToFormArray(this.softSkillsForm, skill);
+            // this.pushSkillToFormArray(this.softSkillsForm, skill);
         }
     }
 
@@ -184,7 +183,7 @@ export class EditingPageComponent implements OnInit {
     // === EDUCATION ===
     setEducation() {
         for (let ed of this.portfolioDto.educations) {
-            this.pushEducationToFomArray(this.educationForm, ed);
+            // this.pushEducationToFomArray(this.educationForm, ed);
         }
     }
     deleteEducation(id: number) {
@@ -233,7 +232,7 @@ export class EditingPageComponent implements OnInit {
             );
             console.log(exp);
             this.http.saveExperience(exp).subscribe((newExp) => {
-                this.pushExperienceToFomArray(this.experienceForm, newExp);
+                // this.pushExperienceToFomArray(this.experienceForm, newExp);
             });
         } else {
             let ed = new Education(
@@ -246,7 +245,7 @@ export class EditingPageComponent implements OnInit {
             );
             console.log(ed);
             this.http.saveEducation(ed).subscribe((newEd) => {
-                this.pushEducationToFomArray(this.educationForm, newEd);
+                // this.pushEducationToFomArray(this.educationForm, newEd);
             });
         }
         // reset and hide form
@@ -270,7 +269,7 @@ export class EditingPageComponent implements OnInit {
     // === EXPERIENCE ===
     setExperience() {
         for (let exp of this.portfolioDto.experiences) {
-            this.pushExperienceToFomArray(this.experienceForm, exp);
+            // this.pushExperienceToFomArray(this.experienceForm, exp);
         }
     }
 
@@ -292,7 +291,7 @@ export class EditingPageComponent implements OnInit {
     }
 
     saveExperience(exp: Experience) {
-        this.http.saveExperience(exp).subscribe(() => window.location.reload())
+        this.http.saveExperience(exp).subscribe(() => window.location.reload());
     }
 
     pushExperienceToFomArray(array: FormArray, exp: Experience) {
@@ -311,41 +310,22 @@ export class EditingPageComponent implements OnInit {
     // === PROJECTS ===
     setProjects() {
         for (let proj of this.portfolioDto.projects) {
-            this.pushProjectToFomArray(this.projectsForm, proj);
+            // this.pushProjectToFomArray(this.projectsForm, proj);
         }
     }
 
-    onProjectDelete(form: AbstractControl, index: number) {
-        let id = form.get('id')?.value;
-
-        this.projectsForm.removeAt(index);
+    deleteProject(id: number) {
         this.http.deleteProject(id).subscribe();
     }
 
-    onProjectUpdate(control: AbstractControl, index: number) {
-        let id: number = control.get('id')?.value;
-        let title: string = control.get('title')?.value;
-        let description: string = control.get('description')?.value;
-        let url: string = control.get('url')?.value;
-
-        this.http.updateProject(id, title, description, url).subscribe();
+    updateProject(proj: Project) {
+        this.http
+            .updateProject(proj.id, proj.title, proj.description, proj.url)
+            .subscribe();
     }
 
-    onProjectSave() {
-        let form = this.addProjectForm;
-
-        let title: string = form.get('title')?.value;
-        let description: string = form.get('description')?.value;
-        let url: string = form.get('url')?.value;
-
-        let proj = new Project(title, description, url);
-        console.log(proj);
-
-        this.http.saveProject(proj).subscribe((newProj) => {
-            this.pushProjectToFomArray(this.projectsForm, newProj);
-        });
-        this.addProjectForm.reset();
-        this.toggleAddProjectForm();
+    saveProject(proj: Project) {
+        this.http.saveProject(proj).subscribe(() => window.location.reload());
     }
 
     pushProjectToFomArray(array: FormArray, proj: Project) {
@@ -359,25 +339,25 @@ export class EditingPageComponent implements OnInit {
         );
     }
 
-    get homeForm() {
-        return this.portfolioForm.get('home') as FormGroup;
-    }
-    get aboutForm() {
-        return this.portfolioForm.get('about') as FormGroup;
-    }
-    get hardSkillsForm() {
-        return this.portfolioForm.get('hardSkills') as FormArray;
-    }
-    get softSkillsForm() {
-        return this.portfolioForm.get('softSkills') as FormArray;
-    }
-    get educationForm() {
-        return this.portfolioForm.get('education') as FormArray;
-    }
-    get experienceForm() {
-        return this.portfolioForm.get('experience') as FormArray;
-    }
-    get projectsForm() {
-        return this.portfolioForm.get('projects') as FormArray;
-    }
+    // get homeForm() {
+    //     return this.portfolioForm.get('home') as FormGroup;
+    // }
+    // get aboutForm() {
+    //     return this.portfolioForm.get('about') as FormGroup;
+    // }
+    // get hardSkillsForm() {
+    //     return this.portfolioForm.get('hardSkills') as FormArray;
+    // }
+    // get softSkillsForm() {
+    //     return this.portfolioForm.get('softSkills') as FormArray;
+    // }
+    // get educationForm() {
+    //     return this.portfolioForm.get('education') as FormArray;
+    // }
+    // get experienceForm() {
+    //     return this.portfolioForm.get('experience') as FormArray;
+    // }
+    // get projectsForm() {
+    //     return this.portfolioForm.get('projects') as FormArray;
+    // }
 }

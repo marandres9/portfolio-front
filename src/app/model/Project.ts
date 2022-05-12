@@ -4,8 +4,8 @@ export class Project {
     description: string;
     url: string;
 
-    public constructor(title: string, description: string, url: string) {
-        this.id = 0;
+    public constructor(id: number, title: string, description: string, url: string) {
+        this.id = id;
         this.title = title
         this.description = description
         this.url = url

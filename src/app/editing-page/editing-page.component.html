@@ -28,6 +28,7 @@
 
 <div class="row">
     <div class="col">
+        <!-- === EDUCATION ===  -->
         <app-education-form
             [educations]="this.portfolioDto.educations"
             (deleteEvent)="this.deleteEducation($event)"
@@ -37,6 +38,7 @@
         </app-education-form>
     </div>
     <div class="col">
+        <!-- === EXPERIENCE ===  -->
         <app-experience-form
             [experiences]="this.portfolioDto.experiences"
             (deleteEvent)="this.deleteExperience($event)"
@@ -47,181 +49,21 @@
     </div>
 </div>
 
-<form [formGroup]="this.portfolioForm">
-    <div class="row">
-        <div class="col">
-            <h3>education</h3>
-            <!-- === EDUCATION === -->
-            <!-- <span formArrayName="education">
-                <div
-                    *ngFor="
-                        let ed of this.educationForm.controls;
-                        let i = index
-                    "
-                    [formGroupName]="i"
-                >
-                    ID: <strong>{{ ed.get("id")?.value }}</strong>
-                    <br />
-                    <label for="title">Title: </label> <br />
-                    <input type="text" id="title" formControlName="title" />
-                    <br />
-                    <label for="period">Period: </label> <br />
-                    <input type="text" id="period" formControlName="period" />
-                    <br />
-                    <label for="institution">Institution: </label> <br />
-                    <input
-                        type="text"
-                        id="institution"
-                        formControlName="institution"
-                    />
-                    <br />
-                    <label for="location">Location: </label> <br />
-                    <input
-                        type="text"
-                        id="location"
-                        formControlName="location"
-                    />
-                    <br />
-                    <label for="description">Description: </label> <br />
-                    <input
-                        type="text"
-                        id="description"
-                        formControlName="description"
-                    />
-                    <br />
-                    <button
-                        type="button"
-                        class="btn btn-danger"
-                        type="button"
-                        (click)="this.onEducationDelete(ed, i)"
-                    >
-                        Delete
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-primary"
-                        (click)="this.onEducationUpdate(ed, i)"
-                    >
-                        Update
-                    </button>
-                    <hr />
-                </div>
-            </span> -->
-        </div>
-        <div class="col">
-            <h3>EXPERIENCE</h3>
-            <!-- === EXPERIENCE === -->
-            <!-- <span formArrayName="experience">
-                <div
-                    *ngFor="
-                        let exp of this.experienceForm.controls;
-                        let i = index
-                    "
-                    [formGroupName]="i"
-                >
-                    ID: <strong>{{ exp.get("id")?.value }}</strong>
-                    <br />
-                    <label for="title">Title: </label> <br />
-                    <input type="text" id="title" formControlName="title" />
-                    <br />
-                    <label for="period">Period: </label> <br />
-                    <input type="text" id="period" formControlName="period" />
-                    <br />
-                    <label for="institution">Institution: </label> <br />
-                    <input
-                        type="text"
-                        id="institution"
-                        formControlName="institution"
-                    />
-                    <br />
-                    <label for="location">Location: </label> <br />
-                    <input
-                        type="text"
-                        id="location"
-                        formControlName="location"
-                    />
-                    <br />
-                    <label for="description">Description: </label> <br />
-                    <input
-                        type="text"
-                        id="description"
-                        formControlName="description"
-                    />
-                    <br />
-                    <button
-                        type="button"
-                        class="btn btn-danger"
-                        type="button"
-                        (click)="this.onExperienceDelete(exp, i)"
-                    >
-                        Delete
-                    </button>
-                    <button
-                        type="button"
-                        class="btn btn-primary"
-                        (click)="this.onExperienceUpdate(exp, i)"
-                    >
-                        Update
-                    </button>
-                    <hr />
-                </div>
-            </span> -->
-        </div>
-    </div>
-    <!-- <form [formGroup]="addEdExpForm">
-        <div [hidden]="!showAddEdExpForm">
-            <label for="title">Title: </label> <br />
-            <input type="text" id="title" formControlName="title" />
-            <br />
-            <label for="period">Period: </label> <br />
-            <input type="text" id="period" formControlName="period" />
-            <br />
-            <label for="institution">Institution: </label> <br />
-            <input type="text" id="institution" formControlName="institution" />
-            <br />
-            <label for="location">Location: </label> <br />
-            <input type="text" id="location" formControlName="location" />
-            <br />
-            <label for="description">Description: </label> <br />
-            <input type="text" id="description" formControlName="description" />
-            <br />
-            <label for="isExperience">Experience?: </label>
-            <input
-                type="checkbox"
-                id="isExperience"
-                formControlName="isExperience"
-            />
-        </div>
-        <div *ngIf="showAddEdExpForm; else showAddProj">
-            <button
-                type="button"
-                class="btn btn-danger"
-                (click)="showAddEdExpForm = !showAddEdExpForm"
-            >
-                Cancel
-            </button>
-            <button
-                type="button"
-                class="btn btn-success"
-                (click)="onEducationExperienceSave()"
-            >
-                Save
-            </button>
-        </div>
-        <ng-template #showAddProj>
-            <button
-                type="button"
-                class="btn btn-success"
-                (click)="showAddEdExpForm = !showAddEdExpForm"
-            >
-                Add+
-            </button>
-        </ng-template>
-    </form> -->
+<h3 class="text-center">projects</h3>
+<div>
+    <!-- === PROJECTS ===  -->
+    <app-projects-form
+        [projects]="this.portfolioDto.projects"
+        (deleteEvent)="this.deleteProject($event)"
+        (updateEvent)="this.updateProject($event)"
+        (saveEvent)="this.saveProject($event)"
+    ></app-projects-form>
+</div>
 
+<!-- <form [formGroup]="this.portfolioForm"> -->
     <!-- === EXPERIENCE === -->
-    <div>
-        <span formArrayName="projects" class="d-flex">
+    <!-- <div> -->
+        <!-- <span formArrayName="projects" class="d-flex">
             <div
                 *ngFor="let proj of this.projectsForm.controls; let i = index"
                 [formGroupName]="i"
@@ -258,11 +100,10 @@
                 >
                     Update
                 </button>
-                <!-- <hr> -->
             </div>
-        </span>
-    </div>
-    <form [formGroup]="addProjectForm">
+        </span> -->
+    <!-- </div> -->
+    <!-- <form [formGroup]="addProjectForm">
         <div [hidden]="!showAddProjectForm">
             <label for="title">Title: </label> <br />
             <input type="text" id="title" formControlName="title" />
@@ -300,8 +141,8 @@
                 </button>
             </ng-template>
         </div>
-    </form>
-</form>
+    </form> -->
+<!-- </form> -->
 
 <!-- {{this.portfolioDto.home_title}} <br>
 {{this.portfolioDto.home_description}} <br>
