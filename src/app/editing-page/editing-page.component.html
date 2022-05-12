@@ -26,12 +26,24 @@
     ></app-skills-form>
 </div>
 
+<div class="row">
+    <div class="col-6">
+        <app-education-form
+            [educations]="this.portfolioDto.educations"
+            (deleteEvent)="this.deleteEducation($event)"
+            (updateEvent)="this.updateEducation($event)"
+            (saveEvent)="this.saveEducation($event)"
+        >
+        </app-education-form>
+    </div>
+</div>
+
 <form [formGroup]="this.portfolioForm">
     <div class="row">
         <div class="col">
             <h3>education</h3>
             <!-- === EDUCATION === -->
-            <span formArrayName="education">
+            <!-- <span formArrayName="education">
                 <div
                     *ngFor="
                         let ed of this.educationForm.controls;
@@ -85,7 +97,7 @@
                     </button>
                     <hr />
                 </div>
-            </span>
+            </span> -->
         </div>
         <div class="col">
             <h3>EXPERIENCE</h3>

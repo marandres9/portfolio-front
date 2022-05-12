@@ -26,6 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HomeFormComponent } from './editing-page/home-form/home-form.component';
 import { AboutFormComponent } from './editing-page/about-form/about-form.component';
 import { SkillsFormComponent } from './editing-page/skills-form/skills-form.component';
+import { EducationFormComponent } from './editing-page/education-form/education-form.component';
 
 @NgModule({
     declarations: [
@@ -47,6 +48,7 @@ import { SkillsFormComponent } from './editing-page/skills-form/skills-form.comp
         HomeFormComponent,
         AboutFormComponent,
         SkillsFormComponent,
+        EducationFormComponent,
     ],
     imports: [
         BrowserModule,
