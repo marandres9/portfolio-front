@@ -26,30 +26,36 @@
     ></app-skills-form>
 </div>
 
-<div class="row">
-    <div class="col">
-        <!-- === EDUCATION ===  -->
-        <app-education-form
-            [educations]="this.portfolioDto.educations"
-            (deleteEvent)="this.deleteEducation($event)"
-            (updateEvent)="this.updateEducation($event)"
-            (saveEvent)="this.saveEducation($event)"
-        >
-        </app-education-form>
+<div class="container mb-4 p-4">
+    <div class="d-flex flex-column align-items-center">
+        <h1>Education & Experience</h1>
+        <div class="separator"></div>
     </div>
-    <div class="col">
-        <!-- === EXPERIENCE ===  -->
-        <app-experience-form
-            [experiences]="this.portfolioDto.experiences"
-            (deleteEvent)="this.deleteExperience($event)"
-            (updateEvent)="this.updateExperience($event)"
-            (saveEvent)="this.saveExperience($event)"
-        >
-        </app-experience-form>
+
+    <div class="row">
+        <div class="col">
+            <!-- === EDUCATION ===  -->
+            <app-education-form
+                [educations]="this.portfolioDto.educations"
+                (deleteEvent)="this.deleteEducation($event)"
+                (updateEvent)="this.updateEducation($event)"
+                (saveEvent)="this.saveEducation($event)"
+            >
+            </app-education-form>
+        </div>
+        <div class="col">
+            <!-- === EXPERIENCE ===  -->
+            <app-experience-form
+                [experiences]="this.portfolioDto.experiences"
+                (deleteEvent)="this.deleteExperience($event)"
+                (updateEvent)="this.updateExperience($event)"
+                (saveEvent)="this.saveExperience($event)"
+            >
+            </app-experience-form>
+        </div>
     </div>
 </div>
 
-<h3 class="text-center">projects</h3>
 <div>
     <!-- === PROJECTS ===  -->
     <app-projects-form
@@ -61,9 +67,9 @@
 </div>
 
 <!-- <form [formGroup]="this.portfolioForm"> -->
-    <!-- === EXPERIENCE === -->
-    <!-- <div> -->
-        <!-- <span formArrayName="projects" class="d-flex">
+<!-- === EXPERIENCE === -->
+<!-- <div> -->
+<!-- <span formArrayName="projects" class="d-flex">
             <div
                 *ngFor="let proj of this.projectsForm.controls; let i = index"
                 [formGroupName]="i"
@@ -102,8 +108,8 @@
                 </button>
             </div>
         </span> -->
-    <!-- </div> -->
-    <!-- <form [formGroup]="addProjectForm">
+<!-- </div> -->
+<!-- <form [formGroup]="addProjectForm">
         <div [hidden]="!showAddProjectForm">
             <label for="title">Title: </label> <br />
             <input type="text" id="title" formControlName="title" />

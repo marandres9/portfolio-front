@@ -102,6 +102,10 @@
 <div class="mb-3">
     <form [formGroup]="newExperienceForm">
         <div [hidden]="!this.showNewForm">
+            <h3 class="text-center">
+                <span class="highlight">New</span> skill
+            </h3>
+
             <div class="mb-2">
                 <label class="form-label" for="title">Title</label>
                 <input
@@ -154,20 +158,20 @@
             </div>
         </div>
         <!-- BUTTONS -->
-        <div [hidden]="this.showNewForm">
+        <div class="d-flex justify-content-center">
             <button
                 type="button"
                 class="btn btn-success"
                 (click)="toggleNewForm()"
+                [hidden]="this.showNewForm"
             >
                 Add+
             </button>
-        </div>
-        <div [hidden]="!this.showNewForm">
             <button
                 type="button"
                 class="btn btn-danger"
                 (click)="toggleNewForm()"
+                [hidden]="!this.showNewForm"
             >
                 Cancel
             </button>
@@ -183,6 +187,7 @@
                         description.value
                     )
                 "
+                [hidden]="!this.showNewForm"
             >
                 Save
             </button>

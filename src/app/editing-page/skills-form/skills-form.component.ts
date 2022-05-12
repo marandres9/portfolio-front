@@ -31,7 +31,7 @@ export class SkillsFormComponent implements OnInit, OnChanges {
     newSkillForm = this.fb.group({
         title: [''],
         value: [''],
-        softSkill: [''],
+        softSkill: [false],
     });
     showNewForm = false;
     toggleNewSkillForm() {
@@ -48,8 +48,6 @@ export class SkillsFormComponent implements OnInit, OnChanges {
         if (hardSkills != null || softSkills != null) {
             this.setSkills();
         }
-
-
     }
 
     pushSkillToFormArray(array: FormArray, skill: Skill) {

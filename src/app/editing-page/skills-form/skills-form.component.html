@@ -13,209 +13,252 @@
     </div>
 </form> -->
 
-<div class="mb-3">
-    <form [formGroup]="skillsForm">
-        <div class="row">
-            <div class="col">
-                <!-- == HARD-SKILLS == -->
-                <span formArrayName="hardSkills">
-                    <div
-                        *ngFor="
-                            let skill of this.hardSkillsForm.controls;
-                            let i = index
-                        "
-                        [formGroupName]="i"
-                    >
-                        <div class="mb-2">
-                            <label class="form-label" for="id">ID</label>
-                            <input
-                                class="form-control"
-                                type="text"
-                                id="id"
-                                formControlName="id"
-                                #id
-                            />
-                        </div>
-                        <div class="mb-2">
-                            <label class="form-label" for="title">Title</label>
-                            <input
-                                class="form-control"
-                                type="text"
-                                id="title"
-                                formControlName="title"
-                                #title
-                            />
-                        </div>
-                        <div class="mb-2">
-                            <label class="form-label" for="value">Value</label>
-                            <input
-                                class="form-control"
-                                type="text"
-                                id="value"
-                                formControlName="value"
-                                #value
-                            />
-                        </div>
-                        <div class="mb-2 form-check">
-                            <input
-                                class="form-check-input"
-                                type="checkbox"
-                                id="soft"
-                                formControlName="softSkill"
-                                #soft
-                            />
-                            <label class="form-check-label" for="soft"
-                                >Soft skill</label
-                            >
-                        </div>
-                        <button
-                            class="btn btn-danger"
-                            type="button"
-                            (click)="onSkillDelete(+id.value, soft.checked, i)"
-                        >
-                            Delete
-                        </button>
-                        <button
-                            class="btn btn-primary"
-                            type="button"
-                            (click)="
-                                onSkillUpdate(+id.value, title.value, +value.value)
-                            "
-                        >
-                            Update
-                        </button>
-                    </div>
-                </span>
-            </div>
-            <div class="col">
-                <!-- == SOFT-SKILLS == -->
-                <span formArrayName="softSkills">
-                    <div
-                        *ngFor="
-                            let skill of this.softSkillsForm.controls;
-                            let i = index
-                        "
-                        [formGroupName]="i"
-                    >
-                        <div class="mb-2">
-                            <label class="form-label" for="id">ID</label>
-                            <input
-                                class="form-control"
-                                type="text"
-                                id="id"
-                                formControlName="id"
-                                #id
-                            />
-                        </div>
-                        <div class="mb-2">
-                            <label class="form-label" for="title">Title</label>
-                            <input
-                                class="form-control"
-                                type="text"
-                                id="title"
-                                formControlName="title"
-                                #title
-                            />
-                        </div>
-                        <div class="mb-2">
-                            <label class="form-label" for="value">Value</label>
-                            <input
-                                class="form-control"
-                                type="text"
-                                id="value"
-                                formControlName="value"
-                                #value
-                            />
-                        </div>
-                        <div class="mb-2 form-check">
-                            <label class="form-check-label" for="soft"
-                                >Soft skill</label
-                            >
-                            <input
-                                class="form-check-input"
-                                type="checkbox"
-                                id="soft"
-                                formControlName="softSkill"
-                                #soft
-                            />
-                        </div>
-                        <button
-                            class="btn btn-danger"
-                            type="button"
-                            (click)="onSkillDelete(+id.value, soft.checked, i)"
-                        >
-                            Delete
-                        </button>
-                        <button
-                            class="btn btn-primary"
-                            type="button"
-                            (click)="
-                                onSkillUpdate(+id.value, title.value, +value.value)
-                            "
-                        >
-                            Update
-                        </button>
-                    </div>
-                </span>
-            </div>
+<div class="container-lg mb-4 p-4" style="background-color: #f6f6f8">
+    <div class="mb-3">
+        <div class="d-flex flex-column align-items-center">
+            <h1>Skills</h1>
+            <div class="separator"></div>
         </div>
-    </form>
-</div>
 
-<div>
-    <form [formGroup]="newSkillForm">
-        <div [hidden]="!showNewForm">
-            <div class="mb-2">
-                <label class="form-label" for="title">Title: </label> <br />
-                <input
-                    class="form-control"
-                    type="text"
-                    id="title"
-                    formControlName="title"
-                    #title
-                />
+        <form [formGroup]="skillsForm">
+            <div class="row">
+                <div class="col">
+                    <!-- == HARD-SKILLS == -->
+                    <span formArrayName="hardSkills">
+                        <div
+                            *ngFor="
+                                let skill of this.hardSkillsForm.controls;
+                                let i = index
+                            "
+                            [formGroupName]="i"
+                        >
+                            <div class="mb-2">
+                                <label class="form-label" for="id">ID</label>
+                                <input
+                                    class="form-control"
+                                    type="text"
+                                    id="id"
+                                    formControlName="id"
+                                    #id
+                                />
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label" for="title"
+                                    >Title</label
+                                >
+                                <input
+                                    class="form-control"
+                                    type="text"
+                                    id="title"
+                                    formControlName="title"
+                                    #title
+                                />
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label" for="value"
+                                    >Value</label
+                                >
+                                <input
+                                    class="form-control"
+                                    type="text"
+                                    id="value"
+                                    formControlName="value"
+                                    #value
+                                />
+                            </div>
+
+                            <button
+                                class="btn btn-danger"
+                                type="button"
+                                (click)="
+                                    onSkillDelete(+id.value, soft.checked, i)
+                                "
+                            >
+                                Delete
+                            </button>
+                            <button
+                                class="btn btn-primary"
+                                type="button"
+                                (click)="
+                                    onSkillUpdate(
+                                        +id.value,
+                                        title.value,
+                                        +value.value
+                                    )
+                                "
+                            >
+                                Update
+                            </button>
+                        </div>
+                    </span>
+                </div>
+                <div class="col">
+                    <!-- == SOFT-SKILLS == -->
+                    <span formArrayName="softSkills">
+                        <div
+                            *ngFor="
+                                let skill of this.softSkillsForm.controls;
+                                let i = index
+                            "
+                            [formGroupName]="i"
+                        >
+                            <div class="mb-2">
+                                <label class="form-label" for="id">ID</label>
+                                <input
+                                    class="form-control"
+                                    type="text"
+                                    id="id"
+                                    formControlName="id"
+                                    #id
+                                />
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label" for="title"
+                                    >Title</label
+                                >
+                                <input
+                                    class="form-control"
+                                    type="text"
+                                    id="title"
+                                    formControlName="title"
+                                    #title
+                                />
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label" for="value"
+                                    >Value</label
+                                >
+                                <input
+                                    class="form-control"
+                                    type="text"
+                                    id="value"
+                                    formControlName="value"
+                                    #value
+                                />
+                            </div>
+
+                            <button
+                                class="btn btn-danger"
+                                type="button"
+                                (click)="
+                                    onSkillDelete(+id.value, soft.checked, i)
+                                "
+                            >
+                                Delete
+                            </button>
+                            <button
+                                class="btn btn-primary"
+                                type="button"
+                                (click)="
+                                    onSkillUpdate(
+                                        +id.value,
+                                        title.value,
+                                        +value.value
+                                    )
+                                "
+                            >
+                                Update
+                            </button>
+                        </div>
+                    </span>
+                </div>
             </div>
-            <div class="mb-2">
-                <label class="form-label" for="value">Value: </label> <br />
-                <input
-                    class="form-control"
-                    type="number"
-                    id="value"
-                    formControlName="value"
-                    #value
-                />
-            </div>
-            <div class="mb-2 form-check">
-                <input
-                class="form-check-input"
-                type="checkbox"
-                id="softSkill"
-                formControlName="softSkill"
-                #soft
-                />
-                <label class="form-check-label" for="softSkill">Soft Skill</label>
-            </div>
+        </form>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <form [formGroup]="newSkillForm">
+                <div [hidden]="!showNewForm">
+                    <h3 class="text-center">
+                        <span class="highlight">New</span> skill
+                    </h3>
+                    <div class="mb-2">
+                        <label class="form-label" for="title">Title: </label>
+                        <br />
+                        <input
+                            class="form-control"
+                            type="text"
+                            id="title"
+                            formControlName="title"
+                            #title
+                        />
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label" for="value">Value: </label>
+                        <br />
+                        <input
+                            class="form-control"
+                            type="number"
+                            id="value"
+                            formControlName="value"
+                            #value
+                        />
+                    </div>
+                    <div class="mb-2 form-check">
+                        <input
+                            class="form-check-input"
+                            type="radio"
+                            id="soft"
+                            formControlName="softSkill"
+                            #soft
+                            [value]="true"
+                        />
+                        <label class="form-check-label" for="soft"
+                            >Soft skill</label
+                        >
+                        <br />
+                        <input
+                            class="form-check-input"
+                            type="radio"
+                            id="hard"
+                            formControlName="softSkill"
+                            [value]="false"
+                        />
+                        <label class="form-check-label" for="hard"
+                            >Hard skill</label
+                        >
+                        <!-- <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="softSkill"
+                        formControlName="softSkill"
+                        #soft
+                    />
+                    <label class="form-check-label" for="softSkill"
+                        >Soft Skill</label
+                    > -->
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button
+                        type="button"
+                        class="btn btn-success mx-auto"
+                        (click)="toggleNewSkillForm()"
+                        [hidden]="this.showNewForm"
+                    >
+                        Add+
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        (click)="toggleNewSkillForm()"
+                        [hidden]="!this.showNewForm"
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-success"
+                        (click)="
+                            onSkillSave(title.value, +value.value, soft.checked)
+                        "
+                        [hidden]="!this.showNewForm"
+                    >
+                        Save
+                    </button>
+                </div>
+            </form>
         </div>
-        <div *ngIf="!showNewForm; else showAddSkill">
-            <button
-                type="button"
-                class="btn btn-success"
-                (click)="toggleNewSkillForm()"
-            >
-                Add+
-            </button>
-        </div>
-        <ng-template #showAddSkill>
-            <button type="button" class="btn btn-danger" (click)="toggleNewSkillForm()">
-                Cancel
-            </button>
-            <button
-                type="button"
-                class="btn btn-success"
-                (click)="onSkillSave(title.value, +value.value, soft.checked)"
-            >
-                Save
-            </button>
-        </ng-template>
-    </form>
+    </div>
 </div>

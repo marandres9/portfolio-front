@@ -1,150 +1,167 @@
-<div class="mb-3">
-    <form [formGroup]="projectsForm">
-        <div class="d-flex" formArrayName="projects">
-            <div
-                class="px-3"
-                *ngFor="
-                    let proj of this.projectFormArray.controls;
-                    let i = index
-                "
-                [formGroupName]="i"
-            >
-                <div class="mb-2">
-                    <label class="form-label" for="id"
-                        ><strong>ID</strong></label
-                    >
-                    <input
-                        class="form-control"
-                        type="text"
-                        id="id"
-                        formControlName="id"
-                        #id
-                    />
-                </div>
-                <div class="mb-2">
-                    <label class="form-label" for="title">title</label>
-                    <input
-                        class="form-control"
-                        type="text"
-                        id="title"
-                        formControlName="title"
-                        #title
-                    />
-                </div>
-                <div class="mb-2">
-                    <label class="form-label" for="description"
-                        >description</label
-                    >
-                    <input
-                        class="form-control"
-                        type="text"
-                        id="description"
-                        formControlName="description"
-                        #description
-                    />
-                </div>
-                <div class="mb-2">
-                    <label class="form-label" for="url">url</label>
-                    <input
-                        class="form-control"
-                        type="text"
-                        id="url"
-                        formControlName="url"
-                        #url
-                    />
-                </div>
-                <button
-                    type="button"
-                    class="btn btn-danger"
-                    type="button"
-                    (click)="this.onProjectDelete(+id.value, i)"
-                >
-                    Delete
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-primary"
-                    (click)="
-                        this.onProjectUpdate(
-                            +id.value,
-                            title.value,
-                            description.value,
-                            url.value
-                        )
+<div class="container-lg mb-4 p-4" style="background-color: #f6f6f8">
+    <div class="mb-3">
+        <div class="d-flex flex-column align-items-center">
+            <h1>Projects</h1>
+            <div class="separator"></div>
+        </div>
+
+        <form [formGroup]="projectsForm">
+            <div class="row" formArrayName="projects">
+                <div
+                    class="col-4 mb-4"
+                    *ngFor="
+                        let proj of this.projectFormArray.controls;
+                        let i = index
                     "
+                    [formGroupName]="i"
                 >
-                    Update
-                </button>
+                    <div class="mb-2">
+                        <label class="form-label" for="id"
+                            ><strong>ID</strong></label
+                        >
+                        <input
+                            class="form-control"
+                            type="text"
+                            id="id"
+                            formControlName="id"
+                            #id
+                        />
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label" for="title">Title</label>
+                        <input
+                            class="form-control"
+                            type="text"
+                            id="title"
+                            formControlName="title"
+                            #title
+                        />
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label" for="description"
+                            >Description</label
+                        >
+                        <input
+                            class="form-control"
+                            type="text"
+                            id="description"
+                            formControlName="description"
+                            #description
+                        />
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label" for="url">URL</label>
+                        <input
+                            class="form-control"
+                            type="text"
+                            id="url"
+                            formControlName="url"
+                            #url
+                        />
+                    </div>
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        type="button"
+                        (click)="this.onProjectDelete(+id.value, i)"
+                    >
+                        Delete
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="
+                            this.onProjectUpdate(
+                                +id.value,
+                                title.value,
+                                description.value,
+                                url.value
+                            )
+                        "
+                    >
+                        Update
+                    </button>
+                </div>
             </div>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
 
-<div class="mb-3">
-    <form [formGroup]="newProjectForm">
-        <div [hidden]="!this.showNewForm">
-            <div class="mb-2">
-                <label class="form-label" for="title">Title</label>
-                <input
-                    class="form-control"
-                    type="text"
-                    id="title"
-                    formControlName="title"
-                    #title
-                />
-            </div>
-            <div class="mb-2">
-                <label class="form-label" for="description">Description</label>
-                <input
-                    class="form-control"
-                    type="text"
-                    id="description"
-                    formControlName="description"
-                    #description
-                />
-            </div>
-            <div class="mb-2">
-                <label class="form-label" for="url">URL</label>
-                <input
-                    class="form-control"
-                    type="text"
-                    id="url"
-                    formControlName="url"
-                    #url
-                />
-            </div>
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <form [formGroup]="newProjectForm">
+                <div [hidden]="!this.showNewForm">
+                    <h3 class="text-center">
+                        <span class="highlight">New</span> skill
+                    </h3>
 
+                    <div class="mb-2">
+                        <label class="form-label" for="title">Title</label>
+                        <input
+                            class="form-control"
+                            type="text"
+                            id="title"
+                            formControlName="title"
+                            #title
+                        />
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label" for="description"
+                            >Description</label
+                        >
+                        <input
+                            class="form-control"
+                            type="text"
+                            id="description"
+                            formControlName="description"
+                            #description
+                        />
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label" for="url">URL</label>
+                        <input
+                            class="form-control"
+                            type="text"
+                            id="url"
+                            formControlName="url"
+                            #url
+                        />
+                    </div>
+                </div>
+                <div
+                    class="d-flex justify-content-center"
+                >
+                    <button
+                        type="button"
+                        class="btn btn-success"
+                        (click)="toggleNewForm()"
+                        [hidden]="this.showNewForm"
+                    >
+                        Add+
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        (click)="toggleNewForm()"
+                        [hidden]="!this.showNewForm"
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-success"
+                        (click)="
+                            onProjectSave(
+                                title.value,
+                                description.value,
+                                url.value
+                            )
+                        "
+                        [hidden]="!this.showNewForm"
+                    >
+                        Save
+                    </button>
+                </div>
+            </form>
         </div>
-        <div [hidden]="this.showNewForm">
-            <button
-                type="button"
-                class="btn btn-success"
-                (click)="toggleNewForm()"
-            >
-                Add+
-            </button>
-        </div>
-        <div [hidden]="!this.showNewForm">
-            <button
-                type="button"
-                class="btn btn-danger"
-                (click)="toggleNewForm()"
-            >
-                Cancel
-            </button>
-            <button
-                type="button"
-                class="btn btn-success"
-                (click)="
-                    onProjectSave(
-                        title.value,
-                        description.value,
-                        url.value
-                    )
-                "
-            >
-                Save
-            </button>
-        </div>
-    </form>
+    </div>
 </div>
