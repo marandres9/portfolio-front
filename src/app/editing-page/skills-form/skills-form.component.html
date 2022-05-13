@@ -15,28 +15,30 @@
 
 <div class="container-lg mb-4 p-4" style="background-color: #f6f6f8">
     <div class="mb-3">
-        <div class="d-flex flex-column align-items-center">
-            <h1>Skills</h1>
-            <div class="separator"></div>
-        </div>
-
         <form [formGroup]="skillsForm">
             <div class="row">
-                <div class="col">
+                <div class="col-md">
                     <!-- == HARD-SKILLS == -->
+                    <div class="d-flex flex-column align-items-center">
+                        <h1>Hard skills</h1>
+                        <div class="separator"></div>
+                    </div>
                     <span formArrayName="hardSkills">
                         <div
-                            class="mb-4"
+                            class="mb-3"
                             *ngFor="
                                 let skill of this.hardSkillsForm.controls;
                                 let i = index
                             "
                             [formGroupName]="i"
                         >
-                            <div class="mb-2">
-                                <label class="form-label" for="id">ID</label>
+                            <div class="mb-2 d-flex">
+                                <label class="col-form-label me-4" for="id"
+                                    >ID</label
+                                >
                                 <input
-                                    class="form-control"
+                                    class="form-control-plaintext"
+                                    readonly
                                     type="text"
                                     id="id"
                                     formControlName="id"
@@ -90,24 +92,32 @@
                             >
                                 Update
                             </button>
+                            <hr />
                         </div>
                     </span>
                 </div>
-                <div class="col">
+                <div class="col-md">
                     <!-- == SOFT-SKILLS == -->
+                    <div class="d-flex flex-column align-items-center">
+                        <h1>Soft skills</h1>
+                        <div class="separator"></div>
+                    </div>
                     <span formArrayName="softSkills">
                         <div
-                            class="mb-4"
+                            class="mb-3"
                             *ngFor="
                                 let skill of this.softSkillsForm.controls;
                                 let i = index
                             "
                             [formGroupName]="i"
                         >
-                            <div class="mb-2">
-                                <label class="form-label" for="id">ID</label>
+                            <div class="mb-2 d-flex">
+                                <label class="col-form-label me-4" for="id"
+                                    >ID</label
+                                >
                                 <input
-                                    class="form-control"
+                                    class="form-control-plaintext"
+                                    readonly
                                     type="text"
                                     id="id"
                                     formControlName="id"
@@ -161,6 +171,7 @@
                             >
                                 Update
                             </button>
+                            <hr />
                         </div>
                     </span>
                 </div>
@@ -169,11 +180,11 @@
     </div>
 
     <div class="row justify-content-center">
-        <div class="col-6">
+        <div class="col-md-6">
             <form [formGroup]="newSkillForm">
                 <div [hidden]="!showNewForm">
                     <h3 class="text-center">
-                        <span class="highlight">New</span> skill
+                        New <span class="highlight">skill</span> entry
                     </h3>
                     <div class="mb-2">
                         <label class="form-label" for="title">Title: </label>

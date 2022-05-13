@@ -26,14 +26,9 @@
     ></app-skills-form>
 </div>
 
-<div class="container mb-4 p-4">
-    <div class="d-flex flex-column align-items-center">
-        <h1>Education & Experience</h1>
-        <div class="separator"></div>
-    </div>
-
+<div class="container-lg mb-4 p-4">
     <div class="row">
-        <div class="col">
+        <div class="col-md mb-4">
             <!-- === EDUCATION ===  -->
             <app-education-form
                 [educations]="this.portfolioDto.educations"
@@ -43,7 +38,7 @@
             >
             </app-education-form>
         </div>
-        <div class="col">
+        <div class="col-md">
             <!-- === EXPERIENCE ===  -->
             <app-experience-form
                 [experiences]="this.portfolioDto.experiences"

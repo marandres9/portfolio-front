@@ -1,4 +1,4 @@
-<div class="container mb-4 p-4" id="about">
+<div class="container-lg mb-4 p-4" id="about">
 <form [formGroup]="aboutForm">
     <div class="d-flex flex-column align-items-center">
         <h1>About</h1>
@@ -9,6 +9,7 @@
         <label class="form-label" for="description">Description</label>
         <textarea
             class="form-control"
+            rows="3"
             id="description"
             formControlName="description"
             #aboutDescription
