@@ -1,45 +1,54 @@
 <!-- ====== HOME ====== -->
 
-    <div class="container-lg my-5 px-4 pt-4 pb-5" style="background-color: #f6f6f8;">
-        <!-- == EDIT ==  -->
-        <app-edit-button *ngIf="isLoggedIn()"></app-edit-button>
-
-        <div class="row align-items-center justify-content-center">
-            <div class="col-md">
-                <h1 class="">
-                    I'm <span class="highlight">Mariano</span> Perez
-                </h1>
-                <h3>{{title}}</h3>
-                <p>
-                    {{description}}
-                </p>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing
-                    elit. Perferendis ea alias eos saepe fugiat
-                    recusandae dicta facilis quidem voluptatum similique
-                    aspernatur quaerat, iste esse aliquam unde corrupti
-                    nemo nulla fugit.
-                </p>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing
-                    elit. Perferendis ea alias eos saepe fugiat
-                    recusandae dicta facilis quidem voluptatum similique
-                    aspernatur quaerat, iste esse aliquam unde corrupti
-                    nemo nulla fugit.
-                </p>
-                <div class="d-flex justify-content-start">
-                    <a class="btn" href="https://facebook.com"><i class="fa-brands fa-facebook fa-xl"></i></a>
-                    <a class="btn" href="https://instagram.com"><i class="fa-brands fa-instagram fa-xl"></i></a>
-                    <a class="btn" href="https://twitter.com"><i class="fa-brands fa-twitter fa-xl"></i></a>
-                    <a class="btn" href="https://github.com"><i class="fa-brands fa-github fa-xl"></i></a>
-                </div>
+<div class="container-lg my-0 px-4 pt-4 pb-5" style="background-color: #f6f6f8">
+    <!-- == EDIT ==  -->
+    <app-edit-button *ngIf="isLoggedIn()"></app-edit-button>
+    <div class="row align-items-center justify-content-center">
+        <div class="col-md mb-4 order-1 order-md-1 mt-4 mt-md-0">
+            <h1 class="">I'm <span class="highlight">Mariano</span> Perez</h1>
+            <h3>{{ title }}</h3>
+            <p>
+                {{ description }}
+            </p>
+            <!-- <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Perferendis ea alias eos saepe fugiat recusandae dicta facilis
+                quidem voluptatum similique aspernatur quaerat, iste esse
+                aliquam unde corrupti nemo nulla fugit.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Perferendis ea alias eos saepe fugiat recusandae dicta facilis
+                quidem voluptatum similique aspernatur quaerat, iste esse
+                aliquam unde corrupti nemo nulla fugit.
+            </p> -->
+            <div class="d-flex justify-content-center justify-content-md-start">
+                <a class="btn" href="https://facebook.com"
+                    ><i class="fa-brands fa-facebook fa-xl"></i
+                ></a>
+                <a class="btn" href="https://instagram.com"
+                    ><i class="fa-brands fa-instagram fa-xl"></i
+                ></a>
+                <a class="btn" href="https://twitter.com"
+                    ><i class="fa-brands fa-twitter fa-xl"></i
+                ></a>
+                <a class="btn" href="https://github.com"
+                    ><i class="fa-brands fa-github fa-xl"></i
+                ></a>
             </div>
-            <div class="col text-center">
-                <div class="img-container">
+        </div>
+        <div class="col-md order-2 mb-5 mb-md-0">
+            <!-- <div class="col-md text-center"> -->
+            <!-- <div class="img-container">
                     <img [src]="profilePicPath" alt="home picture" />
+                </div> -->
+            <div class="w-75 mx-auto">
+                <div class="img-container">
+                    <img [src]="profilePicPath" class="img-fluid" alt="" />
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 <!-- ====== END HOME ====== -->
