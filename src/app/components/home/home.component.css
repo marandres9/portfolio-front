@@ -1,7 +1,3 @@
-/* img {
-    width: 25vw;
-} */
-
 .img-container {
     display: inline-block;
     width: 100%; /* !! must be same as .main img !! */
