@@ -1,14 +1,19 @@
 <!-- ====== ED&EX ====== -->
-<div class="container p-4 mb-4">
+<div class="container-lg p-4 mb-4">
     <!-- == EDIT == -->
     <app-edit-button *ngIf="isLoggedIn()"></app-edit-button>
 
     <div class="row">
-        <div class="d-flex align-items-center flex-column">
+        <!-- <div class="d-flex align-items-center flex-column">
             <h1>Education & Experience</h1>
             <div class="separator"></div>
-        </div>
-        <div class="col">
+        </div> -->
+        <div class="col-md mb-4">
+            <div class="d-flex align-items-center flex-column">
+                <h1>Education</h1>
+                <div class="separator"></div>
+            </div>
+
             <!-- EDUCATION COLUMN -->
             <div
                 class="resume-item"
@@ -17,8 +22,13 @@
                 <app-education-item [education]="education"></app-education-item>
             </div>
         </div>
-        <div class="col">
-        <!-- EDUCATION COLUMN -->
+        <div class="col-md mb-4">
+            <div class="d-flex align-items-center flex-column">
+                <h1>Experience</h1>
+                <div class="separator"></div>
+            </div>
+
+        <!-- EXPERIENCE COLUMN -->
             <div
                 class="resume-item"
                 *ngFor="let experience of this.experiences"

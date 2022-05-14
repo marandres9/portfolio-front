@@ -1,31 +1,42 @@
 <!-- ====== ABOUT ====== -->
-<div class="container mb-4 p-4" id="about">
+<div class="container-lg mb-4 p-4" id="about">
     <!-- == EDIT == -->
     <app-edit-button *ngIf="isLoggedIn()"></app-edit-button>
 
     <div class="row align-items-center justify-content-evenly">
-        <div class="col text-center">
-            <img src="../../assets/img/banner-image.png" alt="about picture" width="70%" />
+        <div class="col-md text-center order-2 order-md-1">
+            <img
+                src="../../assets/img/banner-image.png"
+                alt="about picture"
+                width="70%"
+            />
         </div>
-        <div class="col">
-            <h1> About me</h1>
-            <div class="separator"></div>
-            <p>{{description}}</p>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing
-                elit. Perferendis ea alias eos saepe fugiat
-                recusandae dicta facilis quidem voluptatum similique
-                aspernatur quaerat, iste esse aliquam unde corrupti
-                nemo nulla fugit.
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing
-                elit. Perferendis ea alias eos saepe fugiat
-                recusandae dicta facilis quidem voluptatum similique
-                aspernatur quaerat, iste esse aliquam unde corrupti
-                nemo nulla fugit.
-            </p>
-            <a href="#" class="btn btn-secondary">Download CV</a>
+        <div class="col-md mb-4 order-1 order-md-2">
+            <div class="d-flex align-items-center flex-column">
+                <h1>About me</h1>
+                <div class="separator"></div>
+            </div>
+            <p>{{ description }}</p>
+            <div class="mb-4">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                    Perferendis ea alias eos saepe fugiat recusandae dicta facilis
+                    quidem voluptatum similique aspernatur quaerat, iste esse
+                    aliquam unde corrupti nemo nulla fugit.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                    Perferendis ea alias eos saepe fugiat recusandae dicta facilis
+                    quidem voluptatum similique aspernatur quaerat, iste esse
+                    aliquam unde corrupti nemo nulla fugit.
+                </p>
+            </div>
+            <!-- <a href="#" class="btn btn-secondary text-center">Download CV</a> -->
+            <div class="text-center">
+                <button class="btn" style="background-color: #e3e3e3">
+                    Download CV
+                </button>
+            </div>
         </div>
     </div>
 </div>
