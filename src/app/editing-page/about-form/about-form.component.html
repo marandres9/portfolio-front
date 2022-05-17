@@ -1,26 +1,26 @@
 <div class="container-lg mb-4 p-4" id="about">
-<form [formGroup]="aboutForm">
-    <div class="d-flex flex-column align-items-center">
-        <h1>About</h1>
-        <div class="separator"></div>
-    </div>
+    <form [formGroup]="aboutForm">
+        <div class="d-flex flex-column align-items-center">
+            <h1>About</h1>
+            <div class="separator"></div>
+        </div>
 
-    <div class="mb-3">
-        <label class="form-label" for="description">Description</label>
-        <textarea
-            class="form-control"
-            rows="3"
-            id="description"
-            formControlName="description"
-            #aboutDescription
-        ></textarea>
-    </div>
-    <button
-        class="btn btn-primary"
-        type="button"
-        (click)="onAboutUpdate(aboutDescription.value)"
-    >
-        Update
-    </button>
-</form>
+        <div class="mb-3">
+            <label class="form-label" for="description">Description</label>
+            <textarea
+                class="form-control"
+                rows="3"
+                id="description"
+                formControlName="description"
+                #aboutDescription
+            ></textarea>
+        </div>
+        <button
+            class="btn"
+            type="button"
+            (click)="onAboutUpdate(aboutDescription.value)"
+        >
+            <i class="fa-solid fa-circle-check"></i>
+        </button>
+    </form>
 </div>

@@ -72,18 +72,18 @@
                     ></textarea>
                 </div>
                 <button
-                    class="btn btn-danger"
+                    class="btn red"
                     type="button"
                     (click)="onExperienceDelete(+id.value, i)"
                 >
-                    Delete
+                    <i class="fa-solid fa-circle-xmark"></i>
                 </button>
                 <button
-                    class="btn btn-primary"
+                    class="btn"
                     type="button"
                     (click)="onExperienceUpdate(exp)"
                 >
-                    Update
+                    <i class="fa-solid fa-circle-check"></i>
                 </button>
                 <hr />
             </div>
@@ -148,27 +148,27 @@
         <div class="d-flex justify-content-center">
             <button
                 type="button"
-                class="btn btn-success"
+                class="btn green"
                 (click)="toggleNewForm()"
                 [hidden]="this.showNewForm"
             >
-                Add+
+                <i class="fa-solid fa-circle-plus fa-xl"></i>
             </button>
             <button
                 type="button"
-                class="btn btn-danger"
+                class="btn red"
                 (click)="toggleNewForm()"
                 [hidden]="!this.showNewForm"
             >
-                Cancel
+                <i class="fa-solid fa-circle-xmark"></i>
             </button>
             <button
                 type="button"
-                class="btn btn-success"
+                class="btn"
                 (click)="onExperienceSave(newExperienceForm)"
                 [hidden]="!this.showNewForm"
             >
-                Save
+                <i class="fa-solid fa-floppy-disk"></i>
             </button>
         </div>
     </form>
