@@ -7,7 +7,7 @@ import {
     Output,
     SimpleChanges,
 } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder } from '@angular/forms';
 import { Skill } from 'src/app/model/Skill';
 
 @Component({
@@ -19,7 +19,11 @@ export class SkillsFormComponent implements OnInit, OnChanges {
     @Input() softSkills: Skill[];
     @Input() hardSkills: Skill[];
 
-    @Output() deleteEvent = new EventEmitter<number>();
+    @Input() editing: boolean = false;
+    // emition of this event tells parent to stop editing
+    @Output() stopEditing = new EventEmitter();
+
+    @Output() deleteEvent = new EventEmitter<Skill>();
     @Output() updateEvent = new EventEmitter<Skill>();
     @Output() saveEvent = new EventEmitter<Skill>();
 
@@ -43,11 +47,19 @@ export class SkillsFormComponent implements OnInit, OnChanges {
     ngOnInit(): void {}
 
     ngOnChanges(changes: SimpleChanges): void {
-        let hardSkills = changes['hardSkills'].currentValue;
-        let softSkills = changes['softSkills'].currentValue;
-        if (hardSkills != null || softSkills != null) {
+        let hardSkills = changes['hardSkills'];
+        let softSkills = changes['softSkills'];
+        if (hardSkills && hardSkills.currentValue && softSkills && softSkills.currentValue) {
             this.setSkills();
         }
+
+        if (changes['editing']) {
+            this.changeFormState();
+        }
+    }
+
+    changeFormState() {
+        this.editing ? this.skillsForm.enable() : this.skillsForm.disable();
     }
 
     pushSkillToFormArray(array: FormArray, skill: Skill) {
@@ -62,18 +74,31 @@ export class SkillsFormComponent implements OnInit, OnChanges {
     }
 
     setSkills() {
+        this.setHardSkills()
+        this.setSoftSkills();
+        this.skillsForm.disable();
+    }
+
+    setHardSkills() {
         for (let skill of this.hardSkills) {
             // push skills to form-array
             this.pushSkillToFormArray(this.hardSkillsForm, skill);
         }
+    }
+
+    setSoftSkills() {
         for (let skill of this.softSkills) {
             // push skills to form-array
             this.pushSkillToFormArray(this.softSkillsForm, skill);
         }
     }
 
-    onSkillDelete(id: number, soft: boolean, index: number) {
-        this.deleteEvent.emit(id);
+    // onSkillDelete(id: number, soft: boolean, index: number) {
+    onSkillDelete(form: AbstractControl, index: number) {
+        let id = form.get('id')?.value;
+        let soft = form.get('softSkill')?.value;
+
+        this.deleteEvent.emit(form.value);
 
         if (soft) {
             this.softSkillsForm.removeAt(index);
@@ -82,12 +107,14 @@ export class SkillsFormComponent implements OnInit, OnChanges {
         }
     }
 
-    onSkillUpdate(id: number, title: string, value: number) {
-        this.updateEvent.emit(new Skill(id, title, value, false));
+    onSkillUpdate(form: AbstractControl) {
+        this.updateEvent.emit(form.value);
+        this.stopEditing.emit();
     }
 
-    onSkillSave(title: string, value: number, soft: boolean) {
-        this.saveEvent.emit(new Skill(0, title, value, soft));
+    onSkillSave(form: AbstractControl) {
+        this.saveEvent.emit(form.value);
+        this.stopEditing.emit()
     }
 
     get hardSkillsForm() {

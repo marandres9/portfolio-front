@@ -73,24 +73,16 @@
                             <button
                                 class="btn red"
                                 type="button"
-                                (click)="
-                                    onSkillDelete(+id.value, soft.checked, i)
-                                "
+                                (click)="onSkillDelete(skill, i)"
                             >
-                                <i class="fa-solid fa-circle-xmark"></i>
+                                <i class="fa-solid fa-trash"></i>
                             </button>
                             <button
                                 class="btn"
                                 type="button"
-                                (click)="
-                                    onSkillUpdate(
-                                        +id.value,
-                                        title.value,
-                                        +value.value
-                                    )
-                                "
+                                (click)="onSkillUpdate(skill)"
                             >
-                                <i class="fa-solid fa-circle-check"></i>
+                                <i class="fa-solid fa-floppy-disk"></i>
                             </button>
                             <hr />
                         </div>
@@ -152,24 +144,16 @@
                             <button
                                 class="btn red"
                                 type="button"
-                                (click)="
-                                    onSkillDelete(+id.value, soft.checked, i)
-                                "
+                                (click)="onSkillDelete(skill, i)"
                             >
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                             <button
                                 class="btn"
                                 type="button"
-                                (click)="
-                                    onSkillUpdate(
-                                        +id.value,
-                                        title.value,
-                                        +value.value
-                                    )
-                                "
+                                (click)="onSkillUpdate(skill)"
                             >
-                                <i class="fa-solid fa-circle-check"></i>
+                                <i class="fa-solid fa-floppy-disk"></i>
                             </button>
                             <hr />
                         </div>
@@ -263,9 +247,7 @@
                     <button
                         type="button"
                         class="btn"
-                        (click)="
-                            onSkillSave(title.value, +value.value, soft.checked)
-                        "
+                        (click)="onSkillSave(newSkillForm)"
                         [hidden]="!this.showNewForm"
                     >
                         <i class="fa-solid fa-floppy-disk"></i>
