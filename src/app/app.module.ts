@@ -33,6 +33,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HomeContentComponent } from './content/home-content/home-content.component';
 import { AboutContentComponent } from './content/about-content/about-content.component';
 import { SkillsContentComponent } from './content/skills-content/skills-content.component';
+import { EducationContentComponent } from './content/education-content/education-content.component';
 
 @NgModule({
     declarations: [
@@ -61,6 +62,7 @@ import { SkillsContentComponent } from './content/skills-content/skills-content.
         HomeContentComponent,
         AboutContentComponent,
         SkillsContentComponent,
+        EducationContentComponent,
     ],
     imports: [
         BrowserModule,

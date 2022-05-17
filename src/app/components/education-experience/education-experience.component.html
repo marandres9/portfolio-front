@@ -1,26 +1,36 @@
 <!-- ====== ED&EX ====== -->
 <div class="container-lg p-4 mb-4">
-    <!-- == EDIT == -->
-    <app-edit-button *ngIf="isLoggedIn()"></app-edit-button>
 
     <div class="row">
-        <!-- <div class="d-flex align-items-center flex-column">
-            <h1>Education & Experience</h1>
-            <div class="separator"></div>
-        </div> -->
         <div class="col-md mb-4">
-            <div class="d-flex align-items-center flex-column">
+            <!-- == EDIT == -->
+            <app-edit-button *ngIf="isLoggedIn()" (click)="toggleEditing()"></app-edit-button>
+            <!-- EDUCATION COLUMN -->
+            <app-education-content
+                [educations]="educations"
+                [hidden]="editing"
+            ></app-education-content>
+
+            <app-education-form
+                [educations]="educations"
+                [editing]="editing"
+                (stopEditing)="toggleEditing()"
+                (deleteEvent)="this.deleteEducation($event)"
+                (updateEvent)="this.updateEducation($event)"
+                (saveEvent)="this.saveEducation($event)"
+                [hidden]="!editing"
+            ></app-education-form>
+            <!-- <div class="d-flex align-items-center flex-column">
                 <h1>Education</h1>
                 <div class="separator"></div>
             </div>
 
-            <!-- EDUCATION COLUMN -->
             <div
                 class="resume-item"
                 *ngFor="let education of educations"
             >
                 <app-education-item [education]="education"></app-education-item>
-            </div>
+            </div> -->
         </div>
         <div class="col-md mb-4">
             <div class="d-flex align-items-center flex-column">
@@ -28,12 +38,14 @@
                 <div class="separator"></div>
             </div>
 
-        <!-- EXPERIENCE COLUMN -->
+            <!-- EXPERIENCE COLUMN -->
             <div
                 class="resume-item"
                 *ngFor="let experience of this.experiences"
             >
-                <app-experience-item [experience]="experience"></app-experience-item>
+                <app-experience-item
+                    [experience]="experience"
+                ></app-experience-item>
             </div>
 
             <!-- <div class="resume-item">
@@ -46,7 +58,6 @@
     </div>
 </div>
 <!-- ====== END ED&EX ====== -->
-
 
 <!-- EXAMPLE SUMMARY -->
 <!-- no lo uso porque ya tengo una seccion 'About' -->

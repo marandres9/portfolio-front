@@ -1,0 +1,11 @@
+<div class="d-flex align-items-center flex-column">
+    <h1>Education</h1>
+    <div class="separator"></div>
+</div>
+
+<div
+    class="resume-item"
+    *ngFor="let education of educations"
+>
+    <app-education-item [education]="education"></app-education-item>
+</div>

@@ -19,7 +19,11 @@ import { Experience } from 'src/app/model/Experience';
 export class EducationFormComponent implements OnInit, OnChanges {
     @Input() educations: Education[];
 
-    @Output() deleteEvent = new EventEmitter<number>();
+    @Input() editing: boolean = false;
+    // emition of this event tells parent to stop editing
+    @Output() stopEditing = new EventEmitter();
+
+    @Output() deleteEvent = new EventEmitter<Education>();
     @Output() updateEvent = new EventEmitter<Education>();
     @Output() saveEvent = new EventEmitter<Education>();
 
@@ -44,10 +48,18 @@ export class EducationFormComponent implements OnInit, OnChanges {
     ngOnInit(): void {}
 
     ngOnChanges(changes: SimpleChanges): void {
-        let education = changes['educations'].currentValue;
-        if (education != null) {
+        let education = changes['educations'];
+        if (education && education.currentValue) {
             this.setEducation();
         }
+
+        if(changes['editing']) {
+            this.changeFormState()
+        }
+    }
+
+    changeFormState() {
+        this.editing ? this.educationForm.enable() : this.educationForm.disable();
     }
 
     setEducation() {
@@ -63,20 +75,23 @@ export class EducationFormComponent implements OnInit, OnChanges {
                 })
             );
         }
+        this.educationForm.disable()
     }
 
-    onEducationDelete(id: number, index: number) {
-        this.deleteEvent.emit(id);
+    onEducationDelete(form: AbstractControl, index: number) {
+        this.deleteEvent.emit(form.value);
 
         this.educationFormArray.removeAt(index);
     }
 
     onEducationUpdate(form: AbstractControl) {
         this.updateEvent.emit(form.value);
+        this.stopEditing.emit()
     }
 
     onEducationSave(form: AbstractControl) {
         this.saveEvent.emit(form.value);
+        this.stopEditing.emit()
     }
 
     get educationFormArray() {
