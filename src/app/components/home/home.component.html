@@ -11,7 +11,6 @@
             <app-edit-button
                 *ngIf="isLoggedIn()"
                 (click)="toggleEditing()"
-                [hidden]="editing"
             ></app-edit-button>
             <app-home-content
                 [title]="title"
