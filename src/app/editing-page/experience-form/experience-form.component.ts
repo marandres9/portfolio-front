@@ -7,7 +7,7 @@ import {
     OnChanges,
     SimpleChanges,
 } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Experience } from 'src/app/model/Experience';
 
 @Component({
@@ -35,6 +35,9 @@ export class ExperienceFormComponent implements OnInit, OnChanges {
     });
     showNewForm = false;
     toggleNewForm() {
+        console.log(this.experienceFormArray.get([1])?.value)
+        console.log(typeof(this.experienceFormArray.get([1])?.value))
+
         this.showNewForm = !this.showNewForm;
     }
 
@@ -69,25 +72,15 @@ export class ExperienceFormComponent implements OnInit, OnChanges {
         this.experienceFormArray.removeAt(index)
     }
 
-    onExperienceUpdate(
-        id: number,
-        title: string,
-        period: string,
-        institution: string,
-        location: string,
-        description: string
-    ) {
-        this.updateEvent.emit(new Experience(id, title, period, institution, location, description))
+    onExperienceUpdate(form: AbstractControl) {
+        // !!!TEST - En vez de recibir los parametros por separado recibe el FormGroup
+        // la estructura del Form debe ser igual al modelo de Experience porqu se pasa
+        // directamente como tal
+        this.updateEvent.emit(form.value)
     }
 
-    onExperienceSave(
-        title: string,
-        period: string,
-        institution: string,
-        location: string,
-        description: string
-    ) {
-        this.saveEvent.emit(new Experience(0, title, period, institution, location, description))
+    onExperienceSave(form: AbstractControl) {
+        this.saveEvent.emit(form.value)
     }
 
 

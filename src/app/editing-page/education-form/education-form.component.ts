@@ -7,7 +7,7 @@ import {
     Output,
     SimpleChanges,
 } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder } from '@angular/forms';
 import { Education } from 'src/app/model/Education';
 import { Experience } from 'src/app/model/Experience';
 
@@ -71,29 +71,12 @@ export class EducationFormComponent implements OnInit, OnChanges {
         this.educationFormArray.removeAt(index);
     }
 
-    onEducationUpdate(
-        id: number,
-        title: string,
-        period: string,
-        institution: string,
-        location: string,
-        description: string
-    ) {
-        this.updateEvent.emit(
-            new Education(id, title, period, institution, location, description)
-        );
+    onEducationUpdate(form: AbstractControl) {
+        this.updateEvent.emit(form.value);
     }
 
-    onEducationSave(
-        title: string,
-        period: string,
-        institution: string,
-        location: string,
-        description: string
-    ) {
-        this.saveEvent.emit(
-            new Education(0, title, period, institution, location, description)
-        );
+    onEducationSave(form: AbstractControl) {
+        this.saveEvent.emit(form.value);
     }
 
     get educationFormArray() {
