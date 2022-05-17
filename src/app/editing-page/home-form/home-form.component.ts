@@ -7,7 +7,7 @@ import {
     SimpleChanges,
     EventEmitter
 } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { AbstractControl, FormBuilder } from '@angular/forms';
 import { Home } from 'src/app/model/Home';
 
 @Component({
@@ -26,6 +26,12 @@ export class HomeFormComponent implements OnInit, OnChanges {
         description: [''],
     });
 
+    editing = false
+    toggleEditing() {
+        this.editing = !this.editing
+        this.editing ? this.homeForm.enable() : this.homeForm.disable();
+    }
+
     constructor(private fb: FormBuilder) {}
 
     ngOnInit(): void {}
@@ -41,12 +47,19 @@ export class HomeFormComponent implements OnInit, OnChanges {
 
     setHome() {
         this.homeForm.setValue({
-            title: this.title,
+            title: [this.title],
             description: this.description,
         });
+        this.homeForm.disable()
     }
 
-    onHomeUpdate(title: string, desc: string) {
-        this.updateEvent.emit(new Home(title, desc))
+    onHomeUpdate() {
+        this.updateEvent.emit(this.homeForm.value)
+        this.toggleEditing()
+    }
+
+    cancelChanges() {
+        this.setHome()
+        this.toggleEditing()
     }
 }

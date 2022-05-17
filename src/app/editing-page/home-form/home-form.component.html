@@ -4,6 +4,10 @@
         <div class="separator"></div>
     </div>
     <form [formGroup]="homeForm">
+        <app-edit-button
+            *ngIf="!editing"
+            (click)="toggleEditing()"
+        ></app-edit-button>
         <div class="mb-3">
             <label class="form-label" for="title">Title</label>
             <input
@@ -11,7 +15,6 @@
                 type="text"
                 id="title"
                 formControlName="title"
-                #homeTitle
             />
         </div>
         <div class="mb-3">
@@ -21,15 +24,25 @@
                 rows="3"
                 id="description"
                 formControlName="description"
-                #homeDescription
             ></textarea>
         </div>
-        <button
-            class="btn"
-            type="button"
-            (click)="onHomeUpdate(homeTitle.value, homeDescription.value)"
-        >
-        <i class="fa-solid fa-circle-check"></i>
-        </button>
+        <div *ngIf="editing">
+            <button
+                type="button"
+                class="btn red"
+                (click)="cancelChanges()"
+                title="Cancel"
+            >
+                <i class="fa-solid fa-circle-xmark"></i>
+            </button>
+            <button
+                type="button"
+                class="btn"
+                (click)="onHomeUpdate()"
+                title="Save changes"
+            >
+                <i class="fa-solid fa-floppy-disk"></i>
+            </button>
+        </div>
     </form>
 </div>
