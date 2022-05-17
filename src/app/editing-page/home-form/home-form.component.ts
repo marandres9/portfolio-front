@@ -30,9 +30,6 @@ export class HomeFormComponent implements OnInit, OnChanges {
         description: [''],
     });
 
-    changeFormState() {
-        this.editing ? this.homeForm.enable() : this.homeForm.disable();
-    }
 
     constructor(private fb: FormBuilder) {}
 
@@ -51,6 +48,10 @@ export class HomeFormComponent implements OnInit, OnChanges {
             this.changeFormState()
         }
 
+    }
+
+    changeFormState() {
+        this.editing ? this.homeForm.enable() : this.homeForm.disable();
     }
 
     setHome() {

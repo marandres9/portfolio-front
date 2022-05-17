@@ -1,8 +1,5 @@
 <!-- ====== ABOUT ====== -->
 <div class="container-lg mb-4 p-4" id="about">
-    <!-- == EDIT == -->
-    <app-edit-button *ngIf="isLoggedIn()"></app-edit-button>
-
     <div class="row align-items-center justify-content-evenly">
         <div class="col-md text-center order-2 order-md-1">
             <img
@@ -12,7 +9,20 @@
             />
         </div>
         <div class="col-md mb-4 order-1 order-md-2">
-            <div class="d-flex align-items-center flex-column">
+            <!-- == EDIT == -->
+            <app-edit-button *ngIf="isLoggedIn()" (click)="toggleEditing()" [hidden]="editing"></app-edit-button>
+
+            <app-about-content [description]="description" [hidden]="editing"></app-about-content>
+
+            <app-about-form
+                [description]="description"
+                [editing]="editing"
+                (stopEditing)="toggleEditing()"
+                (updateEvent)="updateAbout($event)"
+                [hidden]="!editing"
+            ></app-about-form>
+
+            <!-- <div class="d-flex align-items-center flex-column">
                 <h1>About me</h1>
                 <div class="separator"></div>
             </div>
@@ -31,12 +41,11 @@
                     aliquam unde corrupti nemo nulla fugit.
                 </p>
             </div>
-            <!-- <a href="#" class="btn btn-secondary text-center">Download CV</a> -->
             <div class="text-center">
                 <button class="btn" style="background-color: #e3e3e3">
                     Download CV
                 </button>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

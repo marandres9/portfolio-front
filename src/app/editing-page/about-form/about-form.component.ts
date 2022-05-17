@@ -10,6 +10,10 @@ import { About } from 'src/app/model/About';
 export class AboutFormComponent implements OnInit, OnChanges {
     @Input() description: string;
 
+    @Input() editing: boolean = false;
+    // emition of this event tells parent to stop editing
+    @Output() stopEditing = new EventEmitter()
+
     @Output() updateEvent = new EventEmitter<About>()
 
     aboutForm = new FormGroup({
@@ -21,11 +25,20 @@ export class AboutFormComponent implements OnInit, OnChanges {
     ngOnInit(): void {}
 
     ngOnChanges(changes: SimpleChanges): void {
-        let desc = changes['description'].currentValue;
-
-        if (desc != null) {
+        let desc = changes['description'];
+        if (desc && desc.currentValue) {
             this.setAbout();
         }
+
+        let edit = changes['editing']
+        if(edit) {
+            this.changeFormState()
+        }
+
+    }
+
+    changeFormState() {
+        this.editing ? this.aboutForm.enable() : this.aboutForm.disable();
     }
 
     setAbout() {
@@ -34,7 +47,14 @@ export class AboutFormComponent implements OnInit, OnChanges {
         });
     }
 
-    onAboutUpdate(desc: string) {
-        this.updateEvent.emit(new About(desc))
+    onAboutUpdate() {
+        this.updateEvent.emit(this.aboutForm.value)
+        this.stopEditing.emit()
     }
+
+    cancelChanges() {
+        this.setAbout()
+        this.stopEditing.emit()
+    }
+
 }

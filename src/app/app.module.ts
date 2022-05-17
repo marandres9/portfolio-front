@@ -31,6 +31,7 @@ import { ExperienceFormComponent } from './editing-page/experience-form/experien
 import { ProjectsFormComponent } from './editing-page/projects-form/projects-form.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeContentComponent } from './content/home-content/home-content.component';
+import { AboutContentComponent } from './content/about-content/about-content.component';
 
 @NgModule({
     declarations: [
@@ -57,6 +58,7 @@ import { HomeContentComponent } from './content/home-content/home-content.compon
         ProjectsFormComponent,
         FooterComponent,
         HomeContentComponent,
+        AboutContentComponent,
     ],
     imports: [
         BrowserModule,

@@ -21,12 +21,12 @@ export class HomeComponent implements OnInit, OnChanges {
     ngOnInit(): void {}
 
     ngOnChanges(changes: SimpleChanges): void {
-        let home = changes['home']
+        // let home = changes['home']
 
-        if(home && home.currentValue) {
-            this.title = home.currentValue.title
-            this.description = home.currentValue.description
-        }
+        // if(home && home.currentValue) {
+        //     this.title = home.currentValue.title
+        //     this.description = home.currentValue.description
+        // }
     }
 
     public isLoggedIn() {

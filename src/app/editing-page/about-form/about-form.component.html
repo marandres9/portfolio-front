@@ -15,12 +15,24 @@
                 #aboutDescription
             ></textarea>
         </div>
-        <button
-            class="btn"
-            type="button"
-            (click)="onAboutUpdate(aboutDescription.value)"
-        >
-            <i class="fa-solid fa-circle-check"></i>
-        </button>
+
+        <div>
+            <button
+                type="button"
+                class="btn red"
+                (click)="cancelChanges()"
+                title="Cancel"
+            >
+                <i class="fa-solid fa-circle-xmark"></i>
+            </button>
+            <button
+                type="button"
+                class="btn"
+                (click)="onAboutUpdate()"
+                title="Save changes"
+            >
+                <i class="fa-solid fa-floppy-disk"></i>
+            </button>
+        </div>
     </form>
 </div>
