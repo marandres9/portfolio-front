@@ -16,8 +16,12 @@ import { Home } from 'src/app/model/Home';
     styleUrls: ['./home-form.component.css'],
 })
 export class HomeFormComponent implements OnInit, OnChanges {
-    @Input() title: string;
-    @Input() description: string;
+    @Input() title: string = '';
+    @Input() description: string = '';
+
+    @Input() editing: boolean = false;
+    // emition of this event tells parent to stop editing
+    @Output() stopEditing = new EventEmitter()
 
     @Output() updateEvent = new EventEmitter<Home>()
 
@@ -26,9 +30,7 @@ export class HomeFormComponent implements OnInit, OnChanges {
         description: [''],
     });
 
-    editing = false
-    toggleEditing() {
-        this.editing = !this.editing
+    changeFormState() {
         this.editing ? this.homeForm.enable() : this.homeForm.disable();
     }
 
@@ -37,12 +39,18 @@ export class HomeFormComponent implements OnInit, OnChanges {
     ngOnInit(): void {}
 
     ngOnChanges(changes: SimpleChanges): void {
-        let title = changes['title'].currentValue;
-        let desc = changes['description'].currentValue;
+        let title = changes['title']
+        let desc = changes['description']
 
-        if (title != null && desc != null) {
+        if ((title && title.currentValue) || (desc && desc.currentValue)) {
             this.setHome();
         }
+
+        let edit = changes['editing']
+        if(edit) {
+            this.changeFormState()
+        }
+
     }
 
     setHome() {
@@ -50,16 +58,15 @@ export class HomeFormComponent implements OnInit, OnChanges {
             title: [this.title],
             description: this.description,
         });
-        this.homeForm.disable()
     }
 
     onHomeUpdate() {
         this.updateEvent.emit(this.homeForm.value)
-        this.toggleEditing()
+        this.stopEditing.emit()
     }
 
     cancelChanges() {
         this.setHome()
-        this.toggleEditing()
+        this.stopEditing.emit()
     }
 }
