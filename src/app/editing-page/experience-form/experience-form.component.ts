@@ -7,7 +7,12 @@ import {
     OnChanges,
     SimpleChanges,
 } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import {
+    AbstractControl,
+    FormArray,
+    FormBuilder,
+    FormGroup,
+} from '@angular/forms';
 import { Experience } from 'src/app/model/Experience';
 
 @Component({
@@ -18,7 +23,11 @@ import { Experience } from 'src/app/model/Experience';
 export class ExperienceFormComponent implements OnInit, OnChanges {
     @Input() experiences: Experience[];
 
-    @Output() deleteEvent = new EventEmitter<number>();
+    @Input() editing: boolean = false;
+    // emition of this event tells parent to stop editing
+    @Output() stopEditing = new EventEmitter();
+
+    @Output() deleteEvent = new EventEmitter<Experience>();
     @Output() updateEvent = new EventEmitter<Experience>();
     @Output() saveEvent = new EventEmitter<Experience>();
 
@@ -35,8 +44,8 @@ export class ExperienceFormComponent implements OnInit, OnChanges {
     });
     showNewForm = false;
     toggleNewForm() {
-        console.log(this.experienceFormArray.get([1])?.value)
-        console.log(typeof(this.experienceFormArray.get([1])?.value))
+        console.log(this.experienceFormArray.get([1])?.value);
+        console.log(typeof this.experienceFormArray.get([1])?.value);
 
         this.showNewForm = !this.showNewForm;
     }
@@ -46,10 +55,20 @@ export class ExperienceFormComponent implements OnInit, OnChanges {
     ngOnInit(): void {}
 
     ngOnChanges(changes: SimpleChanges): void {
-        let exp = changes['experiences'].currentValue;
-        if (exp != null) {
+        let exp = changes['experiences'];
+        if (exp && exp.currentValue) {
             this.setExperience();
         }
+
+        if (changes['editing']) {
+            this.changeFormState();
+        }
+    }
+
+    changeFormState() {
+        this.editing
+            ? this.experienceForm.enable()
+            : this.experienceForm.disable();
     }
 
     setExperience() {
@@ -65,24 +84,24 @@ export class ExperienceFormComponent implements OnInit, OnChanges {
                 })
             );
         }
+        this.experienceForm.disable();
     }
 
-    onExperienceDelete(id: number, index: number) {
-        this.deleteEvent.emit(id)
-        this.experienceFormArray.removeAt(index)
+    onExperienceDelete(form: AbstractControl, index: number) {
+        this.deleteEvent.emit(form.value);
+        this.experienceFormArray.removeAt(index);
     }
 
     onExperienceUpdate(form: AbstractControl) {
         // !!!TEST - En vez de recibir los parametros por separado recibe el FormGroup
         // la estructura del Form debe ser igual al modelo de Experience porqu se pasa
         // directamente como tal
-        this.updateEvent.emit(form.value)
+        this.updateEvent.emit(form.value);
     }
 
     onExperienceSave(form: AbstractControl) {
-        this.saveEvent.emit(form.value)
+        this.saveEvent.emit(form.value);
     }
-
 
     get experienceFormArray() {
         return this.experienceForm.get('experience') as FormArray;

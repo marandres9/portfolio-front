@@ -1,24 +1,26 @@
 <!-- ====== ED&EX ====== -->
 <div class="container-lg p-4 mb-4">
-
     <div class="row">
         <div class="col-md mb-4">
             <!-- == EDIT == -->
-            <app-edit-button *ngIf="isLoggedIn()" (click)="toggleEditing()"></app-edit-button>
+            <app-edit-button
+                *ngIf="isLoggedIn()"
+                (click)="toggleEditingEdu()"
+            ></app-edit-button>
             <!-- EDUCATION COLUMN -->
             <app-education-content
                 [educations]="educations"
-                [hidden]="editing"
+                [hidden]="editingEdu"
             ></app-education-content>
 
             <app-education-form
                 [educations]="educations"
-                [editing]="editing"
-                (stopEditing)="toggleEditing()"
+                [editing]="editingEdu"
+                (stopEditing)="toggleEditingEdu()"
                 (deleteEvent)="this.deleteEducation($event)"
                 (updateEvent)="this.updateEducation($event)"
                 (saveEvent)="this.saveEducation($event)"
-                [hidden]="!editing"
+                [hidden]="!editingEdu"
             ></app-education-form>
             <!-- <div class="d-flex align-items-center flex-column">
                 <h1>Education</h1>
@@ -33,12 +35,31 @@
             </div> -->
         </div>
         <div class="col-md mb-4">
-            <div class="d-flex align-items-center flex-column">
+            <app-edit-button
+                *ngIf="isLoggedIn()"
+                (click)="toggleEditingExp()"
+            ></app-edit-button>
+
+            <app-experience-content
+                [experiences]="experiences"
+                [hidden]="editingExp"
+            ></app-experience-content>
+
+            <app-experience-form
+                [experiences]="experiences"
+                [editing]="editingExp"
+                (stopEditing)="toggleEditingExp()"
+                (deleteEvent)="this.deleteExperience($event)"
+                (updateEvent)="this.updateExperience($event)"
+                (saveEvent)="this.saveExperience($event)"
+                [hidden]="!editingExp"
+            ></app-experience-form>
+            <!-- EXPERIENCE COLUMN -->
+            <!-- <div class="d-flex align-items-center flex-column">
                 <h1>Experience</h1>
                 <div class="separator"></div>
             </div>
 
-            <!-- EXPERIENCE COLUMN -->
             <div
                 class="resume-item"
                 *ngFor="let experience of this.experiences"
@@ -46,7 +67,7 @@
                 <app-experience-item
                     [experience]="experience"
                 ></app-experience-item>
-            </div>
+            </div> -->
 
             <!-- <div class="resume-item">
                 <app-experience-item></app-experience-item>

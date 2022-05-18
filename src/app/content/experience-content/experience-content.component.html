@@ -1,0 +1,14 @@
+<div class="d-flex align-items-center flex-column">
+    <h1>Experience</h1>
+    <div class="separator"></div>
+</div>
+
+<!-- EXPERIENCE COLUMN -->
+<div
+    class="resume-item"
+    *ngFor="let experience of this.experiences"
+>
+    <app-experience-item
+        [experience]="experience"
+    ></app-experience-item>
+</div>

@@ -34,6 +34,7 @@ import { HomeContentComponent } from './content/home-content/home-content.compon
 import { AboutContentComponent } from './content/about-content/about-content.component';
 import { SkillsContentComponent } from './content/skills-content/skills-content.component';
 import { EducationContentComponent } from './content/education-content/education-content.component';
+import { ExperienceContentComponent } from './content/experience-content/experience-content.component';
 
 @NgModule({
     declarations: [
@@ -63,6 +64,7 @@ import { EducationContentComponent } from './content/education-content/education
         AboutContentComponent,
         SkillsContentComponent,
         EducationContentComponent,
+        ExperienceContentComponent,
     ],
     imports: [
         BrowserModule,

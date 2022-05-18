@@ -13,7 +13,8 @@ export class EducationExperienceComponent implements OnInit {
     @Input() educations: Education[] = [];
     @Input() experiences: Experience[] = [];
 
-    editing = false;
+    editingEdu = false;
+    editingExp = false;
 
     constructor(
         private authService: AuthenticationService,
@@ -24,8 +25,11 @@ export class EducationExperienceComponent implements OnInit {
 
     ngOnInit(): void {}
 
-    toggleEditing() {
-        this.editing = !this.editing;
+    toggleEditingEdu() {
+        this.editingEdu = !this.editingEdu;
+    }
+    toggleEditingExp() {
+        this.editingExp = !this.editingExp;
     }
 
     public isLoggedIn() {
@@ -64,5 +68,37 @@ export class EducationExperienceComponent implements OnInit {
     saveEducation(ed: Education) {
         // sends post requeset and reloads the page to get updated list
         this.http.saveEducation(ed).subscribe(() => window.location.reload());
+    }
+
+    deleteExperience(exp: Experience) {
+        this.http.deleteExperience(exp.id).subscribe(() => {
+            let index = this.experiences.findIndex(
+                (value) => value.id === exp.id
+            );
+            this.experiences.splice(index, 1);
+        });
+    }
+
+    updateExperience(exp: Experience) {
+        this.http
+            .updateEducation(
+                exp.id,
+                exp.title,
+                exp.period,
+                exp.institution,
+                exp.location,
+                exp.description
+            )
+            .subscribe((exp) => {
+                let index = this.experiences.findIndex(
+                    (value) => value.id === exp.id
+                );
+                this.experiences.splice(index, 1, exp);
+            });
+    }
+
+    saveExperience(exp: Experience) {
+        // sends post requeset and reloads the page to get updated list
+        this.http.saveExperience(exp).subscribe(() => window.location.reload());
     }
 }
