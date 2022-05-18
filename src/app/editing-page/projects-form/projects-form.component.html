@@ -1,7 +1,7 @@
 <div class="container-lg mb-4 p-4" style="background-color: #f6f6f8">
     <div class="mb-3">
         <div class="d-flex flex-column align-items-center">
-            <h1>Projects</h1>
+            <h1>Editing - Projects</h1>
             <div class="separator"></div>
         </div>
 
@@ -72,7 +72,7 @@
                             type="button"
                             (click)="this.onProjectDelete(proj, i)"
                         >
-                            <i class="fa-solid fa-circle-xmark"></i>
+                            <i class="fa-solid fa-trash"></i>
                         </button>
                         <button
                             type="button"
@@ -81,8 +81,8 @@
                                 this.onProjectUpdate(proj)
                             "
                         >
-                            <i class="fa-solid fa-circle-check"></i>
-                        </button>
+                        <i class="fa-solid fa-floppy-disk"></i>
+                    </button>
                     </div>
                 </div>
             </div>
@@ -141,7 +141,7 @@
                     </button>
                     <button
                         type="button"
-                        class="btn red"
+                        class="btn"
                         (click)="toggleNewForm()"
                         [hidden]="!this.showNewForm"
                     >

@@ -1,7 +1,7 @@
 <div class="mb-3">
     <form [formGroup]="experienceForm">
         <div class="d-flex flex-column align-items-center">
-            <h1>Experience</h1>
+            <h1>Editing - Experience</h1>
             <div class="separator"></div>
         </div>
 
@@ -76,14 +76,14 @@
                     type="button"
                     (click)="onExperienceDelete(exp, i)"
                 >
-                    <i class="fa-solid fa-circle-xmark"></i>
+                    <i class="fa-solid fa-trash"></i>
                 </button>
                 <button
                     class="btn"
                     type="button"
                     (click)="onExperienceUpdate(exp)"
                 >
-                    <i class="fa-solid fa-circle-check"></i>
+                    <i class="fa-solid fa-floppy-disk"></i>
                 </button>
                 <hr />
             </div>
@@ -156,7 +156,7 @@
             </button>
             <button
                 type="button"
-                class="btn red"
+                class="btn"
                 (click)="toggleNewForm()"
                 [hidden]="!this.showNewForm"
             >
