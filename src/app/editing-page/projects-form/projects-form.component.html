@@ -70,7 +70,7 @@
                             type="button"
                             class="btn red"
                             type="button"
-                            (click)="this.onProjectDelete(+id.value, i)"
+                            (click)="this.onProjectDelete(proj, i)"
                         >
                             <i class="fa-solid fa-circle-xmark"></i>
                         </button>
@@ -78,12 +78,7 @@
                             type="button"
                             class="btn"
                             (click)="
-                                this.onProjectUpdate(
-                                    +id.value,
-                                    title.value,
-                                    description.value,
-                                    url.value
-                                )
+                                this.onProjectUpdate(proj)
                             "
                         >
                             <i class="fa-solid fa-circle-check"></i>
@@ -156,11 +151,7 @@
                         type="button"
                         class="btn"
                         (click)="
-                            onProjectSave(
-                                title.value,
-                                description.value,
-                                url.value
-                            )
+                            onProjectSave(newProjectForm)
                         "
                         [hidden]="!this.showNewForm"
                     >

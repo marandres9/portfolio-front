@@ -1,9 +1,27 @@
 <!-- ====== PROJECTS ====== -->
-<div class="container-lg p-4 mb-4" id="projects" style="background-color: #f6f6f8;">
+<div
+    class="container-lg p-4 mb-4"
+    id="projects"
+    style="background-color: #f6f6f8"
+>
     <!-- == EDIT == -->
-    <app-edit-button *ngIf="isLoggedIn()"></app-edit-button>
+    <app-edit-button *ngIf="isLoggedIn()" (click)="toggleEditing()"></app-edit-button>
 
-    <div class="d-flex flex-column align-items-center">
+    <app-projects-content
+        [projects]="projects"
+        [hidden]="editing"
+    ></app-projects-content>
+
+    <app-projects-form
+        [projects]="projects"
+        [editing]="editing"
+        (stopEditing)="toggleEditing()"
+        (deleteEvent)="this.deleteProject($event)"
+        (updateEvent)="this.updateProject($event)"
+        (saveEvent)="this.saveProject($event)"
+        [hidden]="!editing"
+    ></app-projects-form>
+    <!-- <div class="d-flex flex-column align-items-center">
         <h1 class="">Projects</h1>
         <div class="separator"></div>
     </div>
@@ -11,10 +29,9 @@
         <div class="col-lg-4 col-md-6 mb-4" *ngFor="let project of this.projects">
             <app-project-card [project]="project"></app-project-card>
         </div>
-    </div>
+    </div> -->
 </div>
 <!-- ====== END PROJECTS ====== -->
-
 
 <!-- app-project-card model -->
 

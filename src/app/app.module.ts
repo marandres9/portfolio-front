@@ -35,6 +35,7 @@ import { AboutContentComponent } from './content/about-content/about-content.com
 import { SkillsContentComponent } from './content/skills-content/skills-content.component';
 import { EducationContentComponent } from './content/education-content/education-content.component';
 import { ExperienceContentComponent } from './content/experience-content/experience-content.component';
+import { ProjectsContentComponent } from './content/projects-content/projects-content.component';
 
 @NgModule({
     declarations: [
@@ -65,6 +66,7 @@ import { ExperienceContentComponent } from './content/experience-content/experie
         SkillsContentComponent,
         EducationContentComponent,
         ExperienceContentComponent,
+        ProjectsContentComponent,
     ],
     imports: [
         BrowserModule,

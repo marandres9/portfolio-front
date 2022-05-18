@@ -7,7 +7,7 @@ import {
     Output,
     SimpleChanges,
 } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder } from '@angular/forms';
 import { Project } from 'src/app/model/Project';
 
 @Component({
@@ -18,7 +18,11 @@ import { Project } from 'src/app/model/Project';
 export class ProjectsFormComponent implements OnInit, OnChanges {
     @Input() projects: Project[];
 
-    @Output() deleteEvent = new EventEmitter<number>();
+    @Input() editing: boolean = false;
+    // emition of this event tells parent to stop editing
+    @Output() stopEditing = new EventEmitter();
+
+    @Output() deleteEvent = new EventEmitter<Project>();
     @Output() updateEvent = new EventEmitter<Project>();
     @Output() saveEvent = new EventEmitter<Project>();
 
@@ -41,10 +45,18 @@ export class ProjectsFormComponent implements OnInit, OnChanges {
     ngOnInit(): void {}
 
     ngOnChanges(changes: SimpleChanges): void {
-        let proj = changes['projects'].currentValue;
-        if (proj != null) {
+        let proj = changes['projects'];
+        if (proj && proj.currentValue) {
             this.setProjects();
         }
+
+        if (changes['editing']) {
+            this.changeFormState();
+        }
+    }
+
+    changeFormState() {
+        this.editing ? this.projectsForm.enable() : this.projectsForm.disable();
     }
 
     setProjects() {
@@ -58,24 +70,22 @@ export class ProjectsFormComponent implements OnInit, OnChanges {
                 })
             );
         }
+        this.projectsForm.disable();
     }
 
-    onProjectDelete(id: number, index: number) {
-        this.deleteEvent.emit(id)
-        this.projectFormArray.removeAt(index)
+    onProjectDelete(form: AbstractControl, index: number) {
+        this.deleteEvent.emit(form.value);
+        this.projectFormArray.removeAt(index);
     }
 
-    onProjectUpdate(
-        id: number,
-        title: string,
-        description: string,
-        url: string
-    ) {
-        this.updateEvent.emit(new Project(id, title, description, url));
+    onProjectUpdate(form: AbstractControl) {
+        this.updateEvent.emit(form.value);
+        this.stopEditing.emit();
     }
 
-    onProjectSave(title: string, description: string, url: string) {
-        this.saveEvent.emit(new Project(0, title, description, url));
+    onProjectSave(form: AbstractControl) {
+        this.saveEvent.emit(form.value);
+        this.stopEditing.emit();
     }
 
     get projectFormArray() {
