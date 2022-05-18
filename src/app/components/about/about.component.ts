@@ -19,7 +19,7 @@ export class AboutComponent implements OnInit {
     ) {}
 
     public isLoggedIn() {
-        return this.authService.isLoggedIn();
+        return this.authService.isLoggedIn;
     }
 
     ngOnInit(): void {}

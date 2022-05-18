@@ -25,7 +25,7 @@ export class ProjectsComponent implements OnInit {
     }
 
     public isLoggedIn() {
-        return this.authService.isLoggedIn();
+        return this.authService.isLoggedIn;
     }
 
     deleteProject(proj: Project) {

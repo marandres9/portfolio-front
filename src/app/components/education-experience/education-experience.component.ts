@@ -33,7 +33,7 @@ export class EducationExperienceComponent implements OnInit {
     }
 
     public isLoggedIn() {
-        return this.authService.isLoggedIn();
+        return this.authService.isLoggedIn;
     }
 
     deleteEducation(ed: Education) {

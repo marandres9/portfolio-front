@@ -28,7 +28,7 @@ export class SkillsComponent implements OnInit {
     ngOnInit(): void {}
 
     public isLoggedIn() {
-        return this.authService.isLoggedIn();
+        return this.authService.isLoggedIn;
     }
 
     toggleEditing() {

@@ -5,7 +5,7 @@
     style="background-color: #f6f6f8"
 >
     <!-- == EDIT == -->
-    <app-edit-button *ngIf="isLoggedIn()" (click)="toggleEditing()"></app-edit-button>
+    <app-edit-button *ngIf="isLoggedIn() | async" (click)="toggleEditing()"></app-edit-button>
 
     <app-projects-content
         [projects]="projects"

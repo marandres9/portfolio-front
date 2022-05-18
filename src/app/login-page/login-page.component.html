@@ -1,1 +1,29 @@
-<p>login-page works!</p>
+<div class="m-5 container-lg mx-auto">
+    <div class="d-flex align-items-center flex-column">
+        <h1>Iniciar Sesión</h1>
+        <div class="separator"></div>
+    </div>
+    <form [formGroup]="loginForm">
+        <div class="mb-3">
+            <label for="username" class="form-label">Nombre de usuario</label>
+            <input
+                class="form-control"
+                type="text"
+                id="username"
+                formControlName="username"
+            />
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input
+                class="form-control"
+                type="password"
+                id="password"
+                formControlName="password"
+            />
+        </div>
+        <button type="button" class="btn btn-primary" (click)="onLogin()">Enviar</button>
+    </form>
+
+    <button class="btn" (click)="nav()">next</button>
+</div>

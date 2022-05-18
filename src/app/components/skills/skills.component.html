@@ -2,7 +2,7 @@
 <div class="container-lg mb-4 p-4" style="background-color: #f6f6f8">
     <!-- == EDIT == -->
     <app-edit-button
-        *ngIf="isLoggedIn()"
+        *ngIf="isLoggedIn() | async"
         (click)="toggleEditing()"
     ></app-edit-button>
 

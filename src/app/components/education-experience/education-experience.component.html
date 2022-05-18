@@ -4,7 +4,7 @@
         <div class="col-md mb-4">
             <!-- == EDIT == -->
             <app-edit-button
-                *ngIf="isLoggedIn()"
+                *ngIf="isLoggedIn() | async"
                 (click)="toggleEditingEdu()"
             ></app-edit-button>
             <!-- EDUCATION COLUMN -->
@@ -36,7 +36,7 @@
         </div>
         <div class="col-md mb-4">
             <app-edit-button
-                *ngIf="isLoggedIn()"
+                *ngIf="isLoggedIn() | async"
                 (click)="toggleEditingExp()"
             ></app-edit-button>
 

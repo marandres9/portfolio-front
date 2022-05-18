@@ -10,7 +10,7 @@
         </div>
         <div class="col-md mb-4 order-1 order-md-2">
             <!-- == EDIT == -->
-            <app-edit-button *ngIf="isLoggedIn()" (click)="toggleEditing()"></app-edit-button>
+            <app-edit-button *ngIf="isLoggedIn() | async" (click)="toggleEditing()"></app-edit-button>
 
             <app-about-content [description]="description" [hidden]="editing"></app-about-content>
 

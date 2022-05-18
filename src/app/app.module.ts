@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 // router
 import { RouterModule } from '@angular/router';
 // http modelue
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -36,6 +36,7 @@ import { EducationContentComponent } from './content/education-content/education
 import { ExperienceContentComponent } from './content/experience-content/experience-content.component';
 import { ProjectsContentComponent } from './content/projects-content/projects-content.component';
 import { SocialsComponent } from './components/socials/socials.component';
+import { AuthInterceptor } from './service/authentication.interceptor';
 
 @NgModule({
     declarations: [
@@ -80,7 +81,8 @@ import { SocialsComponent } from './components/socials/socials.component';
     ],
     providers: [
         AuthenticationService,
-        HttpService
+        HttpService,
+        {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
     ],
     bootstrap: [AppComponent]
 })

@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit, OnChanges {
     }
 
     public isLoggedIn() {
-        return this.authService.isLoggedIn();
+        return this.authService.isLoggedIn
     }
 
     toggleEditing() {
