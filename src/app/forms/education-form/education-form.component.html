@@ -28,7 +28,25 @@
                         type="text"
                         id="title"
                         formControlName="title"
+                        required
                     />
+                    <!-- TITLE VALIDATORS -->
+                    <div
+                        *ngIf="
+                            getGroupTitle(ed)?.invalid &&
+                            (getGroupTitle(ed)?.dirty ||
+                                getGroupTitle(ed)?.touched)
+                        "
+                        class="alert alert-danger mt-2"
+                    >
+                        <div *ngIf="getGroupTitle(ed)!.errors?.['required']">
+                            Un título es requerido.
+                        </div>
+                        <div *ngIf="getGroupTitle(ed)!.errors?.['maxlength']">
+                            El título es demasiado largo.
+                        </div>
+                    </div>
+                    <!-- END TITLE VALIDATORS -->
                 </div>
                 <div class="mb-2">
                     <label class="form-label" for="period">Period</label>
@@ -37,7 +55,25 @@
                         type="text"
                         id="period"
                         formControlName="period"
+                        required
                     />
+                    <!-- PERIOD VALIDATORS -->
+                    <div
+                        *ngIf="
+                            getGroupPeriod(ed)?.invalid &&
+                            (getGroupPeriod(ed)?.dirty ||
+                                getGroupPeriod(ed)?.touched)
+                        "
+                        class="alert alert-danger mt-2"
+                    >
+                        <div *ngIf="getGroupPeriod(ed)!.errors?.['required']">
+                            Un periodo es requerido.
+                        </div>
+                        <div *ngIf="getGroupPeriod(ed)!.errors?.['maxlength']">
+                            El periodo es demasiado largo.
+                        </div>
+                    </div>
+                    <!-- END PERIOD VALIDATORS -->
                 </div>
                 <div class="mb-2">
                     <label class="form-label" for="institution"
@@ -48,7 +84,29 @@
                         type="text"
                         id="institution"
                         formControlName="institution"
+                        required
                     />
+                    <!-- INSTITUTION VALIDATORS -->
+                    <div
+                        *ngIf="
+                            getGroupInstitution(ed)?.invalid &&
+                            (getGroupInstitution(ed)?.dirty ||
+                                getGroupInstitution(ed)?.touched)
+                        "
+                        class="alert alert-danger mt-2"
+                    >
+                        <div
+                            *ngIf="getGroupInstitution(ed)!.errors?.['required']"
+                        >
+                            Una institución es requerida.
+                        </div>
+                        <div
+                            *ngIf="getGroupInstitution(ed)!.errors?.['maxlength']"
+                        >
+                            El nombre de la institución es demasiado largo.
+                        </div>
+                    </div>
+                    <!-- END INSTITUTION VALIDATORS -->
                 </div>
                 <div class="mb-2">
                     <label class="form-label" for="location">Location</label>
@@ -57,7 +115,27 @@
                         type="text"
                         id="location"
                         formControlName="location"
+                        required
                     />
+                    <!-- LOCATION VALIDATORS -->
+                    <div
+                        *ngIf="
+                            getGroupLocation(ed)?.invalid &&
+                            (getGroupLocation(ed)?.dirty ||
+                                getGroupLocation(ed)?.touched)
+                        "
+                        class="alert alert-danger mt-2"
+                    >
+                        <div *ngIf="getGroupLocation(ed)!.errors?.['required']">
+                            Una localidad es requerida.
+                        </div>
+                        <div
+                            *ngIf="getGroupLocation(ed)!.errors?.['maxlength']"
+                        >
+                            El nombre de la localidad es demasiado largo.
+                        </div>
+                    </div>
+                    <!-- END LOCATION VALIDATORS -->
                 </div>
                 <div class="mb-2">
                     <label class="form-label" for="description"
@@ -68,7 +146,24 @@
                         rows="3"
                         id="description"
                         formControlName="description"
+                        required
                     ></textarea>
+                    <!-- DESCRIPTION VALIDATORS -->
+                    <div
+                        *ngIf="
+                            getGroupDescription(ed)?.invalid &&
+                            (getGroupDescription(ed)?.dirty ||
+                                getGroupDescription(ed)?.touched)
+                        "
+                        class="alert alert-danger mt-2"
+                    >
+                        <div
+                            *ngIf="getGroupDescription(ed)!.errors?.['required']"
+                        >
+                            Una descripción es requerida.
+                        </div>
+                    </div>
+                    <!-- END DESCRIPTION VALIDATORS -->
                 </div>
                 <button
                     class="btn red"
@@ -81,6 +176,7 @@
                     class="btn"
                     type="button"
                     (click)="onEducationUpdate(ed)"
+                    [disabled]="ed.invalid"
                 >
                     <i class="fa-solid fa-floppy-disk"></i>
                 </button>
@@ -104,8 +200,24 @@
                     type="text"
                     id="title"
                     formControlName="title"
-                    #title
+                    required
                 />
+                <!-- TITLE VALIDATORS -->
+                <div
+                    *ngIf="
+                        newTitle?.invalid &&
+                        (newTitle?.dirty || newTitle?.touched)
+                    "
+                    class="alert alert-danger mt-2"
+                >
+                    <div *ngIf="newTitle!.errors?.['required']">
+                        Un título es requerido.
+                    </div>
+                    <div *ngIf="newTitle!.errors?.['maxlength']">
+                        El título es demasiado largo.
+                    </div>
+                </div>
+                <!-- END TITLE VALIDATORS -->
             </div>
             <div class="mb-2">
                 <label class="form-label" for="period">Period</label>
@@ -114,7 +226,24 @@
                     type="text"
                     id="period"
                     formControlName="period"
+                    required
                 />
+                <!-- PERIOD VALIDATORS -->
+                <div
+                    *ngIf="
+                        newPeriod?.invalid &&
+                        (newPeriod?.dirty || newPeriod?.touched)
+                    "
+                    class="alert alert-danger mt-2"
+                >
+                    <div *ngIf="newPeriod!.errors?.['required']">
+                        Un periodo es requerido.
+                    </div>
+                    <div *ngIf="newPeriod!.errors?.['maxlength']">
+                        El periodo es demasiado largo.
+                    </div>
+                </div>
+                <!-- END PERIOD VALIDATORS -->
             </div>
             <div class="mb-2">
                 <label class="form-label" for="institution">Institution</label>
@@ -123,7 +252,24 @@
                     type="text"
                     id="institution"
                     formControlName="institution"
+                    required
                 />
+                <!-- INSTITUTION VALIDATORS -->
+                <div
+                    *ngIf="
+                        newInstitution?.invalid &&
+                        (newInstitution?.dirty || newInstitution?.touched)
+                    "
+                    class="alert alert-danger mt-2"
+                >
+                    <div *ngIf="newInstitution!.errors?.['required']">
+                        Una institución es requerida.
+                    </div>
+                    <div *ngIf="newInstitution!.errors?.['maxlength']">
+                        El nombre de la institución es demasiado largo.
+                    </div>
+                </div>
+                <!-- END INSTITUTION VALIDATORS -->
             </div>
             <div class="mb-2">
                 <label class="form-label" for="location">Location</label>
@@ -132,7 +278,24 @@
                     type="text"
                     id="location"
                     formControlName="location"
+                    required
                 />
+                <!-- LOCATION VALIDATORS -->
+                <div
+                    *ngIf="
+                        newLocation?.invalid &&
+                        (newLocation?.dirty || newLocation?.touched)
+                    "
+                    class="alert alert-danger mt-2"
+                >
+                    <div *ngIf="newLocation!.errors?.['required']">
+                        Una localidad es requerida.
+                    </div>
+                    <div *ngIf="newLocation!.errors?.['maxlength']">
+                        El nombre de la localidad es demasiado largo.
+                    </div>
+                </div>
+                <!-- END LOCATION VALIDATORS -->
             </div>
             <div class="mb-2">
                 <label class="form-label" for="description">Description</label>
@@ -141,7 +304,21 @@
                     rows="3"
                     id="description"
                     formControlName="description"
+                    required
                 ></textarea>
+                <!-- DESCRIPTION VALIDATORS -->
+                <div
+                    *ngIf="
+                        newDescription?.invalid &&
+                        (newDescription?.dirty || newDescription?.touched)
+                    "
+                    class="alert alert-danger mt-2"
+                >
+                    <div *ngIf="newDescription!.errors?.['required']">
+                        Una descripción es requerida.
+                    </div>
+                </div>
+                <!-- END DESCRIPTION VALIDATORS -->
             </div>
         </div>
         <!-- BUTTONS -->
@@ -167,6 +344,7 @@
                 class="btn"
                 (click)="onEducationSave(newEducationForm)"
                 [hidden]="!this.showNewForm"
+                [disabled]="newEducationForm.invalid"
             >
                 <i class="fa-solid fa-floppy-disk"></i>
             </button>

@@ -12,6 +12,7 @@ import {
     FormArray,
     FormBuilder,
     FormGroup,
+    Validators,
 } from '@angular/forms';
 import { Experience } from 'src/app/model/Experience';
 
@@ -36,11 +37,11 @@ export class ExperienceFormComponent implements OnInit, OnChanges {
     });
 
     newExperienceForm = this.fb.group({
-        title: [''],
-        period: [''],
-        institution: [''],
-        location: [''],
-        description: [''],
+        title: ['', [Validators.required, Validators.maxLength(255)]],
+        period: ['', [Validators.required, Validators.maxLength(255)]],
+        institution: ['',  [Validators.required, Validators.maxLength(255)]],
+        location: ['', [Validators.required, Validators.maxLength(255)]],
+        description: ['', Validators.required],
     });
     showNewForm = false;
     toggleNewForm() {
@@ -76,11 +77,11 @@ export class ExperienceFormComponent implements OnInit, OnChanges {
             this.experienceFormArray.push(
                 this.fb.group({
                     id: [exp.id],
-                    title: [exp.title],
-                    period: [exp.period],
-                    institution: [exp.institution],
-                    location: [exp.location],
-                    description: [exp.description],
+                    title: [exp.title, [Validators.required, Validators.maxLength(255)]],
+                    period: [exp.period, [Validators.required, Validators.maxLength(255)]],
+                    institution: [exp.institution, [Validators.required, Validators.maxLength(255)]],
+                    location: [exp.location, [Validators.required, Validators.maxLength(255)]],
+                    description: [exp.description, Validators.required],
                 })
             );
         }
@@ -105,5 +106,37 @@ export class ExperienceFormComponent implements OnInit, OnChanges {
 
     get experienceFormArray() {
         return this.experienceForm.get('experience') as FormArray;
+    }
+
+    getGroupTitle(group: AbstractControl) {
+        return group.get('title');
+    }
+    getGroupPeriod(group: AbstractControl) {
+        return group.get('period');
+    }
+    getGroupInstitution(group: AbstractControl) {
+        return group.get('institution');
+    }
+    getGroupLocation(group: AbstractControl) {
+        return group.get('location');
+    }
+    getGroupDescription(group: AbstractControl) {
+        return group.get('description')
+    }
+
+    get newTitle() {
+        return this.newExperienceForm.get('title');
+    }
+    get newPeriod() {
+        return this.newExperienceForm.get('period');
+    }
+    get newInstitution() {
+        return this.newExperienceForm.get('institution');
+    }
+    get newLocation() {
+        return this.newExperienceForm.get('location');
+    }
+    get newDescription() {
+        return this.newExperienceForm.get('description')
     }
 }

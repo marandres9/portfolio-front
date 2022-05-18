@@ -7,7 +7,7 @@ import {
     Output,
     SimpleChanges,
 } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Education } from 'src/app/model/Education';
 import { Experience } from 'src/app/model/Experience';
 
@@ -32,11 +32,11 @@ export class EducationFormComponent implements OnInit, OnChanges {
     });
 
     newEducationForm = this.fb.group({
-        title: [''],
-        period: [''],
-        institution: [''],
-        location: [''],
-        description: [''],
+        title: ['', [Validators.required, Validators.maxLength(255)]],
+        period: ['', [Validators.required, Validators.maxLength(255)]],
+        institution: ['', [Validators.required, Validators.maxLength(255)]],
+        location: ['', [Validators.required, Validators.maxLength(255)]],
+        description: ['', Validators.required],
     });
     showNewForm = false;
     toggleNewForm() {
@@ -67,11 +67,11 @@ export class EducationFormComponent implements OnInit, OnChanges {
             this.educationFormArray.push(
                 this.fb.group({
                     id: [ed.id],
-                    title: [ed.title],
-                    period: [ed.period],
-                    institution: [ed.institution],
-                    location: [ed.location],
-                    description: [ed.description],
+                    title: [ed.title, [Validators.required, Validators.maxLength(255)]],
+                    period: [ed.period, [Validators.required, Validators.maxLength(255)]],
+                    institution: [ed.institution, [Validators.required, Validators.maxLength(255)]],
+                    location: [ed.location, [Validators.required, Validators.maxLength(255)]],
+                    description: [ed.description, Validators.required],
                 })
             );
         }
@@ -96,5 +96,37 @@ export class EducationFormComponent implements OnInit, OnChanges {
 
     get educationFormArray() {
         return this.educationForm.get('education') as FormArray;
+    }
+
+    getGroupTitle(group: AbstractControl) {
+        return group.get('title');
+    }
+    getGroupPeriod(group: AbstractControl) {
+        return group.get('period');
+    }
+    getGroupInstitution(group: AbstractControl) {
+        return group.get('institution');
+    }
+    getGroupLocation(group: AbstractControl) {
+        return group.get('location');
+    }
+    getGroupDescription(group: AbstractControl) {
+        return group.get('description')
+    }
+
+    get newTitle() {
+        return this.newEducationForm.get('title');
+    }
+    get newPeriod() {
+        return this.newEducationForm.get('period');
+    }
+    get newInstitution() {
+        return this.newEducationForm.get('institution');
+    }
+    get newLocation() {
+        return this.newEducationForm.get('location');
+    }
+    get newDescription() {
+        return this.newEducationForm.get('description')
     }
 }

@@ -4,10 +4,6 @@
         <div class="separator"></div>
     </div>
     <form [formGroup]="homeForm">
-        <!-- <app-edit-button
-            *ngIf="!editing"
-            (click)="toggleEditing()"
-        ></app-edit-button> -->
         <div class="mb-3">
             <label class="form-label" for="title">Title</label>
             <input
@@ -15,7 +11,24 @@
                 type="text"
                 id="title"
                 formControlName="title"
+                required
             />
+            <!-- TITLE VALIDATORS -->
+            <div
+                *ngIf="
+                    homeTitle?.invalid &&
+                    (homeTitle?.dirty || homeTitle?.touched)
+                "
+                class="alert alert-danger mt-2"
+            >
+                <div *ngIf="homeTitle!.errors?.['required']">
+                    Un título es requerido.
+                </div>
+                <div *ngIf="homeTitle!.errors?.['maxlength']">
+                    El título es demasiado largo.
+                </div>
+            </div>
+            <!-- END TITLE VALIDATORS -->
         </div>
         <div class="mb-3">
             <label class="form-label" for="description">Description</label>
@@ -24,7 +37,21 @@
                 rows="3"
                 id="description"
                 formControlName="description"
+                required
             ></textarea>
+            <!-- DESCRIPTION VALIDATORS -->
+            <div
+                *ngIf="
+                    homeDescription?.invalid &&
+                    (homeDescription?.dirty || homeDescription?.touched)
+                "
+                class="alert alert-danger mt-2"
+            >
+                <div *ngIf="homeDescription!.errors?.['required']">
+                    Una descripción es requerida.
+                </div>
+            </div>
+            <!-- END DESCRIPTION VALIDATORS -->
         </div>
         <div *ngIf="editing">
             <button
@@ -40,6 +67,7 @@
                 class="btn"
                 (click)="onHomeUpdate()"
                 title="Save changes"
+                [disabled]="homeForm.invalid"
             >
                 <i class="fa-solid fa-floppy-disk"></i>
             </button>

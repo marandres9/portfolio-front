@@ -7,7 +7,7 @@ import {
     SimpleChanges,
     EventEmitter
 } from '@angular/core';
-import { AbstractControl, FormBuilder } from '@angular/forms';
+import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Home } from 'src/app/model/Home';
 
 @Component({
@@ -26,8 +26,8 @@ export class HomeFormComponent implements OnInit, OnChanges {
     @Output() updateEvent = new EventEmitter<Home>()
 
     homeForm = this.fb.group({
-        title: [''],
-        description: [''],
+        title: ['', [Validators.required, Validators.maxLength(255)]],
+        description: ['', Validators.required],
     });
 
 
@@ -69,5 +69,12 @@ export class HomeFormComponent implements OnInit, OnChanges {
     cancelChanges() {
         this.setHome()
         this.stopEditing.emit()
+    }
+
+    get homeTitle() {
+        return this.homeForm.get('title')
+    }
+    get homeDescription() {
+        return this.homeForm.get('description')
     }
 }

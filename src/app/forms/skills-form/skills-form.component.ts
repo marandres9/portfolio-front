@@ -7,7 +7,13 @@ import {
     Output,
     SimpleChanges,
 } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder } from '@angular/forms';
+import {
+    AbstractControl,
+    FormArray,
+    FormBuilder,
+    FormGroup,
+    Validators,
+} from '@angular/forms';
 import { Skill } from 'src/app/model/Skill';
 
 @Component({
@@ -33,8 +39,11 @@ export class SkillsFormComponent implements OnInit, OnChanges {
     });
 
     newSkillForm = this.fb.group({
-        title: [''],
-        value: [''],
+        title: ['', [Validators.required, Validators.maxLength(255)]],
+        value: [
+            '',
+            [Validators.required, Validators.min(0), Validators.max(100)],
+        ],
         softSkill: [false],
     });
     showNewForm = false;
@@ -49,7 +58,12 @@ export class SkillsFormComponent implements OnInit, OnChanges {
     ngOnChanges(changes: SimpleChanges): void {
         let hardSkills = changes['hardSkills'];
         let softSkills = changes['softSkills'];
-        if (hardSkills && hardSkills.currentValue && softSkills && softSkills.currentValue) {
+        if (
+            hardSkills &&
+            hardSkills.currentValue &&
+            softSkills &&
+            softSkills.currentValue
+        ) {
             this.setSkills();
         }
 
@@ -66,15 +80,25 @@ export class SkillsFormComponent implements OnInit, OnChanges {
         array.push(
             this.fb.group({
                 id: [skill.id],
-                title: [skill.title],
-                value: [skill.value],
+                title: [
+                    skill.title,
+                    [Validators.required, Validators.maxLength(255)],
+                ],
+                value: [
+                    skill.value,
+                    [
+                        Validators.required,
+                        Validators.min(0),
+                        Validators.max(100),
+                    ],
+                ],
                 softSkill: [skill.softSkill],
             })
         );
     }
 
     setSkills() {
-        this.setHardSkills()
+        this.setHardSkills();
         this.setSoftSkills();
         this.skillsForm.disable();
     }
@@ -114,7 +138,7 @@ export class SkillsFormComponent implements OnInit, OnChanges {
 
     onSkillSave(form: AbstractControl) {
         this.saveEvent.emit(form.value);
-        this.stopEditing.emit()
+        this.stopEditing.emit();
     }
 
     get hardSkillsForm() {
@@ -123,45 +147,18 @@ export class SkillsFormComponent implements OnInit, OnChanges {
     get softSkillsForm() {
         return this.skillsForm.get('softSkills') as FormArray;
     }
-    // onSkillsDelete(form: AbstractControl, index: number) {
-    //     let id = form.get('id')?.value;
-    //     let isSoftSkill = form.get('softSkill')?.value;
 
-    //     if (isSoftSkill) {
-    //         this.softSkillsForm.removeAt(index);
-    //     } else {
-    //         this.hardSkillsForm.removeAt(index);
-    //     }
-    //     // An HttpClient method does not begin its HTTP request until you call
-    //     // .subscribe() on the observable returned by that method
-    //     this.http.deleteSkill(id).subscribe();
-    // }
+    get newTitle() {
+        return this.newSkillForm.get('title');
+    }
+    get newValue() {
+        return this.newSkillForm.get('value');
+    }
 
-    // onSkillsUpdate(control: AbstractControl, index: number) {
-    //     let id: number = control.get('id')?.value;
-    //     let title: string = control.get('title')?.value;
-    //     let value: number = control.get('value')?.value;
-
-    //     this.http.updateSkill(id, title, value).subscribe();
-    // }
-
-    // onSkillsSave() {
-    //     let form = this.addSkillForm;
-
-    //     let title: string = form.get('title')?.value;
-    //     let value: number = form.get('value')?.value;
-    //     let softSkill: boolean = form.get('softSkill')?.value;
-
-    //     let skill = new Skill(title, value, softSkill);
-    //     // console.log(skill)
-    //     this.http.saveSkill(skill).subscribe((newSkill) => {
-    //         if (newSkill.softSkill) {
-    //             this.pushSkillToFormArray(this.softSkillsForm, newSkill);
-    //         } else {
-    //             this.pushSkillToFormArray(this.hardSkillsForm, newSkill);
-    //         }
-    //     });
-    //     this.addSkillForm.reset();
-    //     this.showAddSkillForm = !this.showAddSkillForm;
-    // }
+    getGroupTitle(group: AbstractControl) {
+        return group.get('title');
+    }
+    getGroupValue(group: AbstractControl) {
+        return group.get('value');
+    }
 }

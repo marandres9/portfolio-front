@@ -12,8 +12,21 @@
                 rows="3"
                 id="description"
                 formControlName="description"
-                #aboutDescription
+                required
             ></textarea>
+            <!-- DESCRIPTION VALIDATORS -->
+            <div
+                *ngIf="
+                    aboutDescription?.invalid &&
+                    (aboutDescription?.dirty || aboutDescription?.touched)
+                "
+                class="alert alert-danger mt-2"
+            >
+                <div *ngIf="aboutDescription!.errors?.['required']">
+                    Una descripción es requerida.
+                </div>
+            </div>
+            <!-- END DESCRIPTION VALIDATORS -->
         </div>
 
         <div>
@@ -30,6 +43,7 @@
                 class="btn"
                 (click)="onAboutUpdate()"
                 title="Save changes"
+                [disabled]="aboutForm.invalid"
             >
                 <i class="fa-solid fa-floppy-disk"></i>
             </button>

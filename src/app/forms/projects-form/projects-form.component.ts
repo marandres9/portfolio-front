@@ -7,7 +7,7 @@ import {
     Output,
     SimpleChanges,
 } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Project } from 'src/app/model/Project';
 
 @Component({
@@ -31,9 +31,9 @@ export class ProjectsFormComponent implements OnInit, OnChanges {
     });
 
     newProjectForm = this.fb.group({
-        title: [''],
-        description: [''],
-        url: [''],
+        title: ['', [Validators.required, Validators.maxLength(255)]],
+        description: ['', [Validators.required, Validators.maxLength(255)]],
+        url: ['', [Validators.required, Validators.maxLength(255)]],
     });
     showNewForm = false;
     toggleNewForm() {
@@ -64,9 +64,9 @@ export class ProjectsFormComponent implements OnInit, OnChanges {
             this.projectFormArray.push(
                 this.fb.group({
                     id: [proj.id],
-                    title: [proj.title],
-                    description: [proj.description],
-                    url: [proj.url],
+                    title: [proj.title, [Validators.required, Validators.maxLength(255)]],
+                    description: [proj.description, [Validators.required, Validators.maxLength(255)]],
+                    url: [proj.url, [Validators.required, Validators.maxLength(255)]],
                 })
             );
         }
@@ -90,5 +90,25 @@ export class ProjectsFormComponent implements OnInit, OnChanges {
 
     get projectFormArray() {
         return this.projectsForm.get('projects') as FormArray;
+    }
+
+    getGroupTitle(group: AbstractControl) {
+        return group.get('title');
+    }
+    getGroupDescription(group: AbstractControl) {
+        return group.get('description')
+    }
+    getGroupUrl(group: AbstractControl) {
+        return group.get('url')
+    }
+
+    get newTitle() {
+        return this.newProjectForm.get('title');
+    }
+    get newDescription() {
+        return this.newProjectForm.get('description')
+    }
+    get newUrl() {
+        return this.newProjectForm.get('url')
     }
 }

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { About } from 'src/app/model/About';
 
 @Component({
@@ -17,7 +17,7 @@ export class AboutFormComponent implements OnInit, OnChanges {
     @Output() updateEvent = new EventEmitter<About>()
 
     aboutForm = new FormGroup({
-        description: new FormControl('')
+        description: new FormControl('', Validators.required)
     })
 
     constructor() {}
@@ -34,7 +34,6 @@ export class AboutFormComponent implements OnInit, OnChanges {
         if(edit) {
             this.changeFormState()
         }
-
     }
 
     changeFormState() {
@@ -55,6 +54,10 @@ export class AboutFormComponent implements OnInit, OnChanges {
     cancelChanges() {
         this.setAbout()
         this.stopEditing.emit()
+    }
+
+    get aboutDescription() {
+        return this.aboutForm.get('description')
     }
 
 }
