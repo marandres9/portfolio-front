@@ -35,6 +35,7 @@ import { SkillsContentComponent } from './content/skills-content/skills-content.
 import { EducationContentComponent } from './content/education-content/education-content.component';
 import { ExperienceContentComponent } from './content/experience-content/experience-content.component';
 import { ProjectsContentComponent } from './content/projects-content/projects-content.component';
+import { SocialsComponent } from './components/socials/socials.component';
 
 @NgModule({
     declarations: [
@@ -65,6 +66,7 @@ import { ProjectsContentComponent } from './content/projects-content/projects-co
         EducationContentComponent,
         ExperienceContentComponent,
         ProjectsContentComponent,
+        SocialsComponent,
     ],
     imports: [
         BrowserModule,
