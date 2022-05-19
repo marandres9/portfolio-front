@@ -7,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SocialsComponent implements OnInit {
 
-    facebook = 'https://facebook.com'
-    instagram = 'https://instagram.com'
+    facebook = 'https://www.facebook.com/marianoandres.perez.1/'
+    instagram = 'https://www.instagram.com/mariano.perez9/'
     twitter = 'https://twitter.com'
-    github = 'https://github.com'
+    github = 'https://github.com/mariano-perez09'
 
     constructor() {}
 

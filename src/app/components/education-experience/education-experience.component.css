@@ -15,33 +15,3 @@
     background: #fff;
     border: 2px solid #c60021;
 }
-
-/* borrar cuando termine experience-component */
-
-/* .resume-item h4 {
-    line-height: 18px;
-    font-size: 18px;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-family: "Poppins", sans-serif;
-    color: #c60021;
-    margin-bottom: 10px;
-}
-.resume-item h5 {
-    color: #000;
-    font-size: 16px;
-    background: #f7f8f9;
-    padding: 5px 15px;
-    display: inline-block;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-.resume-item ul {
-    padding-left: 20px;
-}
-.resume-item ul li {
-    padding-bottom: 10px;
-}
-.resume-item:last-child {
-    padding-bottom: 0;
-} */

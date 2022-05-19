@@ -19,7 +19,7 @@ export class AuthenticationService {
     constructor(private http: HttpService, private router: Router) {
         // for page reloads, checks if a token is available and updates the login state
         this._isLoggedIn.next(!!this.token)
-        // !!!CHECK TOKEN EXPIRATION
+        // !!!INCOMPLETE - Should check token expiration
     }
 
     login(loginReq: AuthenticationRequest) {
@@ -37,7 +37,7 @@ export class AuthenticationService {
 
     logout() {
         sessionStorage.removeItem(this.TOKEN_NAME);
-        // remove token and update beahviour subject
+        // remove token and update beahviour-subject
         this._isLoggedIn.next(false)
     }
 

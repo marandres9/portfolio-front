@@ -8,6 +8,7 @@
                 width="130px"
             />
         </a>
+        <!-- === NAVBAR-TOGGLER === -->
         <!-- <button
             class="navbar-toggler"
             type="button"
@@ -22,21 +23,30 @@
         <!-- <div
             class="collapse navbar-collapse d-fllex justify-content-end"
             id="navbarToggler"
-        > -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <div *ngIf="!(isLoggedIn() | async); else notLoggedIn">
-                        <button class="btn btn-dark" style="background-color: #c60021" (click)="login()">
-                            Login
-                        </button>
-                    </div>
-                    <ng-template #notLoggedIn>
-                        <button class="btn btn-dark" style="background-color: #c60021" (click)="logout()">
-                            Logout
-                        </button>
-                    </ng-template>
-                </li>
-            </ul>
+            > -->
+        <!-- === END NAVBAR-TOGGLER === -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <div *ngIf="!(isLoggedIn() | async); else notLoggedIn">
+                    <button
+                        class="btn btn-dark"
+                        style="background-color: #c60021"
+                        (click)="login()"
+                    >
+                        Login
+                    </button>
+                </div>
+                <ng-template #notLoggedIn>
+                    <button
+                        class="btn btn-dark"
+                        style="background-color: #c60021"
+                        (click)="logout()"
+                    >
+                        Logout
+                    </button>
+                </ng-template>
+            </li>
+        </ul>
         <!-- </div> -->
     </div>
 </nav>

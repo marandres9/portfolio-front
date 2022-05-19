@@ -19,9 +19,7 @@ export class EducationExperienceComponent implements OnInit {
     constructor(
         private authService: AuthenticationService,
         private http: HttpService
-    ) {
-        // console.log(this.experiences)
-    }
+    ) {}
 
     ngOnInit(): void {}
 

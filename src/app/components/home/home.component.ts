@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Home } from 'src/app/model/Home';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { HttpService } from 'src/app/service/http.service';
@@ -8,7 +8,7 @@ import { HttpService } from 'src/app/service/http.service';
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, OnChanges {
+export class HomeComponent implements OnInit {
     profilePicPath: string = 'assets/img/profile.jpg'
 
     @Input() title: string;
@@ -19,15 +19,6 @@ export class HomeComponent implements OnInit, OnChanges {
     constructor(private authService: AuthenticationService, private http: HttpService) { }
 
     ngOnInit(): void {}
-
-    ngOnChanges(changes: SimpleChanges): void {
-        // let home = changes['home']
-
-        // if(home && home.currentValue) {
-        //     this.title = home.currentValue.title
-        //     this.description = home.currentValue.description
-        // }
-    }
 
     public isLoggedIn() {
         return this.authService.isLoggedIn
