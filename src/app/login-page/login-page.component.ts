@@ -14,7 +14,10 @@ export class LoginPageComponent implements OnInit {
         password: new FormControl(''),
     });
 
-    constructor(private authService: AuthenticationService, private router: Router) {}
+    constructor(
+        private authService: AuthenticationService,
+        private router: Router
+    ) {}
 
     ngOnInit(): void {}
 
@@ -26,13 +29,17 @@ export class LoginPageComponent implements OnInit {
     }
 
     nav() {
-        this.router.navigate(['/home'])
-
+        this.router.navigate(['/home']);
     }
 
-    onLogin() {
+    onSubmit() {
         this.authService.login(this.loginForm.value).subscribe((data) => {
-            this.router.navigate(['/home'])
+            this.authService.isLoggedIn.subscribe((loggedIn) => {
+                console.log(`logged in?: ${loggedIn}`);
+                if (loggedIn) {
+                    this.router.navigate(['/home']);
+                }
+            });
         });
     }
 }
