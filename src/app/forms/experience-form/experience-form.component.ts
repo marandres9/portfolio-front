@@ -98,10 +98,12 @@ export class ExperienceFormComponent implements OnInit, OnChanges {
         // la estructura del Form debe ser igual al modelo de Experience porqu se pasa
         // directamente como tal
         this.updateEvent.emit(form.value);
+        this.stopEditing.emit()
     }
 
     onExperienceSave(form: AbstractControl) {
         this.saveEvent.emit(form.value);
+        this.stopEditing.emit()
     }
 
     get experienceFormArray() {

@@ -20,7 +20,6 @@ export class LandingPageComponent implements OnInit {
     public getPortfolio() {
         this.http.getPortfolio()
             .subscribe((portfolioDto) => {
-                console.log(portfolioDto)
                 this.portfoioDto = portfolioDto
             })
         }
