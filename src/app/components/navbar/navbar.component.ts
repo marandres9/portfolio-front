@@ -10,6 +10,8 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 })
 export class NavbarComponent implements OnInit {
 
+    logo_path = 'assets/img/logo-argProg.png'
+
     constructor(private authService: AuthenticationService, private router: Router) { }
 
     ngOnInit(): void { }
