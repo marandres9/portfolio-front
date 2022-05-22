@@ -1,0 +1,9 @@
+<div class="d-flex flex-column align-items-center">
+    <h1 class="">Mis Proyectos</h1>
+    <div class="separator"></div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-lg-4 col-md-6 mb-4" *ngFor="let project of this.projects">
+        <app-project-card [project]="project"></app-project-card>
+    </div>
+</div>

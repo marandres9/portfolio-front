@@ -1,31 +1,27 @@
 <!-- ====== ABOUT ====== -->
-<div class="container p-4" id="about">
-    <!-- == EDIT == -->
-    <app-edit-button *ngIf="isLoggedIn()"></app-edit-button>
-
+<div class="container-lg mb-4 p-4" id="about">
     <div class="row align-items-center justify-content-evenly">
-        <div class="col text-center">
-            <img src="../../assets/img/banner-image.png" alt="about picture" width="70%" />
+        <div class="col-md text-center order-2 order-md-1">
+            <img
+                src="../../assets/img/banner-image.png"
+                alt="about picture"
+                width="70%"
+            />
         </div>
-        <div class="col">
-            <h1> About me</h1>
-            <div class="separator"></div>
-            <p>{{description}}</p>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing
-                elit. Perferendis ea alias eos saepe fugiat
-                recusandae dicta facilis quidem voluptatum similique
-                aspernatur quaerat, iste esse aliquam unde corrupti
-                nemo nulla fugit.
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing
-                elit. Perferendis ea alias eos saepe fugiat
-                recusandae dicta facilis quidem voluptatum similique
-                aspernatur quaerat, iste esse aliquam unde corrupti
-                nemo nulla fugit.
-            </p>
-            <a href="#" class="btn btn-secondary">Download CV</a>
+        <div class="col-md mb-4 order-1 order-md-2">
+            <!-- == EDIT == -->
+            <app-edit-button *ngIf="isLoggedIn() | async" (click)="toggleEditing()"></app-edit-button>
+
+            <app-about-content [description]="description" [hidden]="editing"></app-about-content>
+
+            <app-about-form
+                [description]="description"
+                [editing]="editing"
+                (stopEditing)="toggleEditing()"
+                (updateEvent)="updateAbout($event)"
+                [hidden]="!editing"
+            ></app-about-form>
+
         </div>
     </div>
 </div>

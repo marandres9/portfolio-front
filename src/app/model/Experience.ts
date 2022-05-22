@@ -6,8 +6,8 @@ export class Experience {
     public location: string;
     public description: string;
 
-    public constructor(title: string, period: string, institution: string, location: string, description: string) {
-        this.id = 0;
+    public constructor(id: number, title: string, period: string, institution: string, location: string, description: string) {
+        this.id = id;
         this.title = title;
         this.period = period;
         this.institution = institution;

@@ -7,6 +7,8 @@ import { PortfolioDTO } from '../model/PortfolioDTO';
 import { Skill } from '../model/Skill';
 import { Experience } from '../model/Experience';
 import { Project } from '../model/Project';
+import { AuthenticationRequest } from '../model/AuthenticationRequest';
+import { AuthenticationResponse } from '../model/AuthenticationResponse';
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +20,14 @@ export class HttpService {
     constructor(private http: HttpClient) { }
 
     public getPortfolio() {
+        // console.log(`retrieved ${sessionStorage.getItem('currentUser')} from sesStorage`)
+        // return this.http.get<PortfolioDTO>(this.url + '/portfolio/get', {headers: {'Authorization': `Bearer ${sessionStorage.getItem('currentUser')}`}})
         return this.http.get<PortfolioDTO>(this.url + '/portfolio/get')
+    }
+
+    // === LOGIN ===
+    public login(loginReq: AuthenticationRequest) {
+        return this.http.post<AuthenticationResponse>(`${this.url}/auth`, loginReq)
     }
 
     // === HOME ===

@@ -1,60 +1,48 @@
 <!-- ====== ED&EX ====== -->
-<div class="container p-4 mb-5">
-    <!-- == EDIT == -->
-    <app-edit-button *ngIf="isLoggedIn()"></app-edit-button>
-
+<div class="container-lg p-4 mb-4">
     <div class="row">
-        <div class="d-flex align-items-center flex-column">
-            <h1>Education & Experience</h1>
-            <div class="separator"></div>
-        </div>
-        <div class="col">
+        <div class="col-md mb-4">
+            <!-- == EDIT == -->
+            <app-edit-button
+                *ngIf="isLoggedIn() | async"
+                (click)="toggleEditingEdu()"
+            ></app-edit-button>
             <!-- EDUCATION COLUMN -->
-            <div
-                class="resume-item"
-                *ngFor="let education of educations"
-            >
-                <app-education-item [education]="education"></app-education-item>
-            </div>
-        </div>
-        <div class="col">
-        <!-- EDUCATION COLUMN -->
-            <div
-                class="resume-item"
-                *ngFor="let experience of this.experiences"
-            >
-                <app-experience-item [experience]="experience"></app-experience-item>
-            </div>
+            <app-education-content
+                [educations]="educations"
+                [hidden]="editingEdu"
+            ></app-education-content>
 
-            <!-- <div class="resume-item">
-                <app-experience-item></app-experience-item>
-            </div>
-            <div class="resume-item">
-                <app-experience-item></app-experience-item>
-            </div> -->
+            <app-education-form
+                [educations]="educations"
+                [editing]="editingEdu"
+                (stopEditing)="toggleEditingEdu()"
+                (deleteEvent)="this.deleteEducation($event)"
+                (updateEvent)="this.updateEducation($event)"
+                (saveEvent)="this.saveEducation($event)"
+                [hidden]="!editingEdu"
+            ></app-education-form>
+        </div>
+        <div class="col-md mb-4">
+            <app-edit-button
+                *ngIf="isLoggedIn() | async"
+                (click)="toggleEditingExp()"
+            ></app-edit-button>
+
+            <app-experience-content
+                [experiences]="experiences"
+                [hidden]="editingExp"
+            ></app-experience-content>
+
+            <app-experience-form
+                [experiences]="experiences"
+                [editing]="editingExp"
+                (stopEditing)="toggleEditingExp()"
+                (deleteEvent)="this.deleteExperience($event)"
+                (updateEvent)="this.updateExperience($event)"
+                (saveEvent)="this.saveExperience($event)"
+                [hidden]="!editingExp"
+            ></app-experience-form>
         </div>
     </div>
 </div>
-<!-- ====== END ED&EX ====== -->
-
-
-<!-- EXAMPLE SUMMARY -->
-<!-- no lo uso porque ya tengo una seccion 'About' -->
-
-<!-- <div class="resume-item">
-    <h4>Brandon Johnson</h4>
-    <p>
-        <em>
-            Innovative and deadline-driven Graphic Designer
-            with 3+ years of experience designing and
-            developing user-centered digital/print marketing
-            material from initial concept to final, polished
-            deliverable.
-        </em>
-    </p>
-    <ul>
-        <li>Portland par 127,Orlando, FL</li>
-        <li>(123) 456-7891</li>
-        <li>alice.barkley@example.com</li>
-    </ul>
-</div> -->

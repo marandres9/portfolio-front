@@ -1,0 +1,364 @@
+<div class="container-lg mb-4 p-4" style="background-color: #f6f6f8">
+    <div class="mb-3">
+        <form [formGroup]="skillsForm">
+            <div class="row">
+                <div class="col-md">
+                    <!-- == HARD-SKILLS == -->
+                    <div class="d-flex flex-column align-items-center">
+                        <h1>Edición - Habilidades Duras</h1>
+                        <div class="separator"></div>
+                    </div>
+                    <span formArrayName="hardSkills">
+                        <div
+                            class="mb-3"
+                            *ngFor="
+                                let skill of this.hardSkillsForm.controls;
+                                let i = index
+                            "
+                            [formGroupName]="i"
+                        >
+                            <div class="mb-2 d-flex">
+                                <label class="col-form-label me-4" for="id"
+                                    >ID</label
+                                >
+                                <input
+                                    class="form-control-plaintext"
+                                    readonly
+                                    type="text"
+                                    id="id"
+                                    formControlName="id"
+                                    #id
+                                />
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label" for="title"
+                                    >Título</label
+                                >
+                                <input
+                                    class="form-control"
+                                    type="text"
+                                    id="title"
+                                    formControlName="title"
+                                    #title
+                                    required
+                                />
+                                <!-- TITLE VALIDATORS -->
+                                <div
+                                    *ngIf="
+                                        getGroupTitle(skill)?.invalid &&
+                                        (getGroupTitle(skill)?.dirty ||
+                                            getGroupTitle(skill)?.touched)
+                                    "
+                                    class="alert alert-danger mt-2"
+                                >
+                                    <div
+                                        *ngIf="getGroupTitle(skill)!.errors?.['required']"
+                                    >
+                                        Un título es requerido.
+                                    </div>
+                                    <div
+                                        *ngIf="getGroupTitle(skill)!.errors?.['maxlength']"
+                                    >
+                                        El título es demasiado largo.
+                                    </div>
+                                </div>
+                                <!-- END TITLE VALIDATORS -->
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label" for="value"
+                                    >Valor</label
+                                >
+                                <input
+                                    class="form-control"
+                                    type="text"
+                                    id="value"
+                                    formControlName="value"
+                                    #value
+                                    required
+                                />
+                                <!-- VALUE VALIDATORS -->
+                                <div
+                                    *ngIf="
+                                        getGroupValue(skill)?.invalid &&
+                                        (getGroupValue(skill)?.dirty ||
+                                            getGroupValue(skill)?.touched)
+                                    "
+                                    class="alert alert-danger mt-2"
+                                >
+                                    <div
+                                        *ngIf="getGroupValue(skill)!.errors?.['required']"
+                                    >
+                                        Un valor númerico es requerido.
+                                    </div>
+                                    <div
+                                        *ngIf="getGroupValue(skill)!.errors?.['max'] || getGroupValue(skill)!.errors?.['min']"
+                                    >
+                                        El valor debe ser un número entre 0 y
+                                        100.
+                                    </div>
+                                </div>
+                                <!-- END VALUE VALIDATORS -->
+                            </div>
+
+                            <button
+                                class="btn red"
+                                type="button"
+                                (click)="onSkillDelete(skill, i)"
+                            >
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                            <button
+                                class="btn"
+                                type="button"
+                                (click)="onSkillUpdate(skill)"
+                                [disabled]="skill.invalid"
+                            >
+                                <i class="fa-solid fa-floppy-disk"></i>
+                            </button>
+                            <hr />
+                        </div>
+                    </span>
+                </div>
+                <div class="col-md">
+                    <!-- == SOFT-SKILLS == -->
+                    <div class="d-flex flex-column align-items-center">
+                        <h1>Edición - Habilidades Blandas</h1>
+                        <div class="separator"></div>
+                    </div>
+                    <span formArrayName="softSkills">
+                        <div
+                            class="mb-3"
+                            *ngFor="
+                                let skill of this.softSkillsForm.controls;
+                                let i = index
+                            "
+                            [formGroupName]="i"
+                        >
+                            <div class="mb-2 d-flex">
+                                <label class="col-form-label me-4" for="id"
+                                    >ID</label
+                                >
+                                <input
+                                    class="form-control-plaintext"
+                                    readonly
+                                    type="text"
+                                    id="id"
+                                    formControlName="id"
+                                    #id
+                                />
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label" for="title"
+                                    >Título</label
+                                >
+                                <input
+                                    class="form-control"
+                                    type="text"
+                                    id="title"
+                                    formControlName="title"
+                                    #title
+                                    required
+                                />
+                                <!-- TITLE VALIDATORS -->
+                                <div
+                                    *ngIf="
+                                        getGroupTitle(skill)?.invalid &&
+                                        (getGroupTitle(skill)?.dirty ||
+                                            getGroupTitle(skill)?.touched)
+                                    "
+                                    class="alert alert-danger mt-2"
+                                >
+                                    <div
+                                        *ngIf="getGroupTitle(skill)!.errors?.['required']"
+                                    >
+                                        Un título es requerido.
+                                    </div>
+                                    <div
+                                        *ngIf="getGroupTitle(skill)!.errors?.['maxlength']"
+                                    >
+                                        El título es demasiado largo.
+                                    </div>
+                                </div>
+                                <!-- END TITLE VALIDATORS -->
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label" for="value"
+                                    >Valor</label
+                                >
+                                <input
+                                    class="form-control"
+                                    type="text"
+                                    id="value"
+                                    formControlName="value"
+                                    #value
+                                    required
+                                />
+                                <!-- VALUE VALIDATORS -->
+                                <div
+                                    *ngIf="
+                                        getGroupValue(skill)?.invalid &&
+                                        (getGroupValue(skill)?.dirty ||
+                                            getGroupValue(skill)?.touched)
+                                    "
+                                    class="alert alert-danger mt-2"
+                                >
+                                    <div
+                                        *ngIf="getGroupValue(skill)!.errors?.['required']"
+                                    >
+                                        Un valor númerico es requerido.
+                                    </div>
+                                    <div
+                                        *ngIf="getGroupValue(skill)!.errors?.['max'] || getGroupValue(skill)!.errors?.['min']"
+                                    >
+                                        El valor debe ser un número entre 0 y
+                                        100.
+                                    </div>
+                                </div>
+                                <!-- END VALUE VALIDATORS -->
+                            </div>
+
+                            <button
+                                class="btn red"
+                                type="button"
+                                (click)="onSkillDelete(skill, i)"
+                            >
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                            <button
+                                class="btn"
+                                type="button"
+                                (click)="onSkillUpdate(skill)"
+                                [disabled]="skill.invalid"
+                            >
+                                <i class="fa-solid fa-floppy-disk"></i>
+                            </button>
+                            <hr />
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form [formGroup]="newSkillForm">
+                <div [hidden]="!showNewForm">
+                    <h3 class="text-center">
+                        New <span class="highlight">skill</span> entry
+                    </h3>
+                    <div class="mb-2">
+                        <label class="form-label" for="title">Title: </label>
+                        <br />
+                        <input
+                            class="form-control"
+                            type="text"
+                            id="title"
+                            formControlName="title"
+                            #title
+                            required
+                        />
+                        <!-- TITLE VALIDATORS -->
+                        <div
+                            *ngIf="
+                                newTitle?.invalid &&
+                                (newTitle?.dirty || newTitle?.touched)
+                            "
+                            class="alert alert-danger mt-2"
+                        >
+                            <div *ngIf="newTitle!.errors?.['required']">
+                                Un título es requerido.
+                            </div>
+                            <div *ngIf="newTitle!.errors?.['maxlength']">
+                                El título es demasiado largo.
+                            </div>
+                        </div>
+                        <!-- END TITLE VALIDATORS -->
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label" for="value">Value: </label>
+                        <br />
+                        <input
+                            class="form-control"
+                            type="number"
+                            id="value"
+                            formControlName="value"
+                            #value
+                            required
+                        />
+                        <!-- VALUE VALIDATORS -->
+                        <div
+                            *ngIf="
+                                newValue?.invalid &&
+                                (newValue?.dirty || newValue?.touched)
+                            "
+                            class="alert alert-danger mt-2"
+                        >
+                            <div *ngIf="newValue!.errors?.['required']">
+                                Un valor númerico es requerido.
+                            </div>
+                            <div
+                                *ngIf="newValue!.errors?.['max'] || newValue!.errors?.['min']"
+                            >
+                                El valor debe ser un número entre 0 y 100.
+                            </div>
+                        </div>
+                        <!-- END VALUE VALIDATORS -->
+                    </div>
+                    <div class="mb-2 form-check">
+                        <input
+                            class="form-check-input"
+                            type="radio"
+                            id="soft"
+                            formControlName="softSkill"
+                            #soft
+                            [value]="true"
+                        />
+                        <label class="form-check-label" for="soft"
+                            >Soft skill</label
+                        >
+                        <br />
+                        <input
+                            class="form-check-input"
+                            type="radio"
+                            id="hard"
+                            formControlName="softSkill"
+                            [value]="false"
+                        />
+                        <label class="form-check-label" for="hard"
+                            >Hard skill</label
+                        >
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button
+                        class="btn green mx-auto"
+                        type="button"
+                        (click)="toggleNewSkillForm()"
+                        [hidden]="this.showNewForm"
+                    >
+                        <i class="fa-solid fa-circle-plus fa-xl"></i>
+                    </button>
+                    <button
+                        type="button"
+                        class="btn"
+                        (click)="toggleNewSkillForm()"
+                        [hidden]="!this.showNewForm"
+                    >
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </button>
+                    <button
+                        type="button"
+                        class="btn"
+                        (click)="onSkillSave(newSkillForm)"
+                        [hidden]="!this.showNewForm"
+                        [disabled]="newSkillForm.invalid"
+                    >
+                        <i class="fa-solid fa-floppy-disk"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

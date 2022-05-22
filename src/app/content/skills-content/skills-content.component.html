@@ -1,0 +1,24 @@
+<div class="d-flex flex-column align-items-center">
+    <h1>Mis Habilidades</h1>
+    <div class="separator"></div>
+</div>
+
+<div class="row">
+    <div class="col-md mb-4">
+
+        <app-progress-bar
+            *ngFor="let skill of this.hardSkills"
+            [skill]="skill"
+        >
+        </app-progress-bar>
+
+    </div>
+    <div class="col-md mb-4">
+        <app-progress-bar
+            *ngFor="let skill of this.softSkills"
+            [skill]="skill"
+        >
+        </app-progress-bar>
+
+    </div>
+</div>

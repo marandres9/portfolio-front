@@ -1,0 +1,76 @@
+<div class="container-lg mb-4 p-4" style="background-color: #f6f6f8">
+    <div class="d-flex flex-column align-items-center">
+        <h1>Edición - Inicio</h1>
+        <div class="separator"></div>
+    </div>
+    <form [formGroup]="homeForm">
+        <div class="mb-3">
+            <label class="form-label" for="title">Título</label>
+            <input
+                class="form-control"
+                type="text"
+                id="title"
+                formControlName="title"
+                required
+            />
+            <!-- TITLE VALIDATORS -->
+            <div
+                *ngIf="
+                    homeTitle?.invalid &&
+                    (homeTitle?.dirty || homeTitle?.touched)
+                "
+                class="alert alert-danger mt-2"
+            >
+                <div *ngIf="homeTitle!.errors?.['required']">
+                    Un título es requerido.
+                </div>
+                <div *ngIf="homeTitle!.errors?.['maxlength']">
+                    El título es demasiado largo.
+                </div>
+            </div>
+            <!-- END TITLE VALIDATORS -->
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="description">Descripción</label>
+            <textarea
+                class="form-control"
+                rows="3"
+                id="description"
+                formControlName="description"
+                required
+            ></textarea>
+            <!-- DESCRIPTION VALIDATORS -->
+            <div
+                *ngIf="
+                    homeDescription?.invalid &&
+                    (homeDescription?.dirty || homeDescription?.touched)
+                "
+                class="alert alert-danger mt-2"
+            >
+                <div *ngIf="homeDescription!.errors?.['required']">
+                    Una descripción es requerida.
+                </div>
+            </div>
+            <!-- END DESCRIPTION VALIDATORS -->
+        </div>
+        <div *ngIf="editing">
+            <button
+                type="button"
+                class="btn red"
+                (click)="cancelChanges()"
+                title="Cancel"
+            >
+                <i class="fa-solid fa-circle-xmark"></i>
+            </button>
+            <button
+                type="button"
+                class="btn"
+                (click)="onHomeUpdate()"
+                title="Save changes"
+                [disabled]="homeForm.invalid"
+            >
+                <i class="fa-solid fa-floppy-disk"></i>
+            </button>
+        </div>
+    </form>
+</div>

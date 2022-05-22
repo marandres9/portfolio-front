@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 // router
 import { RouterModule } from '@angular/router';
 // http modelue
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -21,8 +21,22 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
 import { EducationItemComponent } from './components/education-item/education-item.component';
 import { ExperienceItemComponent } from './components/experience-item/experience-item.component';
 import { ProjectCardComponent } from './components/project-card/project-card.component';
-import { EditingPageComponent } from './editing-page/editing-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HomeFormComponent } from './forms/home-form/home-form.component';
+import { AboutFormComponent } from './forms/about-form/about-form.component';
+import { SkillsFormComponent } from './forms/skills-form/skills-form.component';
+import { EducationFormComponent } from './forms/education-form/education-form.component';
+import { ExperienceFormComponent } from './forms/experience-form/experience-form.component';
+import { ProjectsFormComponent } from './forms/projects-form/projects-form.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HomeContentComponent } from './content/home-content/home-content.component';
+import { AboutContentComponent } from './content/about-content/about-content.component';
+import { SkillsContentComponent } from './content/skills-content/skills-content.component';
+import { EducationContentComponent } from './content/education-content/education-content.component';
+import { ExperienceContentComponent } from './content/experience-content/experience-content.component';
+import { ProjectsContentComponent } from './content/projects-content/projects-content.component';
+import { SocialsComponent } from './components/socials/socials.component';
+import { AuthInterceptor } from './service/authentication.interceptor';
 
 @NgModule({
     declarations: [
@@ -40,7 +54,20 @@ import { ReactiveFormsModule } from '@angular/forms';
         EducationItemComponent,
         ExperienceItemComponent,
         ProjectCardComponent,
-        EditingPageComponent,
+        HomeFormComponent,
+        AboutFormComponent,
+        SkillsFormComponent,
+        EducationFormComponent,
+        ExperienceFormComponent,
+        ProjectsFormComponent,
+        FooterComponent,
+        HomeContentComponent,
+        AboutContentComponent,
+        SkillsContentComponent,
+        EducationContentComponent,
+        ExperienceContentComponent,
+        ProjectsContentComponent,
+        SocialsComponent,
     ],
     imports: [
         BrowserModule,
@@ -49,13 +76,13 @@ import { ReactiveFormsModule } from '@angular/forms';
         RouterModule.forRoot([
             { path: 'home', component: LandingPageComponent },
             { path: 'login', component: LoginPageComponent },
-            { path: 'edit', component: EditingPageComponent },
             { path:'', redirectTo: '/home', pathMatch: 'full' }
         ])
     ],
     providers: [
         AuthenticationService,
-        HttpService
+        HttpService,
+        {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
     ],
     bootstrap: [AppComponent]
 })
