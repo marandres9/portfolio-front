@@ -9,7 +9,7 @@ import { HttpService } from 'src/app/service/http.service';
     styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-    profilePicPath: string = 'assets/img/profile.jpg'
+    profilePicPath: string = 'assets/img/profile-compressed-croped.jpg'
 
     @Input() title: string;
     @Input() description: string;
