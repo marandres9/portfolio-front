@@ -15,7 +15,7 @@ import { AuthenticationResponse } from '../model/AuthenticationResponse';
 })
 export class HttpService {
 
-    url = 'http://localhost:8080'
+    url = 'https://my-portfolio-backend9.herokuapp.com'
 
     constructor(private http: HttpClient) { }
 
