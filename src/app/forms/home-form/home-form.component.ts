@@ -5,7 +5,7 @@ import {
     OnInit,
     Output,
     SimpleChanges,
-    EventEmitter
+    EventEmitter,
 } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Home } from 'src/app/model/Home';
@@ -21,9 +21,9 @@ export class HomeFormComponent implements OnInit, OnChanges {
 
     @Input() editing: boolean = false;
     // emition of this event tells parent to stop editing
-    @Output() stopEditing = new EventEmitter()
+    @Output() stopEditing = new EventEmitter();
 
-    @Output() updateEvent = new EventEmitter<Home>()
+    @Output() updateEvent = new EventEmitter<Home>();
 
     homeForm = this.fb.group({
         id: '',
@@ -31,24 +31,22 @@ export class HomeFormComponent implements OnInit, OnChanges {
         description: ['', Validators.required],
     });
 
-
     constructor(private fb: FormBuilder) {}
 
     ngOnInit(): void {}
 
     ngOnChanges(changes: SimpleChanges): void {
-        let title = changes['title']
-        let desc = changes['description']
+        let title = changes['title'];
+        let desc = changes['description'];
 
         if ((title && title.currentValue) || (desc && desc.currentValue)) {
             this.setHome();
         }
 
-        let edit = changes['editing']
-        if(edit) {
-            this.changeFormState()
+        let edit = changes['editing'];
+        if (edit) {
+            this.changeFormState();
         }
-
     }
 
     changeFormState() {
@@ -64,20 +62,22 @@ export class HomeFormComponent implements OnInit, OnChanges {
     }
 
     onHomeUpdate() {
-        this.updateEvent.emit(this.homeForm.value)
-        console.log(this.homeForm.value)
-        this.stopEditing.emit()
+        // En vez de recibir los parametros por separado recibe el FormGroup
+        // la estructura del Form debe ser igual al modelo de Home porque se pasa
+        // directamente como tal
+        this.updateEvent.emit(this.homeForm.value);
+        this.stopEditing.emit();
     }
 
     cancelChanges() {
-        this.setHome()
-        this.stopEditing.emit()
+        this.setHome();
+        this.stopEditing.emit();
     }
 
     get homeTitle() {
-        return this.homeForm.get('title')
+        return this.homeForm.get('title');
     }
     get homeDescription() {
-        return this.homeForm.get('description')
+        return this.homeForm.get('description');
     }
 }

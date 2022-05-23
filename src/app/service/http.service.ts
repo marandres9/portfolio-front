@@ -14,15 +14,11 @@ import { AuthenticationResponse } from '../model/AuthenticationResponse';
     providedIn: 'root',
 })
 export class HttpService {
-    // url = 'http://localhost:8080';
+    url = 'https://my-portfolio-backend9.herokuapp.com';
 
-    url = 'https://my-portfolio-backend9.herokuapp.com'
-
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {}
 
     public getPortfolio() {
-        // console.log(`retrieved ${sessionStorage.getItem('currentUser')} from sesStorage`)
-        // return this.http.get<PortfolioDTO>(this.url + '/portfolio/get', {headers: {'Authorization': `Bearer ${sessionStorage.getItem('currentUser')}`}})
         return this.http.get<PortfolioDTO>(this.url + '/portfolio/get');
     }
 
@@ -33,15 +29,16 @@ export class HttpService {
             loginReq
         );
     }
+    // === END LOGIN ===
 
     // === HOME ===
     public updateHome(home: Home) {
-        console.log('sending' + JSON.stringify(home));
         return this.http.put<Home>(
             `${this.url}/portfolio/edit/home/update/`,
             home
         );
     }
+    // === END HOME ===
 
     // === ABOUT ===
     public updateAbout(about: About) {
@@ -50,6 +47,7 @@ export class HttpService {
             about
         );
     }
+    // === END ABOUT ===
 
     // === SKILLS ===
     public deleteSkill(id: number) {
@@ -71,6 +69,7 @@ export class HttpService {
             skill
         );
     }
+    // === END SKILLS ===
 
     // === EDUCATION ===
     public deleteEducation(id: number) {
@@ -92,6 +91,7 @@ export class HttpService {
             ed
         );
     }
+    // === END EDUCATION ===
 
     // === EXPERIENCE ===
     public deleteExperience(id: number) {
@@ -113,6 +113,7 @@ export class HttpService {
             exp
         );
     }
+    // === END EXPERIENCE ===
 
     // === PROJECTS ===
     public deleteProject(id: Number) {
@@ -134,6 +135,5 @@ export class HttpService {
             proj
         );
     }
-
-    // !!! HANDLE HTTP ERRORS
+    // === END PROJECTS ===
 }

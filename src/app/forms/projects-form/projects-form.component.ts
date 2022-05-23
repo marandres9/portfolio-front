@@ -79,7 +79,6 @@ export class ProjectsFormComponent implements OnInit, OnChanges {
     }
 
     onProjectUpdate(form: AbstractControl) {
-        console.log(form.value)
         this.updateEvent.emit(form.value);
         this.stopEditing.emit();
     }

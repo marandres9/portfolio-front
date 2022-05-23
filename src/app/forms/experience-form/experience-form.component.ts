@@ -45,9 +45,6 @@ export class ExperienceFormComponent implements OnInit, OnChanges {
     });
     showNewForm = false;
     toggleNewForm() {
-        console.log(this.experienceFormArray.get([1])?.value);
-        console.log(typeof this.experienceFormArray.get([1])?.value);
-
         this.showNewForm = !this.showNewForm;
     }
 
@@ -94,9 +91,6 @@ export class ExperienceFormComponent implements OnInit, OnChanges {
     }
 
     onExperienceUpdate(form: AbstractControl) {
-        // !!!TEST - En vez de recibir los parametros por separado recibe el FormGroup
-        // la estructura del Form debe ser igual al modelo de Experience porqu se pasa
-        // directamente como tal
         this.updateEvent.emit(form.value);
         this.stopEditing.emit()
     }

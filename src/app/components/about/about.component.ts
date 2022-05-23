@@ -30,21 +30,6 @@ export class AboutComponent implements OnInit {
     }
 
     updateAbout(about: About) {
-        // if (this.authService.isTokenExpired()) {
-        //     alert('Error encountered - Credentials expired or unavailable');
-        //     window.location.reload();
-        // } else {
-        //     this.http
-        //         .updateAbout(about)
-        //         .pipe(catchError((err) => of(null)))
-        //         .subscribe((about) => {
-        //             if(about) {
-        //             this.description = about.description;
-        //         } else {
-        //             alert('Error encountered');
-        //         }
-        //         });
-        // }
         const op = () => {
             this.http
                 .updateAbout(about)
