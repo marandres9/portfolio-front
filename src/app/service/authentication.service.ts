@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from './http.service';
 import { AuthenticationRequest } from '../model/AuthenticationRequest';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, catchError, of, tap } from 'rxjs';
+import { AuthenticationResponse } from '../model/AuthenticationResponse';
 
 @Injectable({
     providedIn: 'root',
@@ -28,11 +29,21 @@ export class AuthenticationService {
             // el observable es encadenado con pipe para acceder a su valor con tap()
             // Luego el observable sigue su rumbo normal
             tap((authResponse) => {
-                sessionStorage.setItem(this.TOKEN_NAME, authResponse.token);
-                // updates the login-state
-                this._isLoggedIn.next(true)
-            })
-        );
+                console.log(authResponse)
+                if(typeof authResponse === 'object') {
+                    sessionStorage.setItem(this.TOKEN_NAME, authResponse['token']);
+                    // updates the login-state
+                    this._isLoggedIn.next(true)
+                }
+            },
+            )
+        ).pipe(catchError((err) => {
+            // si el usuario falla en la autenticacion el request y la funcion tap van a
+            // devolver errores que van a ser atrapados por esta funcion antes de devolver
+            // el error al componente de login. Si se atrapa un error se devuelve un arreglo
+            // vaio ([]) y no se actualiza el estado _isLoggedIn
+            return of([])
+        }));
     }
 
     logout() {
