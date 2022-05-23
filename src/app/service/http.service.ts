@@ -11,9 +11,10 @@ import { AuthenticationRequest } from '../model/AuthenticationRequest';
 import { AuthenticationResponse } from '../model/AuthenticationResponse';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class HttpService {
+    // url = 'http://localhost:8080';
 
     url = 'https://my-portfolio-backend9.herokuapp.com'
 
@@ -22,102 +23,116 @@ export class HttpService {
     public getPortfolio() {
         // console.log(`retrieved ${sessionStorage.getItem('currentUser')} from sesStorage`)
         // return this.http.get<PortfolioDTO>(this.url + '/portfolio/get', {headers: {'Authorization': `Bearer ${sessionStorage.getItem('currentUser')}`}})
-        return this.http.get<PortfolioDTO>(this.url + '/portfolio/get')
+        return this.http.get<PortfolioDTO>(this.url + '/portfolio/get');
     }
 
     // === LOGIN ===
     public login(loginReq: AuthenticationRequest) {
-        return this.http.post<AuthenticationResponse>(`${this.url}/auth`, loginReq)
+        return this.http.post<AuthenticationResponse>(
+            `${this.url}/auth`,
+            loginReq
+        );
     }
 
     // === HOME ===
-    public updateHome(title: string, description: string) {
-        return this.http.put<Home>(`${this.url}/portfolio/edit/home/update/`, {}, {params: {'title': title, 'description': description}})
+    public updateHome(home: Home) {
+        console.log('sending' + JSON.stringify(home));
+        return this.http.put<Home>(
+            `${this.url}/portfolio/edit/home/update/`,
+            home
+        );
     }
 
     // === ABOUT ===
-    public updateAbout(description: string) {
-        return this.http.put<About>(`${this.url}/portfolio/edit/about/update/`, {}, {params: {'description': description}})
+    public updateAbout(about: About) {
+        return this.http.put<About>(
+            `${this.url}/portfolio/edit/about/update/`,
+            about
+        );
     }
 
     // === SKILLS ===
     public deleteSkill(id: number) {
-        return this.http.delete<Skill>(this.url + `/portfolio/edit/skills/delete/${id}`)
+        return this.http.delete<Skill>(
+            this.url + `/portfolio/edit/skills/delete/${id}`
+        );
     }
 
-    public updateSkill(id:number, title: string, value: number) {
-        return this.http.put<Skill>(`${this.url}/portfolio/edit/skills/update/${id}`, {}, {params: {'title': title, 'value': value}})
+    public updateSkill(skill: Skill) {
+        return this.http.put<Skill>(
+            `${this.url}/portfolio/edit/skills/update/${skill.id}`,
+            skill
+        );
     }
 
     public saveSkill(skill: Skill) {
-        return this.http.post<Skill>(`${this.url}/portfolio/edit/skills/save`, skill)
+        return this.http.post<Skill>(
+            `${this.url}/portfolio/edit/skills/save`,
+            skill
+        );
     }
 
     // === EDUCATION ===
     public deleteEducation(id: number) {
-        return this.http.delete(`${this.url}/portfolio/edit/education/delete/${id}`)
+        return this.http.delete(
+            `${this.url}/portfolio/edit/education/delete/${id}`
+        );
     }
 
-    public updateEducation(id: number, title: string, period: string, institution: string, location: string, description: string) {
+    public updateEducation(ed: Education) {
         return this.http.put<Education>(
-            `${this.url}/portfolio/edit/education/update/${id}`,
-            {},
-            {params: {
-                'title': title,
-                'period': period,
-                'institution': institution,
-                'location': location,
-                'description': description
-            }}
-        )
+            `${this.url}/portfolio/edit/education/update/${ed.id}`,
+            ed
+        );
     }
 
     public saveEducation(ed: Education) {
-        return this.http.post<Education>(`${this.url}/portfolio/edit/education/save`, ed)
+        return this.http.post<Education>(
+            `${this.url}/portfolio/edit/education/save`,
+            ed
+        );
     }
 
     // === EXPERIENCE ===
     public deleteExperience(id: number) {
-        return this.http.delete<Experience>(`${this.url}/portfolio/edit/experience/delete/${id}`)
+        return this.http.delete<Experience>(
+            `${this.url}/portfolio/edit/experience/delete/${id}`
+        );
     }
 
-    public updateExperience(id: number, title: string, period: string, institution: string, location: string, description: string) {
+    public updateExperience(exp: Experience) {
         return this.http.put<Experience>(
-            `${this.url}/portfolio/edit/experience/update/${id}`,
-            {},
-            {params: {
-                'title': title,
-                'period': period,
-                'institution': institution,
-                'location': location,
-                'description': description
-            }}
-        )
+            `${this.url}/portfolio/edit/experience/update/${exp.id}`,
+            exp
+        );
     }
 
     public saveExperience(exp: Experience) {
-        return this.http.post<Experience>(`${this.url}/portfolio/edit/experience/save`, exp)
+        return this.http.post<Experience>(
+            `${this.url}/portfolio/edit/experience/save`,
+            exp
+        );
     }
 
     // === PROJECTS ===
     public deleteProject(id: Number) {
-        return this.http.delete<Project>(`${this.url}/portfolio/edit/projects/delete/${id}`)
+        return this.http.delete<Project>(
+            `${this.url}/portfolio/edit/projects/delete/${id}`
+        );
     }
 
-    public updateProject(id: number, title: string, description: string, url: string) {
+    public updateProject(proj: Project) {
         return this.http.put<Project>(
-            `${this.url}/portfolio/edit/projects/update/${id}`,
-            {},
-            {params: {
-                'title': title,
-                'description': description,
-                'url': url
-            }}
-        )
+            `${this.url}/portfolio/edit/projects/update/${proj.id}`,
+            proj
+        );
     }
 
     public saveProject(proj: Project) {
-        return this.http.post<Project>(`${this.url}/portfolio/edit/projects/save`, proj)
+        return this.http.post<Project>(
+            `${this.url}/portfolio/edit/projects/save`,
+            proj
+        );
     }
 
     // !!! HANDLE HTTP ERRORS

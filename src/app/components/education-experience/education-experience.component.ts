@@ -47,14 +47,7 @@ export class EducationExperienceComponent implements OnInit {
 
     updateEducation(ed: Education) {
         this.http
-            .updateEducation(
-                ed.id,
-                ed.title,
-                ed.period,
-                ed.institution,
-                ed.location,
-                ed.description
-            )
+            .updateEducation(ed)
             .subscribe((ed) => {
                 let index = this.educations.findIndex(
                     (value) => value.id === ed.id
@@ -79,14 +72,7 @@ export class EducationExperienceComponent implements OnInit {
 
     updateExperience(exp: Experience) {
         this.http
-            .updateEducation(
-                exp.id,
-                exp.title,
-                exp.period,
-                exp.institution,
-                exp.location,
-                exp.description
-            )
+            .updateEducation(exp)
             .subscribe((exp) => {
                 let index = this.experiences.findIndex(
                     (value) => value.id === exp.id

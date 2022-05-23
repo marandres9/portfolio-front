@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
     }
 
     updateHome(home: Home) {
-        this.http.updateHome(home.title, home.description).subscribe((home) => {
+        this.http.updateHome(home).subscribe((home) => {
             this.title = home.title
             this.description = home.description
         });

@@ -50,7 +50,7 @@ export class SkillsComponent implements OnInit {
 
     updateSkill(skill: Skill) {
         this.http
-            .updateSkill(skill.id, skill.title, skill.value)
+            .updateSkill(skill)
             .subscribe((skill) => {
                 if(skill.softSkill) {
                     let index = this.softSkills.findIndex((value) => value.id == skill.id)

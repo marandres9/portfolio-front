@@ -26,6 +26,7 @@ export class HomeFormComponent implements OnInit, OnChanges {
     @Output() updateEvent = new EventEmitter<Home>()
 
     homeForm = this.fb.group({
+        id: '',
         title: ['', [Validators.required, Validators.maxLength(255)]],
         description: ['', Validators.required],
     });
@@ -56,13 +57,15 @@ export class HomeFormComponent implements OnInit, OnChanges {
 
     setHome() {
         this.homeForm.setValue({
-            title: [this.title],
+            id: 1,
+            title: this.title,
             description: this.description,
         });
     }
 
     onHomeUpdate() {
         this.updateEvent.emit(this.homeForm.value)
+        console.log(this.homeForm.value)
         this.stopEditing.emit()
     }
 
