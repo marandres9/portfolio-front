@@ -22,6 +22,15 @@
                 formControlName="password"
             />
         </div>
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <div *ngIf="loginForm.invalid && (loginForm.dirty || loginForm.touched)" class="alert alert-danger mt-2">
+            Se requiere un usuario y contraseña.
+        </div>
+        <div
+            *ngIf="wrongCredentials"
+            class="alert alert-danger mt-2"
+        >
+            Usuario o contraseña equivocada.
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Enviar</button>
     </form>
 </div>

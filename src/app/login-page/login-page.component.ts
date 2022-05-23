@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { catchError, of } from 'rxjs';
 import { AuthenticationService } from '../service/authentication.service';
 
 @Component({
@@ -10,9 +11,11 @@ import { AuthenticationService } from '../service/authentication.service';
 })
 export class LoginPageComponent implements OnInit {
     loginForm = new FormGroup({
-        username: new FormControl(''),
-        password: new FormControl(''),
+        username: new FormControl('', Validators.required),
+        password: new FormControl('', Validators.required),
     });
+
+    wrongCredentials = false;
 
     constructor(
         private authService: AuthenticationService,
@@ -38,6 +41,8 @@ export class LoginPageComponent implements OnInit {
                 console.log(`logged in?: ${loggedIn}`);
                 if (loggedIn) {
                     this.router.navigate(['/home']);
+                } else {
+                    this.wrongCredentials = true;
                 }
             });
         });
