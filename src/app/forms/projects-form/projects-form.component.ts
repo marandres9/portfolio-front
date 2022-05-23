@@ -63,7 +63,7 @@ export class ProjectsFormComponent implements OnInit, OnChanges {
         for (let proj of this.projects) {
             this.projectFormArray.push(
                 this.fb.group({
-                    id: [proj.id],
+                    id: proj.id,
                     title: [proj.title, [Validators.required, Validators.maxLength(255)]],
                     description: [proj.description, [Validators.required, Validators.maxLength(255)]],
                     url: [proj.url, [Validators.required, Validators.maxLength(255)]],
@@ -79,6 +79,7 @@ export class ProjectsFormComponent implements OnInit, OnChanges {
     }
 
     onProjectUpdate(form: AbstractControl) {
+        console.log(form.value)
         this.updateEvent.emit(form.value);
         this.stopEditing.emit();
     }

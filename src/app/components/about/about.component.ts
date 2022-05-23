@@ -30,7 +30,7 @@ export class AboutComponent implements OnInit {
 
     updateAbout(about: About) {
         this.http
-            .updateAbout(about.description)
+            .updateAbout(about)
             .subscribe((about) => {
                 this.description = about.description
             });

@@ -39,7 +39,7 @@ export class ProjectsComponent implements OnInit {
 
     updateProject(proj: Project) {
         this.http
-            .updateProject(proj.id, proj.title, proj.description, proj.url)
+            .updateProject(proj)
             .subscribe((proj) => {
                 let index = this.projects.findIndex(
                     (value) => value.id === proj.id

@@ -79,7 +79,7 @@ export class SkillsFormComponent implements OnInit, OnChanges {
     pushSkillToFormArray(array: FormArray, skill: Skill) {
         array.push(
             this.fb.group({
-                id: [skill.id],
+                id: skill.id,
                 title: [
                     skill.title,
                     [Validators.required, Validators.maxLength(255)],
@@ -92,7 +92,7 @@ export class SkillsFormComponent implements OnInit, OnChanges {
                         Validators.max(100),
                     ],
                 ],
-                softSkill: [skill.softSkill],
+                softSkill: skill.softSkill,
             })
         );
     }
