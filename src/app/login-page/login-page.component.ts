@@ -38,7 +38,6 @@ export class LoginPageComponent implements OnInit {
     onSubmit() {
         this.authService.login(this.loginForm.value).subscribe((data) => {
             this.authService.isLoggedIn.subscribe((loggedIn) => {
-                console.log(`logged in?: ${loggedIn}`);
                 if (loggedIn) {
                     this.router.navigate(['/home']);
                 } else {

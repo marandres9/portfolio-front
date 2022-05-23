@@ -44,7 +44,6 @@ export class AuthenticationService {
                 // el observable es encadenado con pipe para acceder a su valor con tap()
                 // Luego el observable sigue su rumbo normal
                 tap((authResponse) => {
-                    console.log(authResponse);
                     sessionStorage.setItem(
                         this.TOKEN_NAME,
                         authResponse['token']

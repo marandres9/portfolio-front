@@ -57,22 +57,6 @@ export class SkillsComponent implements OnInit {
     }
 
     updateSkill(skill: Skill) {
-        // this.http.updateSkill(skill).subscribe((skill) => {
-        //     if (skill.softSkill) {
-        //         let index = this.softSkills.findIndex(
-        //             (value) => value.id == skill.id
-        //         );
-
-        //         this.softSkills.splice(index, 1, skill);
-        //     } else {
-        //         let index = this.hardSkills.findIndex(
-        //             (value) => value.id == skill.id
-        //         );
-
-        //         this.hardSkills.splice(index, 1, skill);
-        //     }
-        // });
-
         const op = () => {
             this.http.updateSkill(skill).subscribe((skill) => {
                 if (skill.softSkill) {
@@ -95,10 +79,6 @@ export class SkillsComponent implements OnInit {
     }
 
     saveSkill(skill: Skill) {
-        // this.http.saveSkill(skill).subscribe(() => {
-        //     window.location.reload();
-        // });
-
         const op = () => {
             this.http.saveSkill(skill).subscribe(() => {
                 window.location.reload();
