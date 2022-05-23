@@ -29,26 +29,38 @@ export class ProjectsComponent implements OnInit {
     }
 
     deleteProject(proj: Project) {
-        this.http.deleteProject(proj.id).subscribe(() => {
-            let index = this.projects.findIndex(
-                (value) => value.id === proj.id
-            );
-            this.projects.splice(index, 1);
-        });
+        const op = () => {
+            this.http.deleteProject(proj.id).subscribe(() => {
+                let index = this.projects.findIndex(
+                    (value) => value.id === proj.id
+                );
+                this.projects.splice(index, 1);
+            });
+        };
+
+        this.authService.performServerOperation(op);
     }
 
     updateProject(proj: Project) {
-        this.http
-            .updateProject(proj)
-            .subscribe((proj) => {
+        const op = () => {
+            this.http.updateProject(proj).subscribe((proj) => {
                 let index = this.projects.findIndex(
                     (value) => value.id === proj.id
                 );
                 this.projects.splice(index, 1, proj);
             });
+        };
+
+        this.authService.performServerOperation(op);
     }
 
     saveProject(proj: Project) {
-        this.http.saveProject(proj).subscribe(() => window.location.reload());
+        const op = () => {
+            this.http
+                .saveProject(proj)
+                .subscribe(() => window.location.reload());
+        };
+
+        this.authService.performServerOperation(op);
     }
 }

@@ -37,52 +37,74 @@ export class EducationExperienceComponent implements OnInit {
     deleteEducation(ed: Education) {
         // An HttpClient method does not begin its HTTP request until you call
         // .subscribe() on the observable returned by that method
-        this.http.deleteEducation(ed.id).subscribe(() => {
-            let index = this.educations.findIndex(
-                (value) => value.id === ed.id
-            );
-            this.educations.splice(index, 1);
-        });
+        const op = () => {
+            this.http.deleteEducation(ed.id).subscribe(() => {
+                let index = this.educations.findIndex(
+                    (value) => value.id === ed.id
+                );
+                this.educations.splice(index, 1);
+            });
+        };
+
+        this.authService.performServerOperation(op);
     }
 
     updateEducation(ed: Education) {
-        this.http
-            .updateEducation(ed)
-            .subscribe((ed) => {
+        const op = () => {
+            this.http.updateEducation(ed).subscribe((ed) => {
                 let index = this.educations.findIndex(
                     (value) => value.id === ed.id
                 );
                 this.educations.splice(index, 1, ed);
             });
+        };
+
+        this.authService.performServerOperation(op);
     }
 
     saveEducation(ed: Education) {
-        // sends post requeset and reloads the page to get updated list
-        this.http.saveEducation(ed).subscribe(() => window.location.reload());
+        const op = () => {
+            this.http.saveEducation(ed).subscribe(() => window.location.reload());
+        }
+
+        this.authService.performServerOperation(op)
     }
 
     deleteExperience(exp: Experience) {
-        this.http.deleteExperience(exp.id).subscribe(() => {
-            let index = this.experiences.findIndex(
-                (value) => value.id === exp.id
-            );
-            this.experiences.splice(index, 1);
-        });
+        const op = () => {
+            this.http.deleteExperience(exp.id).subscribe(() => {
+                let index = this.experiences.findIndex(
+                    (value) => value.id === exp.id
+                );
+                this.experiences.splice(index, 1);
+            });
+        }
+
+        this.authService.performServerOperation(op)
+
     }
 
     updateExperience(exp: Experience) {
-        this.http
-            .updateEducation(exp)
-            .subscribe((exp) => {
+        const op = () => {
+            this.http.updateEducation(exp).subscribe((exp) => {
                 let index = this.experiences.findIndex(
                     (value) => value.id === exp.id
                 );
                 this.experiences.splice(index, 1, exp);
             });
+        }
+
+        this.authService.performServerOperation(op)
+
     }
 
     saveExperience(exp: Experience) {
         // sends post requeset and reloads the page to get updated list
-        this.http.saveExperience(exp).subscribe(() => window.location.reload());
+        const op = () => {
+            this.http.saveExperience(exp).subscribe(() => window.location.reload());
+        }
+
+        this.authService.performServerOperation(op)
+
     }
 }
