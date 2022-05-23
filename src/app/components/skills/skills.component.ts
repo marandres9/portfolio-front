@@ -5,6 +5,7 @@ import {
     OnInit,
     SimpleChanges,
 } from '@angular/core';
+import { catchError, of } from 'rxjs';
 import { Skill } from 'src/app/model/Skill';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { HttpService } from 'src/app/service/http.service';
@@ -33,40 +34,76 @@ export class SkillsComponent implements OnInit {
 
     toggleEditing() {
         this.editing = !this.editing;
-        console.log(this.editing);
     }
 
     deleteSkill(skill: Skill) {
-        this.http.deleteSkill(skill.id).subscribe(() => {
-            if(skill.softSkill) {
-                let index = this.softSkills.findIndex((value) => value.id === skill.id)
-                this.softSkills.splice(index, 1)
-            } else {
-                let index = this.hardSkills.findIndex((value) => value.id === skill.id)
-                this.hardSkills.splice(index, 1)
-            }
-        })
+        const op = () => {
+            this.http.deleteSkill(skill.id).subscribe(() => {
+                if (skill.softSkill) {
+                    let index = this.softSkills.findIndex(
+                        (value) => value.id === skill.id
+                    );
+                    this.softSkills.splice(index, 1);
+                } else {
+                    let index = this.hardSkills.findIndex(
+                        (value) => value.id === skill.id
+                    );
+                    this.hardSkills.splice(index, 1);
+                }
+            });
+        };
+
+        this.authService.performServerOperation(op);
     }
 
     updateSkill(skill: Skill) {
-        this.http
-            .updateSkill(skill)
-            .subscribe((skill) => {
-                if(skill.softSkill) {
-                    let index = this.softSkills.findIndex((value) => value.id == skill.id)
+        // this.http.updateSkill(skill).subscribe((skill) => {
+        //     if (skill.softSkill) {
+        //         let index = this.softSkills.findIndex(
+        //             (value) => value.id == skill.id
+        //         );
 
-                    this.softSkills.splice(index, 1, skill)
+        //         this.softSkills.splice(index, 1, skill);
+        //     } else {
+        //         let index = this.hardSkills.findIndex(
+        //             (value) => value.id == skill.id
+        //         );
+
+        //         this.hardSkills.splice(index, 1, skill);
+        //     }
+        // });
+
+        const op = () => {
+            this.http.updateSkill(skill).subscribe((skill) => {
+                if (skill.softSkill) {
+                    let index = this.softSkills.findIndex(
+                        (value) => value.id == skill.id
+                    );
+
+                    this.softSkills.splice(index, 1, skill);
                 } else {
-                    let index = this.hardSkills.findIndex((value) => value.id == skill.id)
+                    let index = this.hardSkills.findIndex(
+                        (value) => value.id == skill.id
+                    );
 
-                    this.hardSkills.splice(index, 1, skill)
+                    this.hardSkills.splice(index, 1, skill);
                 }
             });
+        };
+
+        this.authService.performServerOperation(op);
     }
 
     saveSkill(skill: Skill) {
-        this.http.saveSkill(skill).subscribe(() => {
-            window.location.reload()
-        });
+        // this.http.saveSkill(skill).subscribe(() => {
+        //     window.location.reload();
+        // });
+
+        const op = () => {
+            this.http.saveSkill(skill).subscribe(() => {
+                window.location.reload();
+            });
+        };
+        this.authService.performServerOperation(op);
     }
 }

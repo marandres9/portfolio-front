@@ -19,20 +19,21 @@ export class AuthenticationService {
 
     constructor(private http: HttpService, private router: Router) {
         // for page reloads, checks if a token is available or expired and updates the login state
-        if (this.token) {
-            if (this.isTokenExpired(this.token)) {
-                this._isLoggedIn.next(false);
-            } else {
-                this._isLoggedIn.next(true);
-            }
-        } else {
+        if (this.isTokenExpired()) {
             this._isLoggedIn.next(false);
+        } else {
+            this._isLoggedIn.next(true);
         }
     }
 
-    private isTokenExpired(token: string) {
-        const expiry = JSON.parse(atob(token.split('.')[1])).exp;
-        return Math.floor(new Date().getTime() / 1000) >= expiry;
+    isTokenExpired() {
+        if (this.token) {
+            const expiry = JSON.parse(atob(this.token.split('.')[1])).exp;
+            return Math.floor(new Date().getTime() / 1000) >= expiry;
+        } else {
+            // if no token is not found returns true so user is logged out
+            return true;
+        }
     }
 
     login(loginReq: AuthenticationRequest) {
@@ -44,14 +45,12 @@ export class AuthenticationService {
                 // Luego el observable sigue su rumbo normal
                 tap((authResponse) => {
                     console.log(authResponse);
-                    if (typeof authResponse === 'object') {
-                        sessionStorage.setItem(
-                            this.TOKEN_NAME,
-                            authResponse['token']
-                        );
-                        // updates the login-state
-                        this._isLoggedIn.next(true);
-                    }
+                    sessionStorage.setItem(
+                        this.TOKEN_NAME,
+                        authResponse['token']
+                    );
+                    // updates the login-state
+                    this._isLoggedIn.next(true);
                 })
             )
             .pipe(
@@ -70,6 +69,16 @@ export class AuthenticationService {
         // remove token and update beahviour-subject
         this._isLoggedIn.next(false);
     }
+
+    performServerOperation(operation: Function) {
+        // for requests that require authentication
+        // checks if token is available and not expired and calls the operation function
+        if (this.isTokenExpired()) {
+            alert('Error encountered - Credentials expired or unavailable');
+            window.location.reload();
+        } else {
+            operation();
+        }    }
 
     get token() {
         return sessionStorage.getItem(this.TOKEN_NAME);

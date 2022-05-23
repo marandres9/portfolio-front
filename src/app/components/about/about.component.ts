@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { catchError, of } from 'rxjs';
 import { About } from 'src/app/model/About';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { HttpService } from 'src/app/service/http.service';
@@ -29,10 +30,34 @@ export class AboutComponent implements OnInit {
     }
 
     updateAbout(about: About) {
-        this.http
-            .updateAbout(about)
-            .subscribe((about) => {
-                this.description = about.description
-            });
+        // if (this.authService.isTokenExpired()) {
+        //     alert('Error encountered - Credentials expired or unavailable');
+        //     window.location.reload();
+        // } else {
+        //     this.http
+        //         .updateAbout(about)
+        //         .pipe(catchError((err) => of(null)))
+        //         .subscribe((about) => {
+        //             if(about) {
+        //             this.description = about.description;
+        //         } else {
+        //             alert('Error encountered');
+        //         }
+        //         });
+        // }
+        const op = () => {
+            this.http
+                .updateAbout(about)
+                .pipe(catchError((err) => of(null)))
+                .subscribe((about) => {
+                    if (about) {
+                        this.description = about.description;
+                    } else {
+                        alert('Error encountered');
+                    }
+                });
+        };
+
+        this.authService.performServerOperation(op);
     }
 }
