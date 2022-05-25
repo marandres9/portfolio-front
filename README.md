@@ -1,5 +1,8 @@
 # Mi Portfolio - Mariano Perez
+
 ### Argentina Programa - [#YoProgramo](http://www.yoprogramo.org.ar/)
+
+### Capa Frontend
 
 Desarrollada con [Angular](https://angular.io/) y hosteada en [Firebase](https://console.firebase.google.com/):
 
