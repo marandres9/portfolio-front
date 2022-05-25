@@ -12,7 +12,7 @@
             <!-- == EDIT == -->
             <app-edit-button *ngIf="isLoggedIn() | async" (click)="toggleEditing()"></app-edit-button>
 
-            <app-about-content [description]="description" [hidden]="editing"></app-about-content>
+            <app-about-content [description]="paragraphs" [hidden]="editing"></app-about-content>
 
             <app-about-form
                 [description]="description"

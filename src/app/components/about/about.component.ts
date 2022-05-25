@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+    Component,
+    Input,
+    OnChanges,
+    OnInit,
+    SimpleChanges,
+} from '@angular/core';
 import { catchError, of } from 'rxjs';
 import { About } from 'src/app/model/About';
 import { AuthenticationService } from 'src/app/service/authentication.service';
@@ -9,8 +15,10 @@ import { HttpService } from 'src/app/service/http.service';
     templateUrl: './about.component.html',
     styleUrls: ['./about.component.css'],
 })
-export class AboutComponent implements OnInit {
+export class AboutComponent implements OnInit, OnChanges {
     @Input() description: string;
+
+    paragraphs: string[];
 
     editing = false;
 
@@ -25,6 +33,13 @@ export class AboutComponent implements OnInit {
 
     ngOnInit(): void {}
 
+    ngOnChanges(changes: SimpleChanges): void {
+        let desc = changes['description'];
+        if (desc && desc.currentValue) {
+            this.paragraphs = this.description.split('\n\n');
+        }
+    }
+
     toggleEditing() {
         this.editing = !this.editing;
     }
@@ -37,6 +52,7 @@ export class AboutComponent implements OnInit {
                 .subscribe((about) => {
                     if (about) {
                         this.description = about.description;
+                        window.location.reload()
                     } else {
                         alert('Error encountered');
                     }

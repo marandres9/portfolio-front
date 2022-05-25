@@ -2,7 +2,10 @@
     <h1>Sobre Mi</h1>
     <div class="separator"></div>
 </div>
-<p>{{ description }}</p>
+
+<p *ngFor="let paragraph of description">
+    {{paragraph}}
+</p>
 
 <!-- DOWNLOAD-CV BUTTON -->
 <!-- <div class="text-center">
