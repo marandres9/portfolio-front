@@ -86,10 +86,11 @@ export class EducationExperienceComponent implements OnInit {
 
     updateExperience(exp: Experience) {
         const op = () => {
-            this.http.updateEducation(exp).subscribe((exp) => {
+            this.http.updateExperience(exp).subscribe((exp) => {
                 let index = this.experiences.findIndex(
                     (value) => value.id === exp.id
                 );
+                console.log(exp);
                 this.experiences.splice(index, 1, exp);
             });
         }
