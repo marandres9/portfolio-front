@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
     styleUrls: ['./about-content.component.css'],
 })
 export class AboutContentComponent implements OnInit {
-    @Input() description: string;
+    @Input() description: string[];
 
     constructor() {}
 
