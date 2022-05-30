@@ -7,12 +7,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { HomeComponent } from './components/home/home.component';
-import { AboutComponent } from './components/about/about.component';
-import { EducationExperienceComponent } from './components/education-experience/education-experience.component';
-import { SkillsComponent } from './components/skills/skills.component';
-import { ProjectsComponent } from './components/projects/projects.component';
-import { LandingPageComponent } from './landing-page/landing-page.component';
+import { HomeComponent } from './sections/home/home.component';
+import { AboutComponent } from './sections/about/about.component';
+import { EducationExperienceComponent } from './sections/education-experience/education-experience.component';
+import { SkillsComponent } from './sections/skills/skills.component';
+import { ProjectsComponent } from './sections/projects/projects.component';
+import { LandingPageComponent } from './portfolio-page/landing-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { EditButtonComponent } from './components/edit-button/edit-button.component';
 import { AuthenticationService } from './service/authentication.service';
